@@ -29,10 +29,11 @@ class Individual : public User
 
 public:
 //----------------------------------------------------- Méthodes publiques
+    // Constructor
+    Individual(const string &id, int points);
 
-    Individual();
-    virtual ~Individual();
-
+    // Destructor
+    ~Individual() override;
 //------------------------------------------------------------------ PRIVE
 
 protected:

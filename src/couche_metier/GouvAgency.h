@@ -36,8 +36,11 @@ public:
     list<User> getUsers();
     list<User> findUnreliable();
 
-    GouvAgency();
-    virtual ~GouvAgency();
+    // Constructor
+    GouvAgency(const string &id, int points);
+
+    // Destructor
+    ~GouvAgency() override;
 
 //------------------------------------------------------------------ PRIVE
 

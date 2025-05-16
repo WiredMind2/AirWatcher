@@ -50,7 +50,12 @@ void Presentation::Menu_principal ( )
 		cout << "Veuillez choisir une valeur parmi celles proposées: "<< endl;
 
 		int choix;
-		cin >> choix;
+		while (!(cin >> choix))
+        {
+            cout << "Entrée invalide. Veuillez entrer un nombre entier.\n\n";
+            cin.clear();                // Réinitialise le statut d'erreur
+            cin.ignore(1000, '\n');     // Ignore les caractères restants dans le flux
+        }
 
 		switch (choix)
 		{
@@ -89,7 +94,12 @@ void Presentation::Menu_principal ( )
 		cout << "\033[1;34m|============================================|\033[0m\n";
 		cout << "Veuillez choisir une valeur parmi celles proposées: "<< endl;
 
-		cin >> choix;
+		while (!(cin >> choix))
+        {
+            cout << "Entrée invalide. Veuillez entrer un nombre entier.\n\n";
+            cin.clear();                // Réinitialise le statut d'erreur
+            cin.ignore(1000, '\n');     // Ignore les caractères restants dans le flux
+        }
 
 		switch (choix)
 		{
@@ -137,7 +147,12 @@ void Presentation::Menu_analyse ( )
 		cout << "\033[1;34m|===================================================|\033[0m\n";
 		cout << "Veuillez choisir une valeur parmi celles proposées: "<< endl;
 
-		cin >> choix;
+		while (!(cin >> choix))
+        {
+            cout << "Entrée invalide. Veuillez entrer un nombre entier.\n\n";
+            cin.clear();                // Réinitialise le statut d'erreur
+            cin.ignore(1000, '\n');     // Ignore les caractères restants dans le flux
+        }
 
 		switch (choix)
 		{
@@ -177,7 +192,12 @@ void Presentation::Menu_statistiques ( )
 		cout << "\033[1;34m|===================================================|\033[0m\n";
 		cout << "Veuillez choisir une valeur parmi celles proposées: "<< endl;
 
-		cin >> choix;
+		while (!(cin >> choix))
+        {
+            cout << "Entrée invalide. Veuillez entrer un nombre entier.\n\n";
+            cin.clear();                // Réinitialise le statut d'erreur
+            cin.ignore(1000, '\n');     // Ignore les caractères restants dans le flux
+        }
 
 		switch (choix)
 		{
@@ -215,7 +235,12 @@ void Presentation::Menu_points_utilisateurs ( )
 		cout << "\033[1;34m|===================================================|\033[0m\n";
 		cout << "Veuillez choisir une valeur parmi celles proposées: "<< endl;
 
-		cin >> choix;
+		while (!(cin >> choix))
+        {
+            cout << "Entrée invalide. Veuillez entrer un nombre entier.\n\n";
+            cin.clear();                // Réinitialise le statut d'erreur
+            cin.ignore(1000, '\n');     // Ignore les caractères restants dans le flux
+        }
 
 		switch(choix)
 		{
@@ -248,7 +273,12 @@ void Presentation::Menu_administration ( )
 		cout << "\033[1;34m|===================================================|\033[0m\n";
 		cout << "Veuillez choisir une valeur parmi celles proposées: "<< endl;
 
-		cin >> choix;
+		while (!(cin >> choix))
+        {
+            cout << "Entrée invalide. Veuillez entrer un nombre entier.\n\n";
+            cin.clear();                // Réinitialise le statut d'erreur
+            cin.ignore(1000, '\n');     // Ignore les caractères restants dans le flux
+        }
 
 		switch (choix)
 		{

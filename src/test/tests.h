@@ -73,6 +73,16 @@ protected:
 //----------------------------------------------------- Méthodes protégées
 
 void test_T11(int &testCount, int &testPassed, int &testFailed);
+void test_T12(int &testCount, int &testPassed, int &testFailed);
+void test_T13(int &testCount, int &testPassed, int &testFailed);
+
+void test_T21(int &testCount, int &testPassed, int &testFailed);
+void test_T22(int &testCount, int &testPassed, int &testFailed);
+void test_T23(int &testCount, int &testPassed, int &testFailed);
+
+void test_T31(int &testCount, int &testPassed, int &testFailed);
+void test_T32(int &testCount, int &testPassed, int &testFailed);
+void test_T33(int &testCount, int &testPassed, int &testFailed);
 
 //----------------------------------------------------- Attributs protégés
 

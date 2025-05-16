@@ -64,9 +64,10 @@ double User::getGeoZoneMean(double latitude, double longitude, double radius)
 //-------------------------------------------- Constructeur - destructeur
 
 User::User(const string &id, int points)
+    : userID(id), points(points)
 // Algorithme :
 //
-    : userID(id), points(points)
+
 {
 #ifdef MAP
     cout << "Appel au constructeur de <User>" << endl;
