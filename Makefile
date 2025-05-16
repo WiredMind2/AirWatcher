@@ -1,5 +1,5 @@
 # Nom de l'exécutable
-EXEC = main
+EXEC = AppWatcher
 
 # Compilateur et options
 CXX = g++
