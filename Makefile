@@ -6,7 +6,7 @@ CXX = g++
 CXXFLAGS = -ansi -pedantic -Wall -std=c++11
 
 # Liste des fichiers sources et objets
-SRCS = $(wildcard *.cpp) $(wildcard src/*.cpp)
+SRCS = $(wildcard *.cpp) $(wildcard src/**/*.cpp)
 OBJDIR = obj
 OBJS = $(patsubst %.cpp,$(OBJDIR)/%.o,$(SRCS))
 
