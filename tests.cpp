@@ -1,12 +1,12 @@
 /*************************************************************************
-                           tests  -  description
+                           Tests  -  description
                              -------------------
     début                : $DATE$
     copyright            : (C) $YEAR$ par $AUTHOR$
     e-mail               : $EMAIL$
 *************************************************************************/
 
-//---------- Réalisation de la classe <tests> (fichier tests.cpp) ------------
+//---------- Réalisation de la classe <Tests> (fichier Tests.cpp) ------------
 
 //---------------------------------------------------------------- INCLUDE
 
@@ -22,13 +22,13 @@ using namespace std;
 //----------------------------------------------------------------- PUBLIC
 
 //----------------------------------------------------- Méthodes publiques
-// type tests::Méthode ( liste des paramètres )
+// type Tests::Méthode ( liste des paramètres )
 // Algorithme :
 //
 //{
 //} //----- Fin de Méthode
 
-bool tests::runTests ( )
+void Tests::runTests ( )
 // Algorithme :
 //
 {
@@ -36,19 +36,19 @@ bool tests::runTests ( )
     int testCount = 0;
     int testPassed = 0;
     int testFailed = 0;
-    bool result = true;
-    cout << "\033[1;32mdébut des tests... \033[0m\n";
+    cout << "\033[1;32mdébut des Tests... \033[0m\n";
 
     // Test cases
     test_fct1(testCount, testPassed, testFailed);
+    //...
 
     //results
     cout << "\033[1;32mTests terminés.\033[0m\n";
-    cout << "\033[1;32mNombre total de tests : " << testCount << "\033[0m\n";
-    cout << "\033[1;32mNombre de tests réussis : " << testPassed << "\033[0m\n";
-    cout << "\033[1;31mNombre de tests échoués : " << testFailed << "\033[0m\n";
+    cout << "\033[1;32mNombre total de Tests : " << testCount << "\033[0m\n";
+    cout << "\033[1;32mNombre de Tests réussis : " << testPassed << "\033[0m\n";
+    cout << "\033[1;31mNombre de Tests échoués : " << testFailed << "\033[0m\n";
     if (testFailed == 0) {
-        cout << "\033[1;32mTous les tests ont réussi.\033[0m\n";
+        cout << "\033[1;32mTous les Tests ont réussi.\033[0m\n";
     } else {
         cout << "\033[1;31m"<< testFailed << "ont échoué.\033[0m\n";
     }
@@ -56,49 +56,50 @@ bool tests::runTests ( )
 
 
 //------------------------------------------------- Surcharge d'opérateurs
-tests & tests::operator = ( const tests & untests )
+Tests & Tests::operator = ( const Tests & unTests )
 // Algorithme :
 //
 {
+    return *this; //to avoid warning
 } //----- Fin de operator =
 
 
 //-------------------------------------------- Constructeurs - destructeur
-tests::tests ( const tests & untests )
+Tests::Tests ( const Tests & unTests )
 // Algorithme :
 //
 {
 #ifdef MAP
-    cout << "Appel au constructeur de copie de <tests>" << endl;
+    cout << "Appel au constructeur de copie de <Tests>" << endl;
 #endif
-} //----- Fin de tests (constructeur de copie)
+} //----- Fin de Tests (constructeur de copie)
 
 
-tests::tests ( )
+Tests::Tests ( )
 // Algorithme :
 //
 {
 #ifdef MAP
-    cout << "Appel au constructeur de <tests>" << endl;
+    cout << "Appel au constructeur de <Tests>" << endl;
 #endif
-} //----- Fin de tests
+} //----- Fin de Tests
 
 
-tests::~tests ( )
+Tests::~Tests ( )
 // Algorithme :
 //
 {
 #ifdef MAP
-    cout << "Appel au destructeur de <tests>" << endl;
+    cout << "Appel au destructeur de <Tests>" << endl;
 #endif
-} //----- Fin de ~tests
+} //----- Fin de ~Tests
 
 
 //------------------------------------------------------------------ PRIVE
 
 //----------------------------------------------------- Méthodes protégées
 
-void tests::test_fct1(int &testCount, int &testPassed, int &testFailed)
+void Tests::test_fct1(int &testCount, int &testPassed, int &testFailed)
 // Algorithme :
 // 
 {

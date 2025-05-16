@@ -1,14 +1,14 @@
 /*************************************************************************
-                           presentation  -  description
+                           Presentation  -  description
                              -------------------
     début                : $DATE$
     copyright            : (C) $YEAR$ par $AUTHOR$
     e-mail               : $EMAIL$
 *************************************************************************/
 
-//---------- Interface de la classe <presentation> (fichier presentation.h) ----------------
-#if ! defined ( presentation_H )
-#define presentation_H
+//---------- Interface de la classe <Presentation> (fichier Presentation.h) ----------------
+#if ! defined ( Presentation_H )
+#define Presentation_H
 
 //--------------------------------------------------- Interfaces utilisées
 
@@ -17,12 +17,12 @@
 //------------------------------------------------------------------ Types
 
 //------------------------------------------------------------------------
-// Rôle de la classe <presentation>
+// Rôle de la classe <Presentation>
 //
 //
 //------------------------------------------------------------------------
 
-class presentation
+class Presentation
 {
 //----------------------------------------------------------------- PUBLIC
 
@@ -65,7 +65,7 @@ public:
     //
 
 //------------------------------------------------- Surcharge d'opérateurs
-    presentation & operator = ( const presentation & unpresentation );
+    Presentation & operator = ( const Presentation & unPresentation );
     // Mode d'emploi :
     //
     // Contrat :
@@ -73,19 +73,19 @@ public:
 
 
 //-------------------------------------------- Constructeurs - destructeur
-    presentation ( const presentation & unpresentation );
+    Presentation ( const Presentation & unPresentation );
     // Mode d'emploi (constructeur de copie) :
     //
     // Contrat :
     //
 
-    presentation ( );
+    Presentation ( );
     // Mode d'emploi :
     //
     // Contrat :
     //
 
-    virtual ~presentation ( );
+    virtual ~Presentation ( );
     // Mode d'emploi :
     //
     // Contrat :
@@ -100,7 +100,7 @@ protected:
 
 };
 
-//-------------------------------- Autres définitions dépendantes de <presentation>
+//-------------------------------- Autres définitions dépendantes de <Presentation>
 
-#endif // presentation_H
+#endif // Presentation_H
 
