@@ -35,15 +35,6 @@ public:
     // Contrat :
     //
 
-
-//------------------------------------------------- Surcharge d'opérateurs
-    PointsUtilisateurs & operator = ( const PointsUtilisateurs & unPointsUtilisateurs );
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
-
-
 //-------------------------------------------- Constructeurs - destructeur
     PointsUtilisateurs ( const PointsUtilisateurs & unPointsUtilisateurs );
     // Mode d'emploi (constructeur de copie) :
