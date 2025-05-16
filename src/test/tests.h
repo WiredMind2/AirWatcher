@@ -72,7 +72,7 @@ public:
 protected:
 //----------------------------------------------------- Méthodes protégées
 
-void test_fct1(int &testCount, int &testPassed, int &testFailed);
+void test_T11(int &testCount, int &testPassed, int &testFailed);
 
 //----------------------------------------------------- Attributs protégés
 
