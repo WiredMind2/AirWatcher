@@ -6,7 +6,6 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
-#include <string>
 
 using namespace std;
 
@@ -29,7 +28,7 @@ void CSVHandler::extractSensors() {
             double latitude = stod(latitudeStr);
             double longitude = stod(longitudeStr);
 
-            Sensor sensor(id, latitude, longitude, nullptr);
+            Sensor sensor(id, latitude, longitude, -1);
         }
         file.close();
     } else {

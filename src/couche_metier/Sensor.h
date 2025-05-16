@@ -36,7 +36,7 @@ public:
 //----------------------------------------------------- Méthodes publiques
     list<Mesurement> getData();
 
-    Sensor(unsigned int id, double lat, double lon, const string &userID);
+    Sensor(unsigned int id, double lat, double lon, unsigned int userID);
     virtual ~Sensor();
 
     unsigned int GetSensorID() const;
@@ -53,7 +53,7 @@ protected:
     unsigned int sensorID;
     double latitude;
     double longitude;
-    string userID;
+    unsigned int userID;
 };
 
 //-------------------------------- Autres définitions dépendantes de <Sensor>
