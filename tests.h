@@ -1,14 +1,14 @@
 /*************************************************************************
-                           tests  -  description
+                           Tests  -  description
                              -------------------
     début                : $DATE$
     copyright            : (C) $YEAR$ par $AUTHOR$
     e-mail               : $EMAIL$
 *************************************************************************/
 
-//---------- Interface de la classe <tests> (fichier tests.h) ----------------
-#if ! defined ( tests_H )
-#define tests_H
+//---------- Interface de la classe <Tests> (fichier Tests.h) ----------------
+#if ! defined ( Tests_H )
+#define Tests_H
 
 //--------------------------------------------------- Interfaces utilisées
 
@@ -17,12 +17,12 @@
 //------------------------------------------------------------------ Types
 
 //------------------------------------------------------------------------
-// Rôle de la classe <tests>
+// Rôle de la classe <Tests>
 //
 //
 //------------------------------------------------------------------------
 
-class tests
+class Tests
 {
 //----------------------------------------------------------------- PUBLIC
 
@@ -34,14 +34,14 @@ public:
     // Contrat :
     //
 
-    bool runTests ( );
+    void runTests ( );
     // Mode d'emploi :
-    // Lance tous les tests unitaires de la classe
+    // Lance tous les Tests unitaires de la classe
     // Contrat :
     // 
 
 //------------------------------------------------- Surcharge d'opérateurs
-    tests & operator = ( const tests & untests );
+    Tests & operator = ( const Tests & unTests );
     // Mode d'emploi :
     //
     // Contrat :
@@ -49,19 +49,19 @@ public:
 
 
 //-------------------------------------------- Constructeurs - destructeur
-    tests ( const tests & untests );
+    Tests ( const Tests & unTests );
     // Mode d'emploi (constructeur de copie) :
     //
     // Contrat :
     //
 
-    tests ( );
+    Tests ( );
     // Mode d'emploi :
     //
     // Contrat :
     //
 
-    virtual ~tests ( );
+    virtual ~Tests ( );
     // Mode d'emploi :
     //
     // Contrat :
@@ -78,7 +78,7 @@ void test_fct1(int &testCount, int &testPassed, int &testFailed);
 
 };
 
-//-------------------------------- Autres définitions dépendantes de <tests>
+//-------------------------------- Autres définitions dépendantes de <Tests>
 
-#endif // tests_H
+#endif // Tests_H
 

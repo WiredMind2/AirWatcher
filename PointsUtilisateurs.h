@@ -1,14 +1,15 @@
 /*************************************************************************
-                           Presentation  -  description
+                           PointsUtilisateurs  -  description
                              -------------------
     début                : $DATE$
     copyright            : (C) $YEAR$ par $AUTHOR$
     e-mail               : $EMAIL$
 *************************************************************************/
 
-//---------- Interface de la classe <Presentation> (fichier Presentation.h) ----------------
-#if ! defined ( Presentation_H )
-#define Presentation_H
+//---------- Interface de la classe <PointsUtilisateurs> (fichier PointsUtilisateurs.h) ----------------
+#if ! defined ( PointsUtilisateurs_H )
+#define PointsUtilisateurs_H
+
 
 //--------------------------------------------------- Interfaces utilisées
 
@@ -17,12 +18,12 @@
 //------------------------------------------------------------------ Types
 
 //------------------------------------------------------------------------
-// Rôle de la classe <Presentation>
+// Rôle de la classe <PointsUtilisateurs>
 //
 //
 //------------------------------------------------------------------------
 
-class Presentation
+class PointsUtilisateurs 
 {
 //----------------------------------------------------------------- PUBLIC
 
@@ -34,38 +35,9 @@ public:
     // Contrat :
     //
 
-    void Menu_principal ( );
-    // Mode d'emploi :
-    // Affiche le menu principal de l'application
-    // Contrat :
-    //
-
-    void Menu_analyse ( );
-    // Mode d'emploi :
-    // Affiche le menu d'analyse de l'application
-    // Contrat :
-    //
-
-    void Menu_statistiques ( );
-    // Mode d'emploi :
-    // Affiche le menu de statistiques de l'application
-    // Contrat :
-    //
-
-    void Menu_points_utilisateurs ( );
-    // Mode d'emploi :
-    // Affiche le menu de points utilisateurs de l'application
-    // Contrat :
-    //
-
-    void Menu_administration ( );
-    // Mode d'emploi :
-    // Affiche le menu d'administration de l'application
-    // Contrat :
-    //
 
 //------------------------------------------------- Surcharge d'opérateurs
-    Presentation & operator = ( const Presentation & unPresentation );
+    PointsUtilisateurs & operator = ( const PointsUtilisateurs & unPointsUtilisateurs );
     // Mode d'emploi :
     //
     // Contrat :
@@ -73,19 +45,19 @@ public:
 
 
 //-------------------------------------------- Constructeurs - destructeur
-    Presentation ( const Presentation & unPresentation );
+    PointsUtilisateurs ( const PointsUtilisateurs & unPointsUtilisateurs );
     // Mode d'emploi (constructeur de copie) :
     //
     // Contrat :
     //
 
-    Presentation ( );
+    PointsUtilisateurs ( );
     // Mode d'emploi :
     //
     // Contrat :
     //
 
-    virtual ~Presentation ( );
+    virtual ~PointsUtilisateurs ( );
     // Mode d'emploi :
     //
     // Contrat :
@@ -96,11 +68,12 @@ public:
 protected:
 //----------------------------------------------------- Méthodes protégées
 
+
 //----------------------------------------------------- Attributs protégés
 
 };
 
-//-------------------------------- Autres définitions dépendantes de <Presentation>
+//-------------------------------- Autres définitions dépendantes de <PointsUtilisateurs>
 
-#endif // Presentation_H
+#endif // PointsUtilisateurs_H
 

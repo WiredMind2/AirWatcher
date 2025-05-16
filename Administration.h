@@ -1,14 +1,15 @@
 /*************************************************************************
-                           Presentation  -  description
+                           Administration  -  description
                              -------------------
     début                : $DATE$
     copyright            : (C) $YEAR$ par $AUTHOR$
     e-mail               : $EMAIL$
 *************************************************************************/
 
-//---------- Interface de la classe <Presentation> (fichier Presentation.h) ----------------
-#if ! defined ( Presentation_H )
-#define Presentation_H
+//---------- Interface de la classe <Administration> (fichier Administration.h) ----------------
+#if ! defined ( Administration_H )
+#define Administration_H
+
 
 //--------------------------------------------------- Interfaces utilisées
 
@@ -17,12 +18,12 @@
 //------------------------------------------------------------------ Types
 
 //------------------------------------------------------------------------
-// Rôle de la classe <Presentation>
+// Rôle de la classe <Administration>
 //
 //
 //------------------------------------------------------------------------
 
-class Presentation
+class Administration 
 {
 //----------------------------------------------------------------- PUBLIC
 
@@ -34,38 +35,9 @@ public:
     // Contrat :
     //
 
-    void Menu_principal ( );
-    // Mode d'emploi :
-    // Affiche le menu principal de l'application
-    // Contrat :
-    //
-
-    void Menu_analyse ( );
-    // Mode d'emploi :
-    // Affiche le menu d'analyse de l'application
-    // Contrat :
-    //
-
-    void Menu_statistiques ( );
-    // Mode d'emploi :
-    // Affiche le menu de statistiques de l'application
-    // Contrat :
-    //
-
-    void Menu_points_utilisateurs ( );
-    // Mode d'emploi :
-    // Affiche le menu de points utilisateurs de l'application
-    // Contrat :
-    //
-
-    void Menu_administration ( );
-    // Mode d'emploi :
-    // Affiche le menu d'administration de l'application
-    // Contrat :
-    //
 
 //------------------------------------------------- Surcharge d'opérateurs
-    Presentation & operator = ( const Presentation & unPresentation );
+    Administration & operator = ( const Administration & unAdministration );
     // Mode d'emploi :
     //
     // Contrat :
@@ -73,19 +45,19 @@ public:
 
 
 //-------------------------------------------- Constructeurs - destructeur
-    Presentation ( const Presentation & unPresentation );
+    Administration ( const Administration & unAdministration );
     // Mode d'emploi (constructeur de copie) :
     //
     // Contrat :
     //
 
-    Presentation ( );
+    Administration ( );
     // Mode d'emploi :
     //
     // Contrat :
     //
 
-    virtual ~Presentation ( );
+    virtual ~Administration ( );
     // Mode d'emploi :
     //
     // Contrat :
@@ -96,11 +68,12 @@ public:
 protected:
 //----------------------------------------------------- Méthodes protégées
 
+
 //----------------------------------------------------- Attributs protégés
 
 };
 
-//-------------------------------- Autres définitions dépendantes de <Presentation>
+//-------------------------------- Autres définitions dépendantes de <Administration>
 
-#endif // Presentation_H
+#endif // Administration_H
 

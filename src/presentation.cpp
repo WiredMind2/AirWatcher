@@ -1,12 +1,12 @@
 /*************************************************************************
-						   presentation  -  description
+						   Presentation  -  description
 							 -------------------
 	début                : $DATE$
 	copyright            : (C) $YEAR$ par $AUTHOR$
 	e-mail               : $EMAIL$
 *************************************************************************/
 
-//---------- Réalisation de la classe <presentation> (fichier presentation.cpp) ------------
+//---------- Réalisation de la classe <Presentation> (fichier Presentation.cpp) ------------
 
 //---------------------------------------------------------------- INCLUDE
 
@@ -22,7 +22,7 @@ using namespace std;
 //----------------------------------------------------------------- PUBLIC
 
 //----------------------------------------------------- Méthodes publiques
-// type presentation::Méthode ( liste des paramètres )
+// type Presentation::Méthode ( liste des paramètres )
 // Algorithme :
 //
 //{
@@ -31,7 +31,7 @@ using namespace std;
 #include <iomanip> // For text formatting
 #include "statistiques.h"
 
-void presentation::Menu_principal ( )
+void Presentation::Menu_principal ( )
 // Algorithme :
 //
 {
@@ -75,7 +75,7 @@ void presentation::Menu_principal ( )
 	} while (choix != 5);
 }
 
-void presentation::Menu_analyse ( )
+void Presentation::Menu_analyse ( )
 // Algorithme :
 //
 {
@@ -112,7 +112,7 @@ void presentation::Menu_analyse ( )
 	} while (choix != 4);
 }
 
-void presentation::Menu_statistiques ( )
+void Presentation::Menu_statistiques ( )
 // Algorithme :
 //
 {
@@ -152,7 +152,7 @@ void presentation::Menu_statistiques ( )
 	} while (choix != 4);
 }
 
-void presentation::Menu_points_utilisateurs ( )
+void Presentation::Menu_points_utilisateurs ( )
 // Algorithme :
 //
 {
@@ -183,7 +183,7 @@ void presentation::Menu_points_utilisateurs ( )
 	} while (choix != 2);
 }
 
-void presentation::Menu_administration ( )
+void Presentation::Menu_administration ( )
 // Algorithme :
 //
 {
@@ -222,7 +222,7 @@ void presentation::Menu_administration ( )
 
 
 //------------------------------------------------- Surcharge d'opérateurs
-presentation & presentation::operator = ( const presentation & unpresentation )
+Presentation & Presentation::operator = ( const Presentation & unPresentation )
 // Algorithme :
 //
 {
@@ -230,34 +230,34 @@ presentation & presentation::operator = ( const presentation & unpresentation )
 
 
 //-------------------------------------------- Constructeurs - destructeur
-presentation::presentation ( const presentation & unpresentation )
+Presentation::Presentation ( const Presentation & unPresentation )
 // Algorithme :
 //
 {
 #ifdef MAP
-	cout << "Appel au constructeur de copie de <presentation>" << endl;
+	cout << "Appel au constructeur de copie de <Presentation>" << endl;
 #endif
-} //----- Fin de presentation (constructeur de copie)
+} //----- Fin de Presentation (constructeur de copie)
 
 
-presentation::presentation ( )
+Presentation::Presentation ( )
 // Algorithme :
 //
 {
 #ifdef MAP
-	cout << "Appel au constructeur de <presentation>" << endl;
+	cout << "Appel au constructeur de <Presentation>" << endl;
 #endif
-} //----- Fin de presentation
+} //----- Fin de Presentation
 
 
-presentation::~presentation ( )
+Presentation::~Presentation ( )
 // Algorithme :
 //
 {
 #ifdef MAP
-	cout << "Appel au destructeur de <presentation>" << endl;
+	cout << "Appel au destructeur de <Presentation>" << endl;
 #endif
-} //----- Fin de ~presentation
+} //----- Fin de ~Presentation
 
 
 //------------------------------------------------------------------ PRIVE
