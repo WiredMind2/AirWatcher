@@ -29,14 +29,6 @@ using namespace std;
 //} //----- Fin de Méthode
 
 
-//------------------------------------------------- Surcharge d'opérateurs
-PointsUtilisateurs & PointsUtilisateurs::operator = ( const PointsUtilisateurs & unPointsUtilisateurs )
-// Algorithme :
-//
-{
-} //----- Fin de operator =
-
-
 //-------------------------------------------- Constructeurs - destructeur
 PointsUtilisateurs::PointsUtilisateurs ( const PointsUtilisateurs & unPointsUtilisateurs )
 // Algorithme :

@@ -16,7 +16,7 @@ using namespace std;
 
 //------------------------------------------------------ Include personnel
 #include "tests.h"
-//#include "../processing.h"
+#include "../processing.h"
 
 
 //------------------------------------------------------------- Constantes
@@ -39,12 +39,15 @@ void Tests::runTests ( )
     int testPassed = 0;
     int testFailed = 0;
     cout << "\033[1;32mdébut des Tests... \033[0m\n";
+    cout<<endl;
 
     // Test cases
     test_T11(testCount, testPassed, testFailed);
+    test_T12(testCount, testPassed, testFailed);
     //...
 
     //results
+    cout<<endl;
     cout << "\033[1;32mTests terminés.\033[0m\n";
     cout << "\033[1;32mNombre total de Tests : " << testCount << "\033[0m\n";
     cout << "\033[1;32mNombre de Tests réussis : " << testPassed << "\033[0m\n";
@@ -52,7 +55,7 @@ void Tests::runTests ( )
     if (testFailed == 0) {
         cout << "\033[1;32mTous les Tests ont réussi.\033[0m\n";
     } else {
-        cout << "\033[1;31m"<< testFailed << "ont échoué.\033[0m\n";
+        cout << "\033[1;31m"<< testFailed << " test(s) ont échoué.\033[0m\n";
     }
 }
 
@@ -105,12 +108,12 @@ void Tests::test_T11(int &testCount, int &testPassed, int &testFailed)
 // Algorithme :
 // 
 {
-    /*AirQualityProcessor AirQualityProcessor;
+    AirQualityProcessor AirQualityProcessor;
     testCount++;
 
-    int k = 3;
-    double lat = 48.8566;
-    double lon = 2.3522;
+    int k = 4;
+    double lat = 44;
+    double lon = 1.1;
     double expectedValue = 0.5;
 
     if (AirQualityProcessor.EstimationQualiteAirPos(lat, lon, k) == expectedValue) {
@@ -119,6 +122,46 @@ void Tests::test_T11(int &testCount, int &testPassed, int &testFailed)
     } else {
         cout << "\033[1;31mTest T11 échoué.\033[0m\n";
         testFailed++;
-    }*/
+    }
 }
 
+void Tests::test_T12(int &testCount, int &testPassed, int &testFailed)
+// Algorithme :
+// 
+{
+    AirQualityProcessor AirQualityProcessor;
+    testCount++;
+
+    int k = 4;
+    double lat = 44;
+    double lon = 1.1;
+
+    if (AirQualityProcessor.EstimationQualiteAirPos(lat, lon, k) == std::numeric_limits<double>::quiet_NaN()) {
+        cout << "\033[1;32mTest T12 réussi.\033[0m\n";
+        testPassed++;
+    } else {
+        cout << "\033[1;31mTest T12 échoué.\033[0m\n";
+        testFailed++;
+    }
+}
+
+void Tests::test_T13(int &testCount, int &testPassed, int &testFailed)
+// Algorithme :
+//
+{
+    AirQualityProcessor AirQualityProcessor;
+    testCount++;
+
+    int k = 4;
+    double lat = 44;
+    double lon = 1.1;
+    double expectedValue = 0.5;
+
+    if (AirQualityProcessor.EstimationQualiteAirPos(lat, lon, k) == expectedValue) {
+        cout << "\033[1;32mTest T11 réussi.\033[0m\n";
+        testPassed++;
+    } else {
+        cout << "\033[1;31mTest T11 échoué.\033[0m\n";
+        testFailed++;
+    }
+}
