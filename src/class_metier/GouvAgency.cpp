@@ -17,12 +17,12 @@ void GouvAgency::classifyReliable(User &user) {
 
 }
 
-list<User> GouvAgency::getUsers() {
-    list<User> users;
+vector<User> GouvAgency::getUsers() {
+    vector<User> users;
     return users;
 }
 
-list<User> GouvAgency::findUnreliable() {
-    list<User> unreliableUsers;
+vector<User> GouvAgency::findUnreliable() {
+    vector<User> unreliableUsers;
     return unreliableUsers;
 }

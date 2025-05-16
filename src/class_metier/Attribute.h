@@ -5,9 +5,12 @@
 #ifndef ATTRIBUTE_H
 #define ATTRIBUTE_H
 
+using namespace std;
+
 class Attribute {
 public:
     // Constructor
+    Attribute() {}
     Attribute(int id, const string &unit, const string &description)
         : attributeID(id), unit(unit), description(description) {}
 

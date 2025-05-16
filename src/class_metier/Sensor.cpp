@@ -7,7 +7,7 @@
 #include <iostream>
 #include <string>
 
-list<Mesurement> Sensor::getData() {
+vector<Mesurement> Sensor::getData() {
     return data;
 }
 

@@ -6,14 +6,18 @@
 #define GOUVAGENCY_H
 
 #include "User.h"
+#include "Provider.h"
+#include <iostream>
+#include <string>
+#include <vector>
 
 class GouvAgency : public User
 {
 public:
     void classifyUnreliable(User &user);
     void classifyReliable(User &user);
-    list<User> getUsers();
-    list<User> findUnreliable();
+    vector<User> getUsers();
+    vector<User> findUnreliable();
 };
 
 #endif //GOUVAGENCY_H

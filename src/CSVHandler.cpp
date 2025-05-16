@@ -3,3 +3,12 @@
 //
 
 #include "CSVHandler.h"
+
+
+void CSVHandler::linkAllObjects() {
+	linkUsers();
+}
+
+void CSVHandler::linkUsers() {
+	return;
+}

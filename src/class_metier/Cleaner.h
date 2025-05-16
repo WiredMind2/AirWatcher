@@ -6,6 +6,7 @@
 #define CLEANER_H
 
 
+using namespace std;
 
 class Cleaner {
 public:
@@ -25,6 +26,7 @@ protected:
     time_t timeStart;
     time_t timeStop;
     string providerID;
+    Cleaner *cleaner;
 };
 
 

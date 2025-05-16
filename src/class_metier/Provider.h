@@ -6,10 +6,16 @@
 #define PROVIDER_H
 
 #include "User.h"
+#include "Cleaner.h"
+#include <iostream>
+#include <string>
+#include <vector>
+
+using namespace std;
 
 class Provider : public User{
 public:
-    list<Cleaner> getCleaners();
+    vector<Cleaner> getCleaners();
 
 
     // Constructor

@@ -5,6 +5,10 @@
 #ifndef MESUREMENT_H
 #define MESUREMENT_H
 
+#include "Attribute.h"
+#include "Sensor.h"
+
+using namespace std;
 
 
 class Mesurement {
@@ -20,6 +24,9 @@ protected:
     double value;
     string sensorID;
     string attributeID;
+
+    Sensor sensor;
+    Attribute attribute;
 };
 
 

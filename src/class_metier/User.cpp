@@ -7,16 +7,17 @@
 #include <iostream>
 #include <string>
 #include <list>
+#include <vector>
 
 using namespace std;
 
 
-list<Sensor> User::getSensors() {
+vector<Sensor> User::getSensors() {
     return sensors;
 }
 
-list<Sensor> User::compareSensor(Sensor sensor) {
-    list<Sensor> result;
+vector<Sensor> User::compareSensor(Sensor sensor) {
+    vector<Sensor> result;
     for (Sensor s : sensors) {
         if (s.getID() == sensor.getID()) {
             result.push_back(s);
