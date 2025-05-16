@@ -51,3 +51,5 @@ protected:
     unordered_map<unsigned int, Sensor> sensors;
     unordered_map<unsigned int, User> users;
 };
+
+#endif //CSVHANDLER_H
