@@ -68,16 +68,17 @@ double AirQualityProcessor::EstimationQualiteAirZone(double lat, double lon, dou
 	return sum / estimations.size();
 }
 
-std::vector<const Mesurement *> AirQualityProcessor::TrouverCapteursDetournes(double radius, double seuil_limite, int k, double step)
+std::vector<const Sensor *> AirQualityProcessor::TrouverCapteursDetournes(double radius, double seuil_limite, int k, double step)
 {
 
 	std::vector<Mesurement> measures = GetAllMeasures();
 
-	std::vector<const Mesurement *> capteurs_detournes;
-	for (const auto &capteur : measures)
+	std::vector<const Sensor *> capteurs_detournes;
+	for (const auto &mesure : measures)
 	{
-		double estimation = EstimationQualiteAirZone(capteur.GetSensor()->GetLatitude(), capteur.GetSensor()->GetLongitude(), radius, k, step);
-		if (!std::isnan(estimation) && std::abs(estimation - capteur.GetValue()) > seuil_limite)
+		const Sensor &capteur = *mesure.GetSensor();
+		double estimation = EstimationQualiteAirZone(capteur.GetLatitude(), capteur.GetLongitude(), radius, k, step);
+		if (!std::isnan(estimation) && std::abs(estimation - mesure.GetValue()) > seuil_limite)
 		{
 			capteurs_detournes.push_back(&capteur);
 		}

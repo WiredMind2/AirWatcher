@@ -42,7 +42,7 @@ public:
     unsigned int GetSensorID() const;
     double GetLatitude() const;
     double GetLongitude() const;
-    string GetUserID() const;
+    unsigned int GetUserID() const;
 
 //------------------------------------------------------------------ PRIVE
 

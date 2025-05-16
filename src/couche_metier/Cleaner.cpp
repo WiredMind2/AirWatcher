@@ -45,7 +45,7 @@ void Cleaner::stop()
 
 //-------------------------------------------- Constructeur - destructeur
 
-Cleaner::Cleaner(const string &cleanerID, double latitude, double longitude, const string &providerID)
+Cleaner::Cleaner(const unsigned int &cleanerID, double latitude, double longitude, const unsigned int &providerID)
 // Algorithme :
 // Initialise les attributs du nettoyeur.
 //
