@@ -14,7 +14,7 @@ void analyse_donnees_capteurs(){
 	// TODO - Choisir une vraie date
 
 	// Appel à la fonction de traitement pour analyser les données
-	double qualiteAir = AirQualityProcessor::EstimationQualiteAirPos(latitude, longitude);
+	double qualiteAir = AirQualityProcessor::EstimationQualiteAirPos(latitude, longitude, 0, -1);
 	cout << "Qualité de l'air estimée à la position (" << latitude << ", " << longitude << ") : " << qualiteAir << endl;
 
 };
@@ -45,10 +45,10 @@ void analyser_impact_purificateurs(){
 	// TODO - Utiliser les dates de début et de fin
 
 	// Appel à la fonction de traitement pour analyser l'impact
-	double qualiteAvant = AirQualityProcessor::EstimationQualiteAirPos(cleaner.GetLatitude(), cleaner.GetLongitude());
+	double qualiteAvant = AirQualityProcessor::EstimationQualiteAirPos(cleaner.GetLatitude(), cleaner.GetLongitude(), 0, -1);
 	cout << "Qualité de l'air avant nettoyage : " << qualiteAvant << endl;
 
 
-	double qualiteApres = AirQualityProcessor::EstimationQualiteAirPos(cleaner.GetLatitude(), cleaner.GetLongitude());
+	double qualiteApres = AirQualityProcessor::EstimationQualiteAirPos(cleaner.GetLatitude(), cleaner.GetLongitude(), 0, -1);
 	cout << "Qualité de l'air après nettoyage : " << qualiteApres << endl;
 };

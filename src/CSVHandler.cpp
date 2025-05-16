@@ -6,6 +6,7 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <vector>
 
 using namespace std;
 
@@ -78,7 +79,7 @@ vector<Mesurement*> CSVHandler::getMeasurement(time_t start, time_t stop) const 
     auto itLow = mesurements.lower_bound(start);
     auto itHigh = mesurements.upper_bound(stop);
 
-    std::vector<Mesurement*> results;
+    vector<Mesurement*> results;
     for (auto it = itLow; it != itHigh; ++it) {
         results.push_back(it->second);
     }

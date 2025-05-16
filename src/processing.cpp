@@ -3,11 +3,14 @@
 #include <algorithm>
 #include <cmath>
 #include <limits>
+#include "CSVHandler.h"
 
-double AirQualityProcessor::EstimationQualiteAirPos(double lat, double lon, int k)
+using namespace std;
+
+double AirQualityProcessor::EstimationQualiteAirPos(double lat, double lon, int k, time_t start, time_t stop)
 {
 
-	std::vector<Mesurement> measures = GetAllMeasures();
+	std::vector<Mesurement> measures = GetMeasures(start, stop);
 
 	if (measures.empty())
 		return std::numeric_limits<double>::quiet_NaN();
@@ -40,10 +43,10 @@ double AirQualityProcessor::EstimationQualiteAirPos(double lat, double lon, int 
 	return (weight_total > 0.0) ? (weighted_sum / weight_total) : std::numeric_limits<double>::quiet_NaN();
 }
 
-double AirQualityProcessor::EstimationQualiteAirZone(double lat, double lon, double radius, int k, double step)
+double AirQualityProcessor::EstimationQualiteAirZone(double lat, double lon, double radius, int k, double step, time_t start, time_t stop)
 {
 
-	std::vector<Mesurement> measures = GetAllMeasures();
+	std::vector<Mesurement> measures = GetMeasures(start, stop);
 
 	std::vector<double> estimations;
 	for (double dlat = -radius; dlat <= radius; dlat += step)
@@ -68,10 +71,10 @@ double AirQualityProcessor::EstimationQualiteAirZone(double lat, double lon, dou
 	return sum / estimations.size();
 }
 
-std::vector<const Sensor *> AirQualityProcessor::TrouverCapteursDetournes(double radius, double seuil_limite, int k, double step)
+std::vector<const Sensor *> AirQualityProcessor::TrouverCapteursDetournes(double radius, double seuil_limite, int k, double step, time_t start, time_t stop)
 {
 
-	std::vector<Mesurement> measures = GetAllMeasures();
+	std::vector<Mesurement> measures = GetMeasures(start, stop);
 
 	std::vector<const Sensor *> capteurs_detournes;
 	for (const auto &mesure : measures)
@@ -86,10 +89,10 @@ std::vector<const Sensor *> AirQualityProcessor::TrouverCapteursDetournes(double
 	return capteurs_detournes;
 }
 
-std::vector<const Mesurement *> AirQualityProcessor::ListerCapteursSimilaires(unsigned int id_ref)
+std::vector<const Mesurement *> AirQualityProcessor::ListerCapteursSimilaires(unsigned int id_ref, time_t start, time_t stop)
 {
 
-	std::vector<Mesurement> measures = GetAllMeasures();
+	std::vector<Mesurement> measures = GetMeasures(start, stop);
 
 	std::vector<const Mesurement *> capteurs_similaires;
 	for (const auto &capteur : measures)
@@ -109,9 +112,8 @@ std::vector<const Mesurement *> AirQualityProcessor::ListerCapteursSimilaires(un
 	return capteurs_similaires;
 }
 
-std::vector<Mesurement> AirQualityProcessor::GetAllMeasures()
+std::vector<Mesurement> AirQualityProcessor::GetMeasures(time_t start, time_t stop)
 {
-	// Cette fonction devrait récupérer toutes les mesures disponibles
-	// Pour l'instant, on retourne une liste vide
-	return std::vector<Mesurement>();
+	// vector<Mesurement> measures = CSVHandler::getMeasurement(start, stop);
+	return vector<Mesurement>(); // Placeholder
 }

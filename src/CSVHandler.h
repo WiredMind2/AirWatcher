@@ -18,6 +18,7 @@ using namespace std;
 #include "couche_metier/Sensor.h"
 #include "couche_metier/User.h"
 #include <map>
+#include <vector>
 
 using namespace std;
 
