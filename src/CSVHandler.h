@@ -17,6 +17,7 @@ using namespace std;
 #include "couche_metier/Provider.h"
 #include "couche_metier/Sensor.h"
 #include "couche_metier/User.h"
+#include <map>
 
 using namespace std;
 
@@ -32,7 +33,7 @@ public:
     Sensor getSensor(unsigned int id) const;
     User getUser(unsigned int id) const;
 
-
+    vector<Mesurement*> getMeasurement(time_t start, time_t stop) const;
 
     // Constructor
     CSVHandler(const string &filePath)
@@ -49,11 +50,9 @@ private:
 protected:
     string filePath;
 
-
-
     unordered_map<unsigned int, Cleaner> cleaners;
     unordered_map<unsigned int, Individual> individuals;
-    unordered_map<unsigned int, Mesurement> mesurements;
+    multimap<time_t, Mesurement*> mesurements;
     unordered_map<unsigned int, Provider> providers;
     unordered_map<unsigned int, Sensor> sensors;
     unordered_map<unsigned int, User> users;

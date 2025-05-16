@@ -13,8 +13,6 @@ void CSVHandler::extractSensors() {
     ifstream file(filePath);
     string line;
 
-    unordered_map<unsigned int, Sensor> sensors;
-
     if (file.is_open()) {
         while (getline(file, line)) {
             stringstream ss(line);
@@ -31,9 +29,8 @@ void CSVHandler::extractSensors() {
             double longitude = stod(longitudeStr);
 
             Sensor sensor(id, latitude, longitude, -1);
-            sensors.emplace(id, sensor);
+            this->sensors.emplace(id, sensor);
         }
-        this->sensors = sensors;
         file.close();
     } else {
         cout << "Unable to open file" << endl;
@@ -75,4 +72,15 @@ User CSVHandler::getUser(unsigned int id) const {
         return it->second;
     }
     throw std::runtime_error("User not found");
+}
+
+vector<Mesurement*> CSVHandler::getMeasurement(time_t start, time_t stop) const {
+    auto itLow = mesurements.lower_bound(start);
+    auto itHigh = mesurements.upper_bound(stop);
+
+    std::vector<Mesurement*> results;
+    for (auto it = itLow; it != itHigh; ++it) {
+        results.push_back(it->second);
+    }
+    return results;
 }
