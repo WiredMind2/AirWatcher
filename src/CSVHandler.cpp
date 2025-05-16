@@ -36,11 +36,3 @@ void CSVHandler::extractSensors() {
         cout << "Unable to open file" << endl;
     }
 }
-
-void CSVHandler::linkAllObjects() {
-	linkUsers();
-}
-
-void CSVHandler::linkUsers() {
-	return;
-}
