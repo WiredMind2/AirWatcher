@@ -39,3 +39,40 @@ void CSVHandler::extractSensors() {
         cout << "Unable to open file" << endl;
     }
 }
+
+// Getters
+Cleaner CSVHandler::getCleaner(unsigned int id) const {
+    auto it = cleaners.find(id);
+    if (it != cleaners.end()) {
+        return it->second;
+    }
+    throw std::runtime_error("Cleaner not found");
+}
+Individual CSVHandler::getIndividual(unsigned int id) const {
+    auto it = individuals.find(id);
+    if (it != individuals.end()) {
+        return it->second;
+    }
+    throw std::runtime_error("Individual not found");
+}
+Provider CSVHandler::getProvider(unsigned int id) const {
+    auto it = providers.find(id);
+    if (it != providers.end()) {
+        return it->second;
+    }
+    throw std::runtime_error("Provider not found");
+}
+Sensor CSVHandler::getSensor(unsigned int id) const {
+    auto it = sensors.find(id);
+    if (it != sensors.end()) {
+        return it->second;
+    }
+    throw std::runtime_error("Sensor not found");
+}
+User CSVHandler::getUser(unsigned int id) const {
+    auto it = users.find(id);
+    if (it != users.end()) {
+        return it->second;
+    }
+    throw std::runtime_error("User not found");
+}
