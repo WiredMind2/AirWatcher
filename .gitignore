@@ -1,3 +1,4 @@
 # Ignore all object files
 *.o
+AppWatcher
 main
