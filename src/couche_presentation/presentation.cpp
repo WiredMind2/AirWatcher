@@ -264,15 +264,6 @@ void Presentation::Menu_administration ( )
 	} while (choix != 4);
 }
 
-
-//------------------------------------------------- Surcharge d'opérateurs
-Presentation & Presentation::operator = ( const Presentation & unPresentation )
-// Algorithme :
-//
-{
-} //----- Fin de operator =
-
-
 //-------------------------------------------- Constructeurs - destructeur
 Presentation::Presentation ( const Presentation & unPresentation )
 // Algorithme :

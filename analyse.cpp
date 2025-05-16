@@ -29,14 +29,6 @@ using namespace std;
 //} //----- Fin de Méthode
 
 
-//------------------------------------------------- Surcharge d'opérateurs
-analyse & analyse::operator = ( const analyse & unanalyse )
-// Algorithme :
-//
-{
-} //----- Fin de operator =
-
-
 //-------------------------------------------- Constructeurs - destructeur
 analyse::analyse ( const analyse & unanalyse )
 // Algorithme :

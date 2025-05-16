@@ -64,14 +64,6 @@ public:
     // Contrat :
     //
 
-//------------------------------------------------- Surcharge d'opérateurs
-    Presentation & operator = ( const Presentation & unPresentation );
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
-
-
 //-------------------------------------------- Constructeurs - destructeur
     Presentation ( const Presentation & unPresentation );
     // Mode d'emploi (constructeur de copie) :

@@ -38,7 +38,7 @@ public:
 	// id_ref : identifiant du capteur de référence
 	// measures : liste de toutes les mesures disponibles
 	// Retourne une liste de pointeurs vers les capteurs similaires
-	static std::vector<const Mesurement *> TrouverCapteursSimilaires(int id_ref);
+	static std::vector<const Mesurement *> ListerCapteursSimilaires(unsigned int id_ref);
 
 private:
 	// Fonction utilitaire pour recuperer la liste de toutes les mesures

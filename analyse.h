@@ -35,14 +35,6 @@ public:
     //
 
 
-//------------------------------------------------- Surcharge d'opérateurs
-    analyse & operator = ( const analyse & unanalyse );
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
-
-
 //-------------------------------------------- Constructeurs - destructeur
     analyse ( const analyse & unanalyse );
     // Mode d'emploi (constructeur de copie) :
