@@ -5,11 +5,15 @@
 #ifndef CSVHANDLER_H
 #define CSVHANDLER_H
 
+#include <iostream>
+
+using namespace std;
 
 
 class CSVHandler {
 public:
 
+    void extractSensors();
 
 
     // Constructor
