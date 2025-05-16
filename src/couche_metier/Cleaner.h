@@ -34,21 +34,27 @@ public:
     void start();
     void stop();
 
-    Cleaner(const string &cleanerID, double latitude, double longitude, const string &providerID);
+    Cleaner(const unsigned int &cleanerID, double latitude, double longitude, const unsigned int &providerID);
     virtual ~Cleaner();
 
+    unsigned int GetCleanerID() const { return cleanerID; }
+    double GetLatitude() const { return latitude; }
+    double GetLongitude() const { return longitude; }
+    time_t GetTimeStart() const { return timeStart; }
+    time_t GetTimeStop() const { return timeStop; }
+    unsigned int GetProviderID() const { return providerID; }
 //------------------------------------------------------------------ PRIVE
 
 protected:
 //----------------------------------------------------- Méthodes protégées
 
 //----------------------------------------------------- Attributs protégés
-    string cleanerID;
+    unsigned int cleanerID;
     double latitude;
     double longitude;
     time_t timeStart;
     time_t timeStop;
-    string providerID;
+    unsigned int providerID;
 };
 
 //-------------------------------- Autres définitions dépendantes de <Cleaner>
