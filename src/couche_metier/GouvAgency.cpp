@@ -1,28 +1,60 @@
-//
-// Created by aaron on 16/05/2025.
-//
+/*************************************************************************
+                           GouvAgency  -  description
+                             -------------------
+    début                : 16/05/2025
+    copyright            : (C) 2025 par aaron
+    e-mail               : 
+*************************************************************************/
 
-#include "GouvAgency.h"
+//---------- Réalisation de la classe <GouvAgency> (fichier GouvAgency.cpp) ------------
+
+//---------------------------------------------------------------- INCLUDE
+
+//-------------------------------------------------------- Include système
 #include <iostream>
 #include <string>
 #include <list>
-
 using namespace std;
 
-void GouvAgency::classifyUnreliable(User &user) {
+//------------------------------------------------------ Include personnel
+#include "GouvAgency.h"
 
-}
+//------------------------------------------------------------- Constantes
 
-void GouvAgency::classifyReliable(User &user) {
+//----------------------------------------------------------------- PUBLIC
 
-}
+//----------------------------------------------------- Méthodes publiques
 
-list<User> GouvAgency::getUsers() {
+void GouvAgency::classifyUnreliable(User &user)
+// Algorithme :
+//
+{
+} //----- Fin de classifyUnreliable
+
+void GouvAgency::classifyReliable(User &user)
+// Algorithme :
+//
+{
+} //----- Fin de classifyReliable
+
+list<User> GouvAgency::getUsers()
+// Algorithme :
+//
+{
     list<User> users;
     return users;
-}
+} //----- Fin de getUsers
 
-list<User> GouvAgency::findUnreliable() {
+list<User> GouvAgency::findUnreliable()
+// Algorithme :
+//
+{
     list<User> unreliableUsers;
     return unreliableUsers;
-}
+} //----- Fin de findUnreliable
+
+//-------------------------------------------- Constructeur - destructeur
+
+//------------------------------------------------------------------ PRIVE
+
+//----------------------------------------------------- Méthodes protégées

@@ -8,7 +8,17 @@
 #include <iostream>
 
 using namespace std;
+#include <unordered_map>
+#include <string>
+#include "class_metier/Cleaner.h"
+#include "class_metier/GouvAgency.h"
+#include "class_metier/Individual.h"
+#include "class_metier/Mesurement.h"
+#include "class_metier/Provider.h"
+#include "class_metier/Sensor.h"
+#include "class_metier/User.h"
 
+using namespace std;
 
 class CSVHandler {
 public:
@@ -22,10 +32,22 @@ public:
 
     // Destructor
     ~CSVHandler() {}
+
+private:
+    // Links objects together using ids
+    void linkAllObjects();
+    void linkUsers();
+
 protected:
     string filePath;
+
+
+
+    unordered_map<unsigned int, Cleaner> cleaners;
+    unordered_map<unsigned int, GouvAgency> gouvAgencies;
+    unordered_map<unsigned int, Individual> individuals;
+    unordered_map<unsigned int, Mesurement> mesurements;
+    unordered_map<unsigned int, Provider> providers;
+    unordered_map<unsigned int, Sensor> sensors;
+    unordered_map<unsigned int, User> users;
 };
-
-
-
-#endif //CSVHANDLER_H

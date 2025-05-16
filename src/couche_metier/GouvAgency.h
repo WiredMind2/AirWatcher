@@ -1,19 +1,53 @@
-//
-// Created by aaron on 16/05/2025.
-//
+/*************************************************************************
+                           GouvAgency  -  description
+                             -------------------
+    début                : 16/05/2025
+    copyright            : (C) 2025 par aaron
+    e-mail               : 
+*************************************************************************/
 
-#ifndef GOUVAGENCY_H
+//---------- Interface de la classe <GouvAgency> (fichier GouvAgency.h) ----------------
+#if ! defined ( GOUVAGENCY_H )
 #define GOUVAGENCY_H
 
+//--------------------------------------------------- Interfaces utilisées
+#include <list>
 #include "User.h"
+using std::list;
+
+//------------------------------------------------------------- Constantes
+
+//------------------------------------------------------------------ Types
+
+//------------------------------------------------------------------------
+// Rôle de la classe <GouvAgency>
+//
+// Représente une agence gouvernementale.
+//------------------------------------------------------------------------
 
 class GouvAgency : public User
 {
+//----------------------------------------------------------------- PUBLIC
+
 public:
+//----------------------------------------------------- Méthodes publiques
     void classifyUnreliable(User &user);
     void classifyReliable(User &user);
     list<User> getUsers();
     list<User> findUnreliable();
+
+    GouvAgency();
+    virtual ~GouvAgency();
+
+//------------------------------------------------------------------ PRIVE
+
+protected:
+//----------------------------------------------------- Méthodes protégées
+
+//----------------------------------------------------- Attributs protégés
+
 };
 
-#endif //GOUVAGENCY_H
+//-------------------------------- Autres définitions dépendantes de <GouvAgency>
+
+#endif // GOUVAGENCY_H

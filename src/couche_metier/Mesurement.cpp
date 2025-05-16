@@ -1,17 +1,49 @@
-//
-// Created by aaron on 16/05/2025.
-//
+/*************************************************************************
+                           Mesurement  -  description
+                             -------------------
+    début                : 16/05/2025
+    copyright            : (C) 2025 par aaron
+    e-mail               : 
+*************************************************************************/
 
-#include "Mesurement.h"
+//---------- Réalisation de la classe <Mesurement> (fichier Mesurement.cpp) ------------
+
+//---------------------------------------------------------------- INCLUDE
+
+//-------------------------------------------------------- Include système
 #include <iostream>
 #include <string>
 #include <ctime>
-
 using namespace std;
 
-//Constructor
-Mesurement::Mesurement(time_t timestamp, double value, const string& sensorID, const string& attributeID)
-    : timestamp(timestamp), value(value), sensorID(sensorID), attributeID(attributeID) {}
+//------------------------------------------------------ Include personnel
+#include "Mesurement.h"
 
-// Destructor
-Mesurement::~Mesurement() {}
+//------------------------------------------------------------- Constantes
+
+//----------------------------------------------------------------- PUBLIC
+
+//----------------------------------------------------- Méthodes publiques
+
+Mesurement::Mesurement(time_t timestamp, double value, const string& sensorID, const string& attributeID)
+// Algorithme :
+//
+    : timestamp(timestamp), value(value), sensorID(sensorID), attributeID(attributeID)
+{
+#ifdef MAP
+    cout << "Appel au constructeur de <Mesurement>" << endl;
+#endif
+} //----- Fin de Mesurement
+
+Mesurement::~Mesurement()
+// Algorithme :
+//
+{
+#ifdef MAP
+    cout << "Appel au destructeur de <Mesurement>" << endl;
+#endif
+} //----- Fin de ~Mesurement
+
+//------------------------------------------------------------------ PRIVE
+
+//----------------------------------------------------- Méthodes protégées

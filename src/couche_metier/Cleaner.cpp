@@ -1,33 +1,68 @@
-//
-// Created by aaron on 16/05/2025.
-//
+/*************************************************************************
+                           Cleaner  -  description
+                             -------------------
+    début                : 16/05/2025
+    copyright            : (C) 2025 par aaron
+    e-mail               : 
+*************************************************************************/
 
-#include "Cleaner.h"
+//---------- Réalisation de la classe <Cleaner> (fichier Cleaner.cpp) ------------
+
+//---------------------------------------------------------------- INCLUDE
+
+//-------------------------------------------------------- Include système
 #include <iostream>
 #include <string>
 #include <ctime>
-
 using namespace std;
 
-void Cleaner::start() {
+//------------------------------------------------------ Include personnel
+#include "Cleaner.h"
+
+//------------------------------------------------------------- Constantes
+
+//----------------------------------------------------------------- PUBLIC
+
+//----------------------------------------------------- Méthodes publiques
+
+void Cleaner::start()
+// Algorithme :
+// Démarre le nettoyeur et enregistre l'heure de début.
+//
+{
     timeStart = time(nullptr);
     cout << "Cleaner started at: " << ctime(&timeStart) << endl;
-}
+} //----- Fin de start
 
-void Cleaner::stop() {
+void Cleaner::stop()
+// Algorithme :
+// Arrête le nettoyeur et enregistre l'heure de fin.
+//
+{
     timeStop = time(nullptr);
     cout << "Cleaner stopped at: " << ctime(&timeStop) << endl;
-}
+} //----- Fin de stop
 
-// Constructor
+//-------------------------------------------- Constructeur - destructeur
+
 Cleaner::Cleaner(const string &cleanerID, double latitude, double longitude, const string &providerID)
-        : cleanerID(cleanerID), latitude(latitude), longitude(longitude), providerID(providerID) {
+// Algorithme :
+// Initialise les attributs du nettoyeur.
+//
+    : cleanerID(cleanerID), latitude(latitude), longitude(longitude), providerID(providerID)
+{
     this->timeStart = nullptr;
     this->timeStop = nullptr;
     cout << "Cleaner created with ID: " << cleanerID << endl;
-}
+} //----- Fin de Cleaner
 
-// Destructor
-Cleaner::~Cleaner() {
+Cleaner::~Cleaner()
+// Algorithme :
+//
+{
     cout << "Cleaner with ID: " << cleanerID << " destroyed." << endl;
-}
+} //----- Fin de ~Cleaner
+
+//------------------------------------------------------------------ PRIVE
+
+//----------------------------------------------------- Méthodes protégées
