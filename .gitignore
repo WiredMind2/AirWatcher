@@ -1,0 +1,6 @@
+# Ignore all object files
+*.o
+.vscode/
+obj/
+AppWatcher
+main
