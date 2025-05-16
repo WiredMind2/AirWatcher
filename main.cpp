@@ -1,10 +1,17 @@
 #include <iostream>
 #include "src/presentation.h"
 #include "analyse.h"
+#include "tests.h"
+using namespace std;
 
-int main(){
+int main( int argc, char* argv[]){
     
-    presentation pres;
-    pres.Menu_principal();
-
+    if (argc > 1 && string(argv[1]) == "test"){
+        tests test;
+        test.runTests();
+    }
+    else{
+        presentation pres;
+        pres.Menu_principal();
+    }
 }
