@@ -25,6 +25,10 @@ AirWatcher est une application de surveillance de la qualité de l'air. Elle per
     ```bash
     ./AirWatcher
     ```
+2. Utilisez la commande suivante pour lancer l'application en mode test :  
+```bash
+./AirWatcher test
+```
 ## Fonctionnement du Menu Principal
 
 Lorsque vous lancez l'application, un menu s'affiche pour sélectionner le type d'utilisateur. Voici les options disponibles :
@@ -42,5 +46,7 @@ Le menu principal se lance ensuite automatiquement après la sélection du type 
 - **3** : Points utilisateurs
 - **4** : Administration (uniquement pour les agences gouvernementales)
 - **0** : Quitter l'application
+
+
 
 
