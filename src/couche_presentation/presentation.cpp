@@ -52,7 +52,7 @@ void Presentation::Menu_principal ( )
 		int choix;
 		while (!(cin >> choix))
         {
-            cout << "Entrée invalide. Veuillez entrer un nombre entier.\n\n";
+            cout << "Entrée invalide. Veuillez entrer un nombre entier.\n";
             cin.clear();                // Réinitialise le statut d'erreur
             cin.ignore(1000, '\n');     // Ignore les caractères restants dans le flux
         }
@@ -96,7 +96,7 @@ void Presentation::Menu_principal ( )
 
 		while (!(cin >> choix))
         {
-            cout << "Entrée invalide. Veuillez entrer un nombre entier.\n\n";
+            cout << "Entrée invalide. Veuillez entrer un nombre entier.\n";
             cin.clear();                // Réinitialise le statut d'erreur
             cin.ignore(1000, '\n');     // Ignore les caractères restants dans le flux
         }
@@ -149,7 +149,7 @@ void Presentation::Menu_analyse ( )
 
 		while (!(cin >> choix))
         {
-            cout << "Entrée invalide. Veuillez entrer un nombre entier.\n\n";
+            cout << "Entrée invalide. Veuillez entrer un nombre entier.\n";
             cin.clear();                // Réinitialise le statut d'erreur
             cin.ignore(1000, '\n');     // Ignore les caractères restants dans le flux
         }
@@ -194,7 +194,7 @@ void Presentation::Menu_statistiques ( )
 
 		while (!(cin >> choix))
         {
-            cout << "Entrée invalide. Veuillez entrer un nombre entier.\n\n";
+            cout << "Entrée invalide. Veuillez entrer un nombre entier.\n";
             cin.clear();                // Réinitialise le statut d'erreur
             cin.ignore(1000, '\n');     // Ignore les caractères restants dans le flux
         }
@@ -237,7 +237,7 @@ void Presentation::Menu_points_utilisateurs ( )
 
 		while (!(cin >> choix))
         {
-            cout << "Entrée invalide. Veuillez entrer un nombre entier.\n\n";
+            cout << "Entrée invalide. Veuillez entrer un nombre entier.\n";
             cin.clear();                // Réinitialise le statut d'erreur
             cin.ignore(1000, '\n');     // Ignore les caractères restants dans le flux
         }
@@ -275,7 +275,7 @@ void Presentation::Menu_administration ( )
 
 		while (!(cin >> choix))
         {
-            cout << "Entrée invalide. Veuillez entrer un nombre entier.\n\n";
+            cout << "Entrée invalide. Veuillez entrer un nombre entier.\n";
             cin.clear();                // Réinitialise le statut d'erreur
             cin.ignore(1000, '\n');     // Ignore les caractères restants dans le flux
         }
