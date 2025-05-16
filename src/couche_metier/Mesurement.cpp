@@ -44,8 +44,8 @@ Mesurement::~Mesurement()
 #endif
 } //----- Fin de ~Mesurement
 
-const Sensor* Mesurement::GetSensor() const {
-    return sensor;
+Sensor* Mesurement::GetSensor() const {
+    return nullptr;
 }
 
 double Mesurement::GetValue() const {
