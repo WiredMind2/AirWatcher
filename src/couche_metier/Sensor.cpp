@@ -24,16 +24,9 @@
 
 //----------------------------------------------------- Méthodes publiques
 
-list<Mesurement> Sensor::getData()
-// Algorithme :
-//
-{
-    return data;
-} //----- Fin de getData
-
 //-------------------------------------------- Constructeur - destructeur
 
-Sensor::Sensor(const string &id, double lat, double lon, const string &userID)
+Sensor::Sensor(unsigned int id, double lat, double lon, const string &userID)
 // Algorithme :
 //
     : sensorID(id), latitude(lat), longitude(lon), userID(userID)
@@ -51,6 +44,19 @@ Sensor::~Sensor()
     cout << "Appel au destructeur de <Sensor>" << endl;
 #endif
 } //----- Fin de ~Sensor
+
+
+double Sensor::GetLongitude() const {
+    return longitude;
+}
+
+double Sensor::GetLatitude() const {
+    return latitude;
+}
+
+unsigned int Sensor::GetSensorID() const {
+    return 1; // Placeholder, should return the actual sensor ID
+}
 
 //------------------------------------------------------------------ PRIVE
 

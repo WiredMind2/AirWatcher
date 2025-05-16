@@ -2,8 +2,12 @@
 // Created by aaron on 16/05/2025.
 //
 
-#pragma once
+#ifndef CSVHANDLER_H
+#define CSVHANDLER_H
 
+#include <iostream>
+
+using namespace std;
 #include <unordered_map>
 #include <string>
 #include "couche_metier/Cleaner.h"
@@ -19,6 +23,7 @@ using namespace std;
 class CSVHandler {
 public:
 
+    void extractSensors();
 
 
     // Constructor
@@ -36,6 +41,8 @@ private:
 protected:
     string filePath;
 
+
+
     unordered_map<unsigned int, Cleaner> cleaners;
     unordered_map<unsigned int, GouvAgency> gouvAgencies;
     unordered_map<unsigned int, Individual> individuals;
@@ -44,3 +51,5 @@ protected:
     unordered_map<unsigned int, Sensor> sensors;
     unordered_map<unsigned int, User> users;
 };
+
+#endif //CSVHANDLER_H

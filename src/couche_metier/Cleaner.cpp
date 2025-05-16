@@ -51,8 +51,8 @@ Cleaner::Cleaner(const string &cleanerID, double latitude, double longitude, con
 //
     : cleanerID(cleanerID), latitude(latitude), longitude(longitude), providerID(providerID)
 {
-    this->timeStart = nullptr;
-    this->timeStop = nullptr;
+    this->timeStart = 0;
+    this->timeStop = 0;
     cout << "Cleaner created with ID: " << cleanerID << endl;
 } //----- Fin de Cleaner
 

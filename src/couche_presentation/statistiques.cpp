@@ -1,6 +1,6 @@
 #include "statistiques.h"
 #include <iostream>
-#include "processing.h"
+#include "../processing.h"
 
 void calculQualiteAirPos() {
 	double lat, lon;
