@@ -54,7 +54,8 @@ list<User> GouvAgency::findUnreliable()
 } //----- Fin de findUnreliable
 
 //-------------------------------------------- Constructeur - destructeur
-
+GouvAgency::GouvAgency(const string &id, int points) : User(id, points) {}
+GouvAgency::~GouvAgency() {}
 //------------------------------------------------------------------ PRIVE
 
 //----------------------------------------------------- Méthodes protégées

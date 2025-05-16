@@ -36,9 +36,11 @@ class Provider : public User
 public:
 //----------------------------------------------------- Méthodes publiques
     list<Cleaner> getCleaners();
+    // Constructor
+    Provider(const string &id, int points);
 
-    Provider(const string &id);
-    virtual ~Provider();
+    // Destructor
+    ~Provider() override;
 
 //------------------------------------------------------------------ PRIVE
 
@@ -46,7 +48,6 @@ protected:
 //----------------------------------------------------- Méthodes protégées
 
 //----------------------------------------------------- Attributs protégés
-    string providerID;
 };
 
 //-------------------------------- Autres définitions dépendantes de <Provider>
