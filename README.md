@@ -12,7 +12,7 @@ AirWatcher est une application de surveillance de la qualité de l'air. Elle per
 ## Installation
 1. Clonez le dépôt :
     ```bash
-    git clone <url-du-repo>
+    git clone https://github.com/WiredMind2/AirWatcher.git
     ```
 2. Accédez au répertoire :
     ```bash
