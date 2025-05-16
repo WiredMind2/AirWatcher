@@ -1,19 +1,14 @@
 /*************************************************************************
-                           Statistiques  -  description
+                           tests  -  description
                              -------------------
     début                : $DATE$
     copyright            : (C) $YEAR$ par $AUTHOR$
     e-mail               : $EMAIL$
 *************************************************************************/
 
-//---------- Interface de la classe <Statistiques> (fichier Statistiques.h) ----------------
-#if ! defined ( Statistiques_H )
-#define Statistiques_H
-#include <list>
-
-using namespace std;
-#include "Sensor.h"
-#include "Measurement.h"
+//---------- Interface de la classe <tests> (fichier tests.h) ----------------
+#if ! defined ( tests_H )
+#define tests_H
 
 //--------------------------------------------------- Interfaces utilisées
 
@@ -22,12 +17,12 @@ using namespace std;
 //------------------------------------------------------------------ Types
 
 //------------------------------------------------------------------------
-// Rôle de la classe <Statistiques>
+// Rôle de la classe <tests>
 //
 //
 //------------------------------------------------------------------------
 
-class Statistiques 
+class tests
 {
 //----------------------------------------------------------------- PUBLIC
 
@@ -39,9 +34,14 @@ public:
     // Contrat :
     //
 
+    bool runTests ( );
+    // Mode d'emploi :
+    // Lance tous les tests unitaires de la classe
+    // Contrat :
+    // 
 
 //------------------------------------------------- Surcharge d'opérateurs
-    Statistiques & operator = ( const Statistiques & unStatistiques );
+    tests & operator = ( const tests & untests );
     // Mode d'emploi :
     //
     // Contrat :
@@ -49,19 +49,19 @@ public:
 
 
 //-------------------------------------------- Constructeurs - destructeur
-    Statistiques ( const Statistiques & unStatistiques );
+    tests ( const tests & untests );
     // Mode d'emploi (constructeur de copie) :
     //
     // Contrat :
     //
 
-    Statistiques ( );
+    tests ( );
     // Mode d'emploi :
     //
     // Contrat :
     //
 
-    virtual ~Statistiques ( );
+    virtual ~tests ( );
     // Mode d'emploi :
     //
     // Contrat :
@@ -72,17 +72,13 @@ public:
 protected:
 //----------------------------------------------------- Méthodes protégées
 
-std::list<Sensor> getSensors();
-// fonctions William;
+void test_fct1(int &testCount, int &testPassed, int &testFailed);
 
 //----------------------------------------------------- Attributs protégés
 
-std::list<Sensor> sensors;
-std::list<Measurement> measures;
-
 };
 
-//-------------------------------- Autres définitions dépendantes de <Statistiques>
+//-------------------------------- Autres définitions dépendantes de <tests>
 
-#endif // Statistiques_H
+#endif // tests_H
 
