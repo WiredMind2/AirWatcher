@@ -44,6 +44,15 @@ void Tests::runTests ( )
     // Test cases
     test_T11(testCount, testPassed, testFailed);
     test_T12(testCount, testPassed, testFailed);
+    test_T13(testCount, testPassed, testFailed);
+
+    test_T21(testCount, testPassed, testFailed);
+    test_T22(testCount, testPassed, testFailed);
+    test_T23(testCount, testPassed, testFailed);
+    
+    test_T31(testCount, testPassed, testFailed);
+    test_T32(testCount, testPassed, testFailed);
+    test_T33(testCount, testPassed, testFailed);
     //...
 
     //results
