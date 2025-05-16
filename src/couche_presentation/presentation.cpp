@@ -30,6 +30,7 @@ using namespace std;
 
 #include <iomanip> // For text formatting
 #include "statistiques.h"
+#include "analyse.h"
 
 void Presentation::Menu_principal ( )
 // Algorithme :
@@ -141,10 +142,13 @@ void Presentation::Menu_analyse ( )
 		switch (choix)
 		{
 			case 1:
+				analyse_donnees_capteurs();
 				break;
 			case 2:
+				identifier_capteurs_non_fiables();
 				break;
 			case 3:
+				analyser_impact_purificateurs();
 				break;
 			case 0:
 				cout << "\033[1;31mRetour au menu principal.\033[0m" << endl;
