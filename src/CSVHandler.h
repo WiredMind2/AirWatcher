@@ -25,51 +25,12 @@ public:
 
     void extractSensors();
 
-    //setters
-    void setCleaners(const unordered_map<unsigned int, Cleaner> &cleaners) {
-        this->cleaners = cleaners;
-    }
-    void setGouvAgencies(const unordered_map<unsigned int, GouvAgency> &gouvAgencies) {
-        this->gouvAgencies = gouvAgencies;
-    }
-    void setIndividuals(const unordered_map<unsigned int, Individual> &individuals) {
-        this->individuals = individuals;
-    }
-    void setMesurements(const unordered_map<unsigned int, Mesurement> &mesurements) {
-        this->mesurements = mesurements;
-    }
-    void setProviders(const unordered_map<unsigned int, Provider> &providers) {
-        this->providers = providers;
-    }
-    void setSensors(const unordered_map<unsigned int, Sensor> &sensors) {
-        this->sensors = sensors;
-    }
-    void setUsers(const unordered_map<unsigned int, User> &users) {
-        this->users = users;
-    }
-
     //getters
-    unordered_map<unsigned int, Cleaner> getCleaners() const {
-        return cleaners;
-    }
-    unordered_map<unsigned int, GouvAgency> getGouvAgencies() const {
-        return gouvAgencies;
-    }
-    unordered_map<unsigned int, Individual> getIndividuals() const {
-        return individuals;
-    }
-    unordered_map<unsigned int, Mesurement> getMesurements() const {
-        return mesurements;
-    }
-    unordered_map<unsigned int, Provider> getProviders() const {
-        return providers;
-    }
-    unordered_map<unsigned int, Sensor> getSensors() const {
-        return sensors;
-    }
-    unordered_map<unsigned int, User> getUsers() const {
-        return users;
-    }
+    Cleaner getCleaner(unsigned int id) const;
+    Individual getIndividual(unsigned int id) const;
+    Provider getProvider(unsigned int id) const;
+    Sensor getSensor(unsigned int id) const;
+    User getUser(unsigned int id) const;
 
 
 
@@ -91,7 +52,6 @@ protected:
 
 
     unordered_map<unsigned int, Cleaner> cleaners;
-    unordered_map<unsigned int, GouvAgency> gouvAgencies;
     unordered_map<unsigned int, Individual> individuals;
     unordered_map<unsigned int, Mesurement> mesurements;
     unordered_map<unsigned int, Provider> providers;
