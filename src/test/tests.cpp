@@ -16,6 +16,8 @@ using namespace std;
 
 //------------------------------------------------------ Include personnel
 #include "tests.h"
+//#include "../processing.h"
+
 
 //------------------------------------------------------------- Constantes
 
@@ -39,7 +41,7 @@ void Tests::runTests ( )
     cout << "\033[1;32mdébut des Tests... \033[0m\n";
 
     // Test cases
-    test_fct1(testCount, testPassed, testFailed);
+    test_T11(testCount, testPassed, testFailed);
     //...
 
     //results
@@ -99,20 +101,24 @@ Tests::~Tests ( )
 
 //----------------------------------------------------- Méthodes protégées
 
-void Tests::test_fct1(int &testCount, int &testPassed, int &testFailed)
+void Tests::test_T11(int &testCount, int &testPassed, int &testFailed)
 // Algorithme :
 // 
 {
+    /*AirQualityProcessor AirQualityProcessor;
     testCount++;
 
-    // Simulate a test case
-    // Replace this with actual test logic
-    bool result = true;
+    int k = 3;
+    double lat = 48.8566;
+    double lon = 2.3522;
+    double expectedValue = 0.5;
 
-    if (result) {
+    if (AirQualityProcessor.EstimationQualiteAirPos(lat, lon, k) == expectedValue) {
+        cout << "\033[1;32mTest T11 réussi.\033[0m\n";
         testPassed++;
     } else {
+        cout << "\033[1;31mTest T11 échoué.\033[0m\n";
         testFailed++;
-    }
+    }*/
 }
 

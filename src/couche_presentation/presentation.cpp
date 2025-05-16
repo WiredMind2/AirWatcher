@@ -116,7 +116,7 @@ void Presentation::Menu_principal ( )
 				cout << "\033[1;31mChoix invalide, veuillez réessayer.\033[0m" << endl;
 				break;
 		}
-	} while (choix != 5);
+	} while (choix != 0);
 }
 
 void Presentation::Menu_analyse ( )
