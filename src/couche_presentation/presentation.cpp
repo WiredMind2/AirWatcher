@@ -35,6 +35,42 @@ void Presentation::Menu_principal ( )
 // Algorithme :
 //
 {
+	//choix de l'utilisateur
+	string userType;
+	do
+	{
+		cout << "\033[1;34m|============================================|\033[0m\n";
+		cout << "\033[1;34m|          Sélection du type d'utilisateur   |\033[0m\n";
+		cout << "\033[1;34m|============================================|\033[0m\n";
+		cout << "\033[1;32m|[1] -------- Agence gouvernementale --------|\033[0m\n";
+		cout << "\033[1;32m|[2] -------- Individu ----------------------|\033[0m\n";
+		cout << "\033[1;32m|[3] -------- Fournisseur -------------------|\033[0m\n";
+		cout << "\033[1;34m|============================================|\033[0m\n";
+		cout << "Veuillez choisir une valeur parmi celles proposées: "<< endl;
+
+		int choix;
+		cin >> choix;
+
+		switch (choix)
+		{
+			case 1:
+				userType = "1";
+				break;
+			case 2:
+				userType = "2";
+				break;
+			case 3:
+				userType = "3";
+				break;
+			default:
+				cout << "\033[1;31mChoix invalide, veuillez réessayer.\033[0m" << endl;
+				break;
+		}
+	} while (userType.empty());
+
+	cout << "\033[1;32mVous avez sélectionné : " << userType << "\033[0m" << endl;
+
+	// Affichage du menu principal
 	int choix;
 	do
 	{
@@ -44,10 +80,13 @@ void Presentation::Menu_principal ( )
 		cout << "\033[1;32m|[1] -------- Analyse de données ------------|\033[0m\n";
 		cout << "\033[1;32m|[2] -------- Statistiques ------------------|\033[0m\n";
 		cout << "\033[1;32m|[3] -------- Points utilisateurs -----------|\033[0m\n";
-		cout << "\033[1;32m|[4] -------- Administration ----------------|\033[0m\n";
-		cout << "\033[1;31m|[5] -------- Quitter -----------------------|\033[0m\n";
+		if (userType == "1")
+		{
+			cout << "\033[1;32m|[4] -------- Administration ----------------|\033[0m\n";
+		}
+		cout << "\033[1;31m|[0] -------- Quitter -----------------------|\033[0m\n";
 		cout << "\033[1;34m|============================================|\033[0m\n";
-		cout << "Veuillez choisir une valeur entre 1 et 5 : "<< endl;
+		cout << "Veuillez choisir une valeur parmi celles proposées: "<< endl;
 
 		cin >> choix;
 
@@ -63,9 +102,14 @@ void Presentation::Menu_principal ( )
 				Menu_points_utilisateurs();
 				break;
 			case 4:
-				Menu_administration();
+				if (userType == "1"){
+					Menu_administration();
+				}
+				else{
+					cout << "\033[1;31mAccès refusé. Vous n'êtes pas une agence gouvernementale.\033[0m" << endl;
+				}
 				break;
-			case 5:
+			case 0:
 				cout << "\033[1;31mAu revoir !\033[0m" << endl;
 				break;
 			default:
@@ -88,9 +132,9 @@ void Presentation::Menu_analyse ( )
 		cout << "\033[1;32m|[1] -------- Analyse des données des capteurs------|\033[0m\n";
 		cout << "\033[1;32m|[2] -------- Identifier capteurs non fiables ------|\033[0m\n";
 		cout << "\033[1;32m|[3] -------- Analyser impact des purificateurs-----|\033[0m\n";
-		cout << "\033[1;31m|[4] -------- Retour au menu principal -------------|\033[0m\n";
+		cout << "\033[1;31m|[0] -------- Retour au menu principal -------------|\033[0m\n";
 		cout << "\033[1;34m|===================================================|\033[0m\n";
-		cout << "Veuillez choisir une valeur entre 1 et 4 : " << endl;
+		cout << "Veuillez choisir une valeur parmi celles proposées: "<< endl;
 
 		cin >> choix;
 
@@ -102,7 +146,7 @@ void Presentation::Menu_analyse ( )
 				break;
 			case 3:
 				break;
-			case 4:
+			case 0:
 				cout << "\033[1;31mRetour au menu principal.\033[0m" << endl;
 				break;
 			default:
@@ -125,9 +169,9 @@ void Presentation::Menu_statistiques ( )
 		cout << "\033[1;32m|[1] ---- Qualité moyenne de l'air par zone --------|\033[0m\n";
 		cout << "\033[1;32m|[2] ---- Qualité moyenne de l'air par point -------|\033[0m\n";
 		cout << "\033[1;32m|[3] ---- Classer capteurs similaires --------------|\033[0m\n";
-		cout << "\033[1;31m|[4] ---- Retour au menu principal -----------------|\033[0m\n";
+		cout << "\033[1;31m|[0] ---- Retour au menu principal -----------------|\033[0m\n";
 		cout << "\033[1;34m|===================================================|\033[0m\n";
-		cout << "Veuillez choisir une valeur entre 1 et 4 : " << endl;
+		cout << "Veuillez choisir une valeur parmi celles proposées: "<< endl;
 
 		cin >> choix;
 
@@ -142,7 +186,7 @@ void Presentation::Menu_statistiques ( )
 			case 3:
 				classerCapteursSimilaires();
 				break;
-			case 4:
+			case 0:
 				cout << "\033[1;31mRetour au menu principal.\033[0m" << endl;
 				break;
 			default:
@@ -163,9 +207,9 @@ void Presentation::Menu_points_utilisateurs ( )
 		cout << "\033[1;34m|           Menu Points Utilisateurs                |\033[0m\n";
 		cout << "\033[1;34m|===================================================|\033[0m\n";
 		cout << "\033[1;32m|[1] ---- Consulter les points d'un utilisateur ----|\033[0m\n";
-		cout << "\033[1;31m|[2] ---- Retour au menu principal -----------------|\033[0m\n";
+		cout << "\033[1;31m|[0] ---- Retour au menu principal -----------------|\033[0m\n";
 		cout << "\033[1;34m|===================================================|\033[0m\n";
-		cout << "Veuillez choisir une valeur entre 1 et 2 : " << endl;
+		cout << "Veuillez choisir une valeur parmi celles proposées: "<< endl;
 
 		cin >> choix;
 
@@ -173,7 +217,7 @@ void Presentation::Menu_points_utilisateurs ( )
 		{
 			case 1:
 				break;
-			case 2:
+			case 0:
 				cout << "\033[1;31mRetour au menu principal.\033[0m" << endl;
 				break;
 			default:
@@ -196,9 +240,9 @@ void Presentation::Menu_administration ( )
 		cout << "\033[1;32m|[1] ---- Consulter capteurs défaillants -----------|\033[0m\n";
 		cout << "\033[1;32m|[2] ---- Marquer un capteur comme non fiable ------|\033[0m\n";
 		cout << "\033[1;32m|[3] ---- Marquer un utilisateur comme malicieux ---|\033[0m\n";
-		cout << "\033[1;31m|[4] ---- Retour au menu principal -----------------|\033[0m\n";
+		cout << "\033[1;31m|[0] ---- Retour au menu principal -----------------|\033[0m\n";
 		cout << "\033[1;34m|===================================================|\033[0m\n";
-		cout << "Veuillez choisir une valeur entre 1 et 4 : " << endl;
+		cout << "Veuillez choisir une valeur parmi celles proposées: "<< endl;
 
 		cin >> choix;
 
@@ -210,7 +254,7 @@ void Presentation::Menu_administration ( )
 				break;
 			case 3:
 				break;
-			case 4:
+			case 0:
 				cout << "\033[1;31mRetour au menu principal.\033[0m" << endl;
 				break;
 			default:
