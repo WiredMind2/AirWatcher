@@ -1,7 +1,7 @@
 #include <iostream>
 #include "src/couche_presentation/presentation.h"
 #include "analyse.h"
-#include "tests.h"
+#include "src/test/tests.h"
 using namespace std;
 
 int main( int argc, char* argv[]){

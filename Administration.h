@@ -35,15 +35,6 @@ public:
     // Contrat :
     //
 
-
-//------------------------------------------------- Surcharge d'opérateurs
-    Administration & operator = ( const Administration & unAdministration );
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
-
-
 //-------------------------------------------- Constructeurs - destructeur
     Administration ( const Administration & unAdministration );
     // Mode d'emploi (constructeur de copie) :

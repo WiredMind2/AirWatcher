@@ -28,15 +28,6 @@ using namespace std;
 //{
 //} //----- Fin de Méthode
 
-
-//------------------------------------------------- Surcharge d'opérateurs
-Administration & Administration::operator = ( const Administration & unAdministration )
-// Algorithme :
-//
-{
-} //----- Fin de operator =
-
-
 //-------------------------------------------- Constructeurs - destructeur
 Administration::Administration ( const Administration & unAdministration )
 // Algorithme :

@@ -168,7 +168,7 @@ void Presentation::Menu_analyse ( )
 				cout << "\033[1;31mChoix invalide, veuillez réessayer.\033[0m" << endl;
 				break;
 		}
-	} while (choix != 4);
+	} while (choix != 0);
 }
 
 void Presentation::Menu_statistiques ( )
@@ -213,7 +213,7 @@ void Presentation::Menu_statistiques ( )
 				cout << "\033[1;31mChoix invalide, veuillez réessayer.\033[0m"<< endl;
 				break;
 		}
-	} while (choix != 4);
+	} while (choix != 0);
 }
 
 void Presentation::Menu_points_utilisateurs ( )
@@ -249,7 +249,7 @@ void Presentation::Menu_points_utilisateurs ( )
 				cout << "\033[1;31mChoix invalide, veuillez réessayer.\033[0m" << endl;
 				break;
 		}
-	} while (choix != 2);
+	} while (choix != 0);
 }
 
 void Presentation::Menu_administration ( )
@@ -291,17 +291,8 @@ void Presentation::Menu_administration ( )
 				cout << "\033[1;31mChoix invalide, veuillez réessayer.\033[0m" << endl;
 				break;
 		}
-	} while (choix != 4);
+	} while (choix != 0);
 }
-
-
-//------------------------------------------------- Surcharge d'opérateurs
-Presentation & Presentation::operator = ( const Presentation & unPresentation )
-// Algorithme :
-//
-{
-} //----- Fin de operator =
-
 
 //-------------------------------------------- Constructeurs - destructeur
 Presentation::Presentation ( const Presentation & unPresentation )

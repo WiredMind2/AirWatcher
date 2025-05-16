@@ -85,7 +85,7 @@ std::vector<const Mesurement *> AirQualityProcessor::TrouverCapteursDetournes(do
 	return capteurs_detournes;
 }
 
-std::vector<const Mesurement *> AirQualityProcessor::TrouverCapteursSimilaires(int id_ref)
+std::vector<const Mesurement *> AirQualityProcessor::ListerCapteursSimilaires(unsigned int id_ref)
 {
 
 	std::vector<Mesurement> measures = GetAllMeasures();
