@@ -44,6 +44,14 @@ Mesurement::~Mesurement()
 #endif
 } //----- Fin de ~Mesurement
 
+const Sensor* Mesurement::GetSensor() const {
+    return sensor;
+}
+
+double Mesurement::GetValue() const {
+    return value;
+}
+
 //------------------------------------------------------------------ PRIVE
 
 //----------------------------------------------------- Méthodes protégées
