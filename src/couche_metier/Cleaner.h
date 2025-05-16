@@ -1,24 +1,48 @@
-//
-// Created by aaron on 16/05/2025.
-//
+/*************************************************************************
+                           Cleaner  -  description
+                             -------------------
+    début                : 16/05/2025
+    copyright            : (C) 2025 par aaron
+    e-mail               : 
+*************************************************************************/
 
-#ifndef CLEANER_H
+//---------- Interface de la classe <Cleaner> (fichier Cleaner.h) ----------------
+#if ! defined ( CLEANER_H )
 #define CLEANER_H
 
+//--------------------------------------------------- Interfaces utilisées
+#include <string>
+#include <ctime>
+using std::string;
 
+//------------------------------------------------------------- Constantes
 
-class Cleaner {
+//------------------------------------------------------------------ Types
+
+//------------------------------------------------------------------------
+// Rôle de la classe <Cleaner>
+//
+// Représente un dispositif de nettoyage avec position et fournisseur.
+//------------------------------------------------------------------------
+
+class Cleaner
+{
+//----------------------------------------------------------------- PUBLIC
+
 public:
+//----------------------------------------------------- Méthodes publiques
     void start();
     void stop();
 
-    // Constructor
-    Cleaner(const string &cleanerID, double latitude, double longitude,const string &providerID)
-        : cleanerID(cleanerID), latitude(latitude), longitude(longitude), providerID(providerID) {}
+    Cleaner(const string &cleanerID, double latitude, double longitude, const string &providerID);
+    virtual ~Cleaner();
 
-    // Destructor
-    ~Cleaner() {}
+//------------------------------------------------------------------ PRIVE
+
 protected:
+//----------------------------------------------------- Méthodes protégées
+
+//----------------------------------------------------- Attributs protégés
     string cleanerID;
     double latitude;
     double longitude;
@@ -27,6 +51,6 @@ protected:
     string providerID;
 };
 
+//-------------------------------- Autres définitions dépendantes de <Cleaner>
 
-
-#endif //CLEANER_H
+#endif // CLEANER_H

@@ -1,16 +1,51 @@
-//
-// Created by aaron on 16/05/2025.
-//
+/*************************************************************************
+                           Attribute  -  description
+                             -------------------
+    début                : 16/05/2025
+    copyright            : (C) 2025 par aaron
+    e-mail               : 
+*************************************************************************/
 
-#include "Attribute.h"
+//---------- Réalisation de la classe <Attribute> (fichier Attribute.cpp) ------------
+
+//---------------------------------------------------------------- INCLUDE
+
+//-------------------------------------------------------- Include système
 #include <iostream>
 #include <string>
-
 using namespace std;
 
-//Constructor
-Attribute::Attribute(int id, const string &unit, const string &description)
-    : attributeID(id), unit(unit), description(description) {}
+//------------------------------------------------------ Include personnel
+#include "Attribute.h"
 
-//Destructor
-Attribute::~Attribute() {}
+//------------------------------------------------------------- Constantes
+
+//----------------------------------------------------------------- PUBLIC
+
+//----------------------------------------------------- Méthodes publiques
+
+// Constructeur
+Attribute::Attribute(int id, const string &unit, const string &description)
+// Algorithme :
+// Initialise les attributs de la classe avec les valeurs fournies.
+//
+    : attributeID(id), unit(unit), description(description)
+{
+#ifdef MAP
+    cout << "Appel au constructeur de <Attribute>" << endl;
+#endif
+} //----- Fin de Attribute
+
+// Destructeur
+Attribute::~Attribute()
+// Algorithme :
+//
+{
+#ifdef MAP
+    cout << "Appel au destructeur de <Attribute>" << endl;
+#endif
+} //----- Fin de ~Attribute
+
+//------------------------------------------------------------------ PRIVE
+
+//----------------------------------------------------- Méthodes protégées

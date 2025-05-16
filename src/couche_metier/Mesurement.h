@@ -1,27 +1,51 @@
-//
-// Created by aaron on 16/05/2025.
-//
+/*************************************************************************
+                           Mesurement  -  description
+                             -------------------
+    début                : 16/05/2025
+    copyright            : (C) 2025 par aaron
+    e-mail               : 
+*************************************************************************/
 
-#ifndef MESUREMENT_H
+//---------- Interface de la classe <Mesurement> (fichier Mesurement.h) ----------------
+#if ! defined ( MESUREMENT_H )
 #define MESUREMENT_H
 
+//--------------------------------------------------- Interfaces utilisées
+#include <string>
+#include <ctime>
+using std::string;
 
+//------------------------------------------------------------- Constantes
 
-class Mesurement {
+//------------------------------------------------------------------ Types
+
+//------------------------------------------------------------------------
+// Rôle de la classe <Mesurement>
+//
+// Représente une mesure prise par un capteur.
+//------------------------------------------------------------------------
+
+class Mesurement
+{
+//----------------------------------------------------------------- PUBLIC
+
 public:
-    // Constructor
-    Mesurement(time_t timestamp, double value, const string& sensorID, const string& attributeID)
-        : timestamp(timestamp), value(value), sensorID(sensorID), attributeID(attributeID) {}
+//----------------------------------------------------- Méthodes publiques
+    Mesurement(time_t timestamp, double value, const string& sensorID, const string& attributeID);
+    virtual ~Mesurement();
 
-    // Destructor
-    ~Mesurement() {}
+//------------------------------------------------------------------ PRIVE
+
 protected:
+//----------------------------------------------------- Méthodes protégées
+
+//----------------------------------------------------- Attributs protégés
     time_t timestamp;
     double value;
     string sensorID;
     string attributeID;
 };
 
+//-------------------------------- Autres définitions dépendantes de <Mesurement>
 
-
-#endif //MESUREMENT_H
+#endif // MESUREMENT_H

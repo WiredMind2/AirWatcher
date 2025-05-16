@@ -1,28 +1,56 @@
-//
-// Created by aaron on 16/05/2025.
-//
+/*************************************************************************
+                           Sensor  -  description
+                             -------------------
+    début                : 16/05/2025
+    copyright            : (C) 2025 par aaron
+    e-mail               : 
+*************************************************************************/
 
-#ifndef SENSOR_H
+//---------- Interface de la classe <Sensor> (fichier Sensor.h) ----------------
+#if ! defined ( SENSOR_H )
 #define SENSOR_H
 
-class Sensor {
+//--------------------------------------------------- Interfaces utilisées
+#include <string>
+#include <list>
+using std::string;
+using std::list;
+
+//------------------------------------------------------------- Constantes
+
+//------------------------------------------------------------------ Types
+
+//------------------------------------------------------------------------
+// Rôle de la classe <Sensor>
+//
+// Représente un capteur associé à un utilisateur.
+//------------------------------------------------------------------------
+
+class Mesurement; // Forward declaration
+
+class Sensor
+{
+//----------------------------------------------------------------- PUBLIC
+
 public:
+//----------------------------------------------------- Méthodes publiques
     list<Mesurement> getData();
 
-    // Constructor
-    Sensor(const string &id, double lat, double lon, const string &userID)
-        : sensorID(id), latitude(lat), longitude(lon), userID(userID) {}
+    Sensor(const string &id, double lat, double lon, const string &userID);
+    virtual ~Sensor();
 
-    // Destructor
-    ~Sensor() {}
+//------------------------------------------------------------------ PRIVE
 
 protected:
-    String sensorID;
+//----------------------------------------------------- Méthodes protégées
+
+//----------------------------------------------------- Attributs protégés
+    string sensorID;
     double latitude;
     double longitude;
     string userID;
 };
 
+//-------------------------------- Autres définitions dépendantes de <Sensor>
 
-
-#endif //SENSOR_H
+#endif // SENSOR_H
