@@ -26,7 +26,7 @@
 
 //-------------------------------------------- Constructeur - destructeur
 
-Sensor::Sensor(const string &id, double lat, double lon, const string &userID)
+Sensor::Sensor(unsigned int id, double lat, double lon, const string &userID)
 // Algorithme :
 //
     : sensorID(id), latitude(lat), longitude(lon), userID(userID)

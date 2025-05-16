@@ -3,12 +3,36 @@
 //
 
 #include "CSVHandler.h"
+#include <iostream>
+#include <fstream>
+#include <sstream>
+#include <string>
 
+using namespace std;
 
-void CSVHandler::linkAllObjects() {
-	linkUsers();
-}
+void CSVHandler::extractSensors() {
+    ifstream file(filePath);
+    string line;
 
-void CSVHandler::linkUsers() {
-	return;
+    if (file.is_open()) {
+        while (getline(file, line)) {
+            stringstream ss(line);
+            string idStr, latitudeStr, longitudeStr;
+
+            getline(ss, idStr, ';');
+            getline(ss, latitudeStr, ';');
+            getline(ss, longitudeStr, ';');
+
+            idStr = idStr.substr(6);
+
+            unsigned int id = stoi(idStr);
+            double latitude = stod(latitudeStr);
+            double longitude = stod(longitudeStr);
+
+            Sensor sensor(id, latitude, longitude, nullptr);
+        }
+        file.close();
+    } else {
+        cout << "Unable to open file" << endl;
+    }
 }
