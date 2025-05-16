@@ -10,12 +10,12 @@ using namespace std;
 double AirQualityProcessor::EstimationQualiteAirPos(double lat, double lon, int k, time_t start, time_t stop)
 {
 
-	std::vector<Mesurement> measures = GetMeasures(start, stop);
+	std::vector<Measurement> measures = GetMeasures(start, stop);
 
 	if (measures.empty())
 		return std::numeric_limits<double>::quiet_NaN();
 
-	std::vector<std::pair<double, const Mesurement *>> distances;
+	std::vector<std::pair<double, const Measurement *>> distances;
 	for (const auto &m : measures)
 	{
 		double dist = std::sqrt((lat - m.GetSensor()->GetLatitude()) * (lat - m.GetSensor()->GetLatitude()) +
@@ -24,7 +24,7 @@ double AirQualityProcessor::EstimationQualiteAirPos(double lat, double lon, int 
 	}
 
 	std::sort(distances.begin(), distances.end(),
-			  [](const std::pair<double, const Mesurement *> &a, const std::pair<double, const Mesurement *> &b)
+			  [](const std::pair<double, const Measurement *> &a, const std::pair<double, const Measurement *> &b)
 			  { return a.first < b.first; });
 
 	int count = std::min(k, static_cast<int>(distances.size()));
@@ -46,7 +46,7 @@ double AirQualityProcessor::EstimationQualiteAirPos(double lat, double lon, int 
 double AirQualityProcessor::EstimationQualiteAirZone(double lat, double lon, double radius, int k, double step, time_t start, time_t stop)
 {
 
-	std::vector<Mesurement> measures = GetMeasures(start, stop);
+	std::vector<Measurement> measures = GetMeasures(start, stop);
 
 	std::vector<double> estimations;
 	for (double dlat = -radius; dlat <= radius; dlat += step)
@@ -74,7 +74,7 @@ double AirQualityProcessor::EstimationQualiteAirZone(double lat, double lon, dou
 std::vector<const Sensor *> AirQualityProcessor::TrouverCapteursDetournes(double radius, double seuil_limite, int k, double step, time_t start, time_t stop)
 {
 
-	std::vector<Mesurement> measures = GetMeasures(start, stop);
+	std::vector<Measurement> measures = GetMeasures(start, stop);
 
 	std::vector<const Sensor *> capteurs_detournes;
 	for (const auto &mesure : measures)
@@ -89,12 +89,12 @@ std::vector<const Sensor *> AirQualityProcessor::TrouverCapteursDetournes(double
 	return capteurs_detournes;
 }
 
-std::vector<const Mesurement *> AirQualityProcessor::ListerCapteursSimilaires(unsigned int id_ref, time_t start, time_t stop)
+std::vector<const Measurement *> AirQualityProcessor::ListerCapteursSimilaires(unsigned int id_ref, time_t start, time_t stop)
 {
 
-	std::vector<Mesurement> measures = GetMeasures(start, stop);
+	std::vector<Measurement> measures = GetMeasures(start, stop);
 
-	std::vector<const Mesurement *> capteurs_similaires;
+	std::vector<const Measurement *> capteurs_similaires;
 	for (const auto &capteur : measures)
 	{
 		if (capteur.GetSensor()->GetSensorID() == id_ref)
@@ -112,8 +112,8 @@ std::vector<const Mesurement *> AirQualityProcessor::ListerCapteursSimilaires(un
 	return capteurs_similaires;
 }
 
-std::vector<Mesurement> AirQualityProcessor::GetMeasures(time_t start, time_t stop)
+std::vector<Measurement> AirQualityProcessor::GetMeasures(time_t start, time_t stop)
 {
-	// vector<Mesurement> measures = CSVHandler::getMeasurement(start, stop);
-	return vector<Mesurement>(); // Placeholder
+	// vector<Measurement> measures = CSVHandler::getMeasurement(start, stop);
+	return vector<Measurement>(); // Placeholder
 }

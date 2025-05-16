@@ -13,7 +13,7 @@ using namespace std;
 #include "couche_metier/Cleaner.h"
 #include "couche_metier/GouvAgency.h"
 #include "couche_metier/Individual.h"
-#include "couche_metier/Mesurement.h"
+#include "couche_metier/Measurement.h"
 #include "couche_metier/Provider.h"
 #include "couche_metier/Sensor.h"
 #include "couche_metier/User.h"
@@ -25,23 +25,18 @@ using namespace std;
 class CSVHandler {
 public:
 
-    void extractSensors();
+    static void extractAll(const string &folder);
+    static void extractSensors(const string &folder);
+    static void extractMeasurements(const string &folder);
 
     //getters
-    Cleaner getCleaner(unsigned int id) const;
-    Individual getIndividual(unsigned int id) const;
-    Provider getProvider(unsigned int id) const;
-    Sensor getSensor(unsigned int id) const;
-    User getUser(unsigned int id) const;
+    static Cleaner getCleaner(unsigned int id);
+    static Individual getIndividual(unsigned int id);
+    static Provider getProvider(unsigned int id);
+    static Sensor getSensor(unsigned int id);
+    static User getUser(unsigned int id);
 
-    vector<Mesurement*> getMeasurement(time_t start, time_t stop) const;
-
-    // Constructor
-    CSVHandler(const string &filePath)
-        : filePath(filePath) {}
-
-    // Destructor
-    ~CSVHandler() {}
+    static vector<Measurement*> getMeasurement(time_t start, time_t stop);
 
 private:
     // Links objects together using ids
@@ -49,14 +44,12 @@ private:
     void linkUsers();
 
 protected:
-    string filePath;
-
-    unordered_map<unsigned int, Cleaner> cleaners;
-    unordered_map<unsigned int, Individual> individuals;
-    multimap<time_t, Mesurement*> mesurements;
-    unordered_map<unsigned int, Provider> providers;
-    unordered_map<unsigned int, Sensor> sensors;
-    unordered_map<unsigned int, User> users;
+    static unordered_map<unsigned int, Cleaner> cleaners;
+    static unordered_map<unsigned int, Individual> individuals;
+    static multimap<time_t, Measurement*> measurements;
+    static unordered_map<unsigned int, Provider> providers;
+    static unordered_map<unsigned int, Sensor> sensors;
+    static unordered_map<unsigned int, User> users;
 };
 
 #endif //CSVHANDLER_H
