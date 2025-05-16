@@ -1,3 +1,5 @@
 # Ignore all object files
 *.o
 main
+.vscode/settings.json
+obj/
