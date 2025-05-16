@@ -1,35 +1,6 @@
+#include "statistiques.h"
 #include <iostream>
 #include "processing.h"
-
-void MenuStatistiques(){
-	int choice;
-	do {
-		std::cout << "Menu Statistiques:\n";
-		std::cout << "1. Calculer la qualité d'air pour une position\n";
-		std::cout << "2. Calculer la qualité d'air médiane sur une zone\n";
-		std::cout << "3. Classer les capteurs similaires\n";
-		std::cout << "5. Quitter\n";
-		std::cout << "Veuillez entrer votre choix (1-5): ";
-		std::cin >> choice;
-
-		switch (choice) {
-			case 1:
-				calculQualiteAirPos();
-				break;
-			case 2:
-				calculQualiteAirZone();
-				break;
-			case 3:
-				classerCapteursSimilaires();
-				break;
-			case 5:
-				break;
-			default:
-				std::cout << "Choix invalide. Veuillez réessayer.\n";
-				break;
-		}
-	} while (choice != 5);
-}
 
 void calculQualiteAirPos() {
 	double lat, lon;

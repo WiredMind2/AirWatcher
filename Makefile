@@ -17,8 +17,8 @@ $(EXEC): $(OBJS)
 	$(CXX) $(CXXFLAGS) -o $@ $^
 # Compilation des fichiers .cpp en .o
 # Cette règle générique fonctionne pour tous les fichiers .cpp, indépendamment des .h
-$(OBJDIR)/%.o: %.cpp | $(OBJDIR)
-	$(CXX) $(CXXFLAGS) -c $< -o $@
+$(OBJDIR)/%.o: %.cpp
+	@mkdir -p $(dir $@)
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 # Nettoyage des fichiers objets et de l'exécutable
 

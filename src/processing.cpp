@@ -21,7 +21,7 @@ double AirQualityProcessor::EstimationQualiteAirPos(double lat, double lon, int 
 	}
 
 	std::sort(distances.begin(), distances.end(),
-			  [](const auto &a, const auto &b)
+			  [](const std::pair<double, const Measure *> &a, const std::pair<double, const Measure *> &b)
 			  { return a.first < b.first; });
 
 	int count = std::min(k, static_cast<int>(distances.size()));
