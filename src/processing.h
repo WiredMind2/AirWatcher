@@ -4,15 +4,7 @@
 #include <algorithm>
 #include <cmath>
 #include <limits>
-
-// Faudra enlever ca plus tard
-struct Measure
-{
-	int id; // Identifiant du capteur
-	double latitude;
-	double longitude;
-	double value; // Mesure de la qualité de l'air
-};
+#include "Mesurement.h"
 
 class AirQualityProcessor
 {
@@ -40,15 +32,15 @@ public:
 	// k : nombre de voisins à utiliser pour l'estimation (par défaut 4)
 	// step : pas de discrétisation de la zone (par défaut 0.01)
 	// Retourne une liste de pointeurs vers les capteurs détournés
-	static std::vector<const Measure *> TrouverCapteursDetournes(double radius = 0.02, double seuil_limite = 20.0, int k = 4, double step = 0.01);
+	static std::vector<const Mesurement *> TrouverCapteursDetournes(double radius = 0.02, double seuil_limite = 20.0, int k = 4, double step = 0.01);
 
 	// Trouve les capteurs similaires à un capteur de référence
 	// id_ref : identifiant du capteur de référence
 	// measures : liste de toutes les mesures disponibles
 	// Retourne une liste de pointeurs vers les capteurs similaires
-	static std::vector<const Measure *> TrouverCapteursSimilaires(int id_ref);
+	static std::vector<const Mesurement *> TrouverCapteursSimilaires(int id_ref);
 
 private:
 	// Fonction utilitaire pour recuperer la liste de toutes les mesures
-	static std::vector<Measure> GetAllMeasures();
+	static std::vector<Mesurement> GetAllMeasures();
 };

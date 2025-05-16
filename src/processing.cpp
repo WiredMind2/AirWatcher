@@ -7,21 +7,21 @@
 double AirQualityProcessor::EstimationQualiteAirPos(double lat, double lon, int k)
 {
 
-	std::vector<Measure> measures = GetAllMeasures();
+	std::vector<Mesurement> measures = GetAllMeasures();
 
 	if (measures.empty())
 		return std::numeric_limits<double>::quiet_NaN();
 
-	std::vector<std::pair<double, const Measure *>> distances;
+	std::vector<std::pair<double, const Mesurement *>> distances;
 	for (const auto &m : measures)
 	{
-		double dist = std::sqrt((lat - m.latitude) * (lat - m.latitude) +
-								(lon - m.longitude) * (lon - m.longitude));
+		double dist = std::sqrt((lat - m.GetSensor()->GetLatitude()) * (lat - m.GetSensor()->GetLatitude()) +
+								(lon - m.GetSensor()->GetLongitude()) * (lon - m.GetSensor()->GetLongitude()));
 		distances.push_back({dist, &m});
 	}
 
 	std::sort(distances.begin(), distances.end(),
-			  [](const std::pair<double, const Measure *> &a, const std::pair<double, const Measure *> &b)
+			  [](const std::pair<double, const Mesurement *> &a, const std::pair<double, const Mesurement *> &b)
 			  { return a.first < b.first; });
 
 	int count = std::min(k, static_cast<int>(distances.size()));
@@ -31,7 +31,7 @@ double AirQualityProcessor::EstimationQualiteAirPos(double lat, double lon, int 
 	for (int i = 0; i < count; ++i)
 	{
 		double dist = distances[i].first;
-		double value = distances[i].second->value;
+		double value = distances[i].second->GetValue();
 		double weight = (dist == 0.0) ? 1e9 : 1.0 / dist;
 		weighted_sum += value * weight;
 		weight_total += weight;
@@ -43,7 +43,7 @@ double AirQualityProcessor::EstimationQualiteAirPos(double lat, double lon, int 
 double AirQualityProcessor::EstimationQualiteAirZone(double lat, double lon, double radius, int k, double step)
 {
 
-	std::vector<Measure> measures = GetAllMeasures();
+	std::vector<Mesurement> measures = GetAllMeasures();
 
 	std::vector<double> estimations;
 	for (double dlat = -radius; dlat <= radius; dlat += step)
@@ -68,16 +68,16 @@ double AirQualityProcessor::EstimationQualiteAirZone(double lat, double lon, dou
 	return sum / estimations.size();
 }
 
-std::vector<const Measure *> AirQualityProcessor::TrouverCapteursDetournes(double radius, double seuil_limite, int k, double step)
+std::vector<const Mesurement *> AirQualityProcessor::TrouverCapteursDetournes(double radius, double seuil_limite, int k, double step)
 {
 
-	std::vector<Measure> measures = GetAllMeasures();
+	std::vector<Mesurement> measures = GetAllMeasures();
 
-	std::vector<const Measure *> capteurs_detournes;
+	std::vector<const Mesurement *> capteurs_detournes;
 	for (const auto &capteur : measures)
 	{
-		double estimation = EstimationQualiteAirZone(capteur.latitude, capteur.longitude, radius, k, step);
-		if (!std::isnan(estimation) && std::abs(estimation - capteur.value) > seuil_limite)
+		double estimation = EstimationQualiteAirZone(capteur.GetSensor()->GetLatitude(), capteur.GetSensor()->GetLongitude(), radius, k, step);
+		if (!std::isnan(estimation) && std::abs(estimation - capteur.GetValue()) > seuil_limite)
 		{
 			capteurs_detournes.push_back(&capteur);
 		}
@@ -85,18 +85,21 @@ std::vector<const Measure *> AirQualityProcessor::TrouverCapteursDetournes(doubl
 	return capteurs_detournes;
 }
 
-std::vector<const Measure *> AirQualityProcessor::TrouverCapteursSimilaires(int id_ref)
+std::vector<const Mesurement *> AirQualityProcessor::TrouverCapteursSimilaires(int id_ref)
 {
 
-	std::vector<Measure> measures = GetAllMeasures();
+	std::vector<Mesurement> measures = GetAllMeasures();
 
-	std::vector<const Measure *> capteurs_similaires;
+	std::vector<const Mesurement *> capteurs_similaires;
 	for (const auto &capteur : measures)
 	{
-		if (capteur.id == id_ref)
+		if (capteur.GetSensor()->GetSensorID() == id_ref)
 			continue; // Ignore le capteur de référence
-		double dist = std::sqrt((capteur.latitude - measures[id_ref].latitude) * (capteur.latitude - measures[id_ref].latitude) +
-								(capteur.longitude - measures[id_ref].longitude) * (capteur.longitude - measures[id_ref].longitude));
+		double dist = std::sqrt(
+			(capteur.GetSensor()->GetLatitude() - measures[id_ref].GetSensor()->GetLatitude()) *
+			(capteur.GetSensor()->GetLatitude() - measures[id_ref].GetSensor()->GetLatitude()) +
+			(capteur.GetSensor()->GetLongitude() - measures[id_ref].GetSensor()->GetLongitude()) *
+			(capteur.GetSensor()->GetLongitude() - measures[id_ref].GetSensor()->GetLongitude()));
 		if (dist < 0.01) // Seuil de proximité
 		{
 			capteurs_similaires.push_back(&capteur);
@@ -105,9 +108,9 @@ std::vector<const Measure *> AirQualityProcessor::TrouverCapteursSimilaires(int 
 	return capteurs_similaires;
 }
 
-std::vector<Measure> AirQualityProcessor::GetAllMeasures()
+std::vector<Mesurement> AirQualityProcessor::GetAllMeasures()
 {
 	// Cette fonction devrait récupérer toutes les mesures disponibles
 	// Pour l'instant, on retourne une liste vide
-	return std::vector<Measure>();
+	return std::vector<Mesurement>();
 }

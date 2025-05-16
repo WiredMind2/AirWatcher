@@ -13,6 +13,7 @@
 //--------------------------------------------------- Interfaces utilisées
 #include <string>
 #include <ctime>
+#include "Sensor.h"
 using std::string;
 
 //------------------------------------------------------------- Constantes
@@ -34,8 +35,10 @@ public:
     Mesurement(time_t timestamp, double value, const string& sensorID, const string& attributeID);
     virtual ~Mesurement();
 
-//------------------------------------------------------------------ PRIVE
+    Sensor * GetSensor() const;
+    double GetValue() const;
 
+//------------------------------------------------------------------ PRIVE
 protected:
 //----------------------------------------------------- Méthodes protégées
 
@@ -44,6 +47,7 @@ protected:
     double value;
     string sensorID;
     string attributeID;
+
 };
 
 //-------------------------------- Autres définitions dépendantes de <Mesurement>

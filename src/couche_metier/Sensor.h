@@ -39,6 +39,11 @@ public:
     Sensor(const string &id, double lat, double lon, const string &userID);
     virtual ~Sensor();
 
+    unsigned int GetSensorID() const;
+    double GetLatitude() const;
+    double GetLongitude() const;
+    string GetUserID() const;
+
 //------------------------------------------------------------------ PRIVE
 
 protected:

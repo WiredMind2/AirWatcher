@@ -6,13 +6,13 @@
 
 #include <unordered_map>
 #include <string>
-#include "class_metier/Cleaner.h"
-#include "class_metier/GouvAgency.h"
-#include "class_metier/Individual.h"
-#include "class_metier/Mesurement.h"
-#include "class_metier/Provider.h"
-#include "class_metier/Sensor.h"
-#include "class_metier/User.h"
+#include "couche_metier/Cleaner.h"
+#include "couche_metier/GouvAgency.h"
+#include "couche_metier/Individual.h"
+#include "couche_metier/Mesurement.h"
+#include "couche_metier/Provider.h"
+#include "couche_metier/Sensor.h"
+#include "couche_metier/User.h"
 
 using namespace std;
 
