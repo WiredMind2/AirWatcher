@@ -19,8 +19,12 @@ void analyse_donnees_capteurs()
 	time_t dateDebut = demander_date("début");
 	time_t dateFin = demander_date("fin");
 
+	int k = 4;
+
+	cout << "Analyse de la qualité de l'air à la position (" << latitude << ", " << longitude << ") entre " << put_time(localtime(&dateDebut), "%Y-%m-%d") << " et " << put_time(localtime(&dateFin), "%Y-%m-%d") << endl;
+
 	// Appel à la fonction de traitement pour analyser les données
-	double qualiteAir = AirQualityProcessor::EstimationQualiteAirPos(latitude, longitude, dateDebut, dateFin);
+	double qualiteAir = AirQualityProcessor::EstimationQualiteAirPos(latitude, longitude, k, dateDebut, dateFin);
 	cout << "Qualité de l'air estimée à la position (" << latitude << ", " << longitude << ") : " << qualiteAir << endl;
 };
 
@@ -74,12 +78,12 @@ time_t demander_date(const string &desc)
 		cout << "Veuillez entrer la date de " << desc << " (YYYY-MM-DD): ";
 		string date;
 		cin >> date;
-		std::istringstream ss(date);
-		ss >> std::get_time(&tm, "%Y-%m-%d");
+		istringstream ss(date);
+		ss >> get_time(&tm, "%Y-%m-%d");
 
 		if (ss.fail())
 		{
-			std::cerr << "Erreur de format de date. Format attendu : YYYY-MM-DD" << std::endl;
+			cerr << "Erreur de format de date. Format attendu : YYYY-MM-DD" << endl;
 		}
 		else
 		{
@@ -87,7 +91,7 @@ time_t demander_date(const string &desc)
 		}
 	}
 
-	cout << "Date entrée : " << std::put_time(&tm, "%Y-%m-%d") << std::endl;
+	cout << "Date entrée : " << put_time(&tm, "%Y-%m-%d") << endl;
 	time_t time = mktime(&tm);
 	return time;
 }

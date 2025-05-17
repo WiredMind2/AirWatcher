@@ -6,10 +6,11 @@
 #define CSVHANDLER_H
 
 #include <iostream>
-
-using namespace std;
-#include <unordered_map>
 #include <string>
+#include <map>
+#include <unordered_map>
+#include <vector>
+
 #include "couche_metier/Cleaner.h"
 #include "couche_metier/GouvAgency.h"
 #include "couche_metier/Individual.h"
@@ -17,8 +18,6 @@ using namespace std;
 #include "couche_metier/Provider.h"
 #include "couche_metier/Sensor.h"
 #include "couche_metier/User.h"
-#include <map>
-#include <vector>
 
 using namespace std;
 

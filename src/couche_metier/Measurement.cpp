@@ -18,6 +18,7 @@ using namespace std;
 
 //------------------------------------------------------ Include personnel
 #include "Measurement.h"
+#include "../CSVHandler.h"
 
 //------------------------------------------------------------- Constantes
 
@@ -44,6 +45,10 @@ Measurement::~Measurement()
 #endif
 } //----- Fin de ~Measurement
 
+Sensor Measurement::GetSensor() const
+{
+    return CSVHandler::getSensor(sensorID);
+}
 
 //------------------------------------------------------------------ PRIVE
 

@@ -3,7 +3,7 @@ EXEC = AppWatcher
 
 # Compilateur et options
 CXX = g++
-CXXFLAGS = -ansi -pedantic -Wall -std=c++11
+CXXFLAGS = -ansi -pedantic -Wall -std=c++11 -g
 
 # Liste des fichiers sources et objets
 SRCS = $(wildcard *.cpp) $(wildcard src/**/*.cpp) $(wildcard src/*.cpp)

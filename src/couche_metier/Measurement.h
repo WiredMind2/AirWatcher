@@ -35,7 +35,7 @@ public:
     Measurement(time_t timestamp, double value, unsigned int sensorID, const string &attributeID);
     virtual ~Measurement();
 
-    Sensor *GetSensor() const { return nullptr; };
+    Sensor GetSensor() const;
     double GetValue() const { return value; };
     time_t GetTimestamp() const { return timestamp; };
     unsigned int GetSensorID() const { return sensorID; };

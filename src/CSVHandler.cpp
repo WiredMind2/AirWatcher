@@ -7,6 +7,9 @@
 #include <fstream>
 #include <sstream>
 #include <vector>
+#include <string>
+#include <cstdlib>
+#include <iomanip> // For get_time
 
 using namespace std;
 
@@ -66,10 +69,20 @@ void CSVHandler::extractMeasurements(const string &folder) {
             getline(ss, attributeIDStr, ';');
             getline(ss, valueStr, ';');
 
-            sensorIDStr = sensorIDStr.substr(6);
+            // Parse timestamp in format "YYYY-MM-DD HH:MM:SS"
+            tm tm = {};
+            istringstream ssTime(timestampStr);
+            ssTime >> get_time(&tm, "%Y-%m-%d %H:%M:%S");
+            time_t timestamp;
+            if (ssTime.fail()) {
+                cout << "Invalid timestamp format: " << timestampStr << endl;
+                continue;
+            } else {
+                timestamp = mktime(&tm);
+            }
 
-            time_t timestamp = stoi(timestampStr);
             double value = stod(valueStr);
+            sensorIDStr = sensorIDStr.substr(6);
             unsigned int sensorID = stoi(sensorIDStr);
             string attributeID = attributeIDStr;
 
@@ -88,46 +101,61 @@ Cleaner CSVHandler::getCleaner(unsigned int id) {
     if (it != cleaners.end()) {
         return it->second;
     }
-    throw std::runtime_error("Cleaner not found");
+    throw runtime_error("Cleaner not found");
 }
 Individual CSVHandler::getIndividual(unsigned int id) {
     auto it = individuals.find(id);
     if (it != individuals.end()) {
         return it->second;
     }
-    throw std::runtime_error("Individual not found");
+    throw runtime_error("Individual not found");
 }
 Provider CSVHandler::getProvider(unsigned int id) {
     auto it = providers.find(id);
     if (it != providers.end()) {
         return it->second;
     }
-    throw std::runtime_error("Provider not found");
+    throw runtime_error("Provider not found");
 }
 Sensor CSVHandler::getSensor(unsigned int id) {
     auto it = sensors.find(id);
     if (it != sensors.end()) {
         return it->second;
     }
-    throw std::runtime_error("Sensor not found");
+    throw runtime_error("Sensor not found");
 }
 User CSVHandler::getUser(unsigned int id) {
     auto it = users.find(id);
     if (it != users.end()) {
         return it->second;
     }
-    throw std::runtime_error("User not found");
+    throw runtime_error("User not found");
 }
 
 vector<Measurement*> CSVHandler::getMeasurement(time_t start, time_t stop) {
+    if(stop == -1){
+        stop = time(nullptr);
+    }
+
+    if (start > stop) {
+        cout << "Invalid time range." << start << " > " << stop << endl;
+        return {};
+    }
+
     auto itLow = measurements.lower_bound(start);
     auto itHigh = measurements.upper_bound(stop);
+
+    if (itLow == measurements.end()) {
+        cout << "No measurements found in the specified range: " << start << " to " << stop << endl;
+        return {};
+    }
+
 
     vector<Measurement*> results;
     for (auto it = itLow; it != itHigh; ++it) {
         results.push_back(it->second);
-        cout << "Measurement ID: " << it->second->GetSensor()->GetSensorID() << ", Value: " << it->second->GetValue();
-        cout << ", Timestamp: " << it->second->GetTimestamp() << endl;
+        // cout << "Measurement ID: " << it->second->GetSensor()->GetSensorID() << ", Value: " << it->second->GetValue();
+        // cout << ", Timestamp: " << it->second->GetTimestamp() << endl;
     }
     return results;
 }
