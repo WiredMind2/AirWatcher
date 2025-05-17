@@ -24,13 +24,18 @@ class CSVHandler {
 public:
 
     void extractSensors();
-
+    void extractUsers();
     //getters
     Cleaner getCleaner(unsigned int id) const;
     Individual getIndividual(unsigned int id) const;
     Provider getProvider(unsigned int id) const;
     Sensor getSensor(unsigned int id) const;
     User getUser(unsigned int id) const;
+
+    //à modifier si autre méthode 
+    void setPath(const string &path) {
+        filePath = path;
+    }
 
 
 

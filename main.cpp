@@ -1,6 +1,8 @@
 #include <iostream>
 #include "src/couche_presentation/presentation.h"
 #include "src/test/tests.h"
+#include "src/CSVHandler.h"
+
 using namespace std;
 
 int main( int argc, char* argv[]){
@@ -10,7 +12,7 @@ int main( int argc, char* argv[]){
         test.runTests();
     }
     else{
-        Presentation pres;
-        pres.Menu_principal();
+        Presentation presentation;
+        presentation.Menu_principal();
     }
 }

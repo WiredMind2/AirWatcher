@@ -58,6 +58,13 @@ unsigned int Sensor::GetSensorID() const {
     return 1; // Placeholder, should return the actual sensor ID
 }
 
+unsigned int Sensor::GetUserID() const {
+    return userID;
+}
+
+void Sensor::SetUserID(unsigned int id) {
+    userID = id;
+}
 //------------------------------------------------------------------ PRIVE
 
 //----------------------------------------------------- Méthodes protégées
