@@ -26,7 +26,7 @@ using std::list;
 // Représente un capteur associé à un utilisateur.
 //------------------------------------------------------------------------
 
-class Mesurement; // Forward declaration
+class Measurement; // Forward declaration
 
 class Sensor
 {
@@ -34,7 +34,7 @@ class Sensor
 
 public:
 //----------------------------------------------------- Méthodes publiques
-    list<Mesurement> getData();
+    list<Measurement> getData();
 
     Sensor(unsigned int id, double lat, double lon, unsigned int userID);
     virtual ~Sensor();

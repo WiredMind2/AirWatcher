@@ -125,7 +125,7 @@ void Tests::test_T11(int &testCount, int &testPassed, int &testFailed)
     double lon = 1.1;
     double expectedValue = 0.5;
 
-    if (AirQualityProcessor::EstimationQualiteAirPos(lat, lon, k) == expectedValue) {
+    if (AirQualityProcessor::EstimationQualiteAirPos(lat, lon, k, 0, -1) == expectedValue) {
         cout << "\033[1;32mTest T11 réussi.\033[0m\n";
         testPassed++;
     } else {
@@ -145,7 +145,7 @@ void Tests::test_T12(int &testCount, int &testPassed, int &testFailed)
     double lat = 44;
     double lon = 1.1;
 
-    if (AirQualityProcessor::EstimationQualiteAirPos(lat, lon, k) == std::numeric_limits<double>::quiet_NaN()) {
+    if (AirQualityProcessor::EstimationQualiteAirPos(lat, lon, k, 0, -1) == std::numeric_limits<double>::quiet_NaN()) {
         cout << "\033[1;32mTest T12 réussi.\033[0m\n";
         testPassed++;
     } else {
@@ -166,7 +166,7 @@ void Tests::test_T13(int &testCount, int &testPassed, int &testFailed)
     double lon = 1.1;
     double expectedValue = 0.5;
 
-    if (AirQualityProcessor::EstimationQualiteAirPos(lat, lon, k) == expectedValue) {
+    if (AirQualityProcessor::EstimationQualiteAirPos(lat, lon, k, 0, -1) == expectedValue) {
         cout << "\033[1;32mTest T11 réussi.\033[0m\n";
         testPassed++;
     } else {
@@ -256,7 +256,7 @@ void Tests::test_T31(int &testCount, int &testPassed, int &testFailed)
     int k = 4;
     double tolerance = 0.1;
 
-    std::vector<const Sensor *> detournes = AirQualityProcessor::TrouverCapteursDetournes(10.0, 0.5, k, tolerance);
+    std::vector<const Sensor *> detournes = AirQualityProcessor::TrouverCapteursDetournes(10.0, 0.5, k, tolerance, 0, -1);
     bool capteurTrouve = false;
 
     for (const auto &capteur : detournes) {
@@ -287,7 +287,7 @@ void Tests::test_T32(int &testCount, int &testPassed, int &testFailed)
     int k = 4;
     double tolerance = 0.1;
 
-    std::vector<const Sensor *> detournes = AirQualityProcessor::TrouverCapteursDetournes(10.0, 0.5, k, tolerance);
+    std::vector<const Sensor *> detournes = AirQualityProcessor::TrouverCapteursDetournes(10.0, 0.5, k, tolerance, 0, -1);
     bool capteurTrouve = false;
 
     for (const auto &capteur : detournes) {
@@ -317,7 +317,7 @@ void Tests::test_T33(int &testCount, int &testPassed, int &testFailed)
     int k = 4;
     double tolerance = 0.1;
 
-    std::vector<const Sensor *> detournes = AirQualityProcessor::TrouverCapteursDetournes(10.0, 0.5, k, tolerance);
+    std::vector<const Sensor *> detournes = AirQualityProcessor::TrouverCapteursDetournes(10.0, 0.5, k, tolerance, 0, -1);
     bool capteurTrouve = false;
 
     for (const auto &capteur : detournes) {

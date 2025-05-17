@@ -1,12 +1,12 @@
 /*************************************************************************
-                           Mesurement  -  description
+                           Measurement  -  description
                              -------------------
     début                : 16/05/2025
     copyright            : (C) 2025 par aaron
     e-mail               : 
 *************************************************************************/
 
-//---------- Réalisation de la classe <Mesurement> (fichier Mesurement.cpp) ------------
+//---------- Réalisation de la classe <Measurement> (fichier Measurement.cpp) ------------
 
 //---------------------------------------------------------------- INCLUDE
 
@@ -17,7 +17,8 @@
 using namespace std;
 
 //------------------------------------------------------ Include personnel
-#include "Mesurement.h"
+#include "Measurement.h"
+#include "../CSVHandler.h"
 
 //------------------------------------------------------------- Constantes
 
@@ -25,31 +26,28 @@ using namespace std;
 
 //----------------------------------------------------- Méthodes publiques
 
-Mesurement::Mesurement(time_t timestamp, double value, const string& sensorID, const string& attributeID)
+Measurement::Measurement(time_t timestamp, double value, unsigned int sensorID, const string& attributeID)
 // Algorithme :
 //
     : timestamp(timestamp), value(value), sensorID(sensorID), attributeID(attributeID)
 {
 #ifdef MAP
-    cout << "Appel au constructeur de <Mesurement>" << endl;
+    cout << "Appel au constructeur de <Measurement>" << endl;
 #endif
-} //----- Fin de Mesurement
+} //----- Fin de Measurement
 
-Mesurement::~Mesurement()
+Measurement::~Measurement()
 // Algorithme :
 //
 {
 #ifdef MAP
-    cout << "Appel au destructeur de <Mesurement>" << endl;
+    cout << "Appel au destructeur de <Measurement>" << endl;
 #endif
-} //----- Fin de ~Mesurement
+} //----- Fin de ~Measurement
 
-Sensor* Mesurement::GetSensor() const {
-    return nullptr;
-}
-
-double Mesurement::GetValue() const {
-    return value;
+Sensor Measurement::GetSensor() const
+{
+    return CSVHandler::getSensor(sensorID);
 }
 
 //------------------------------------------------------------------ PRIVE
