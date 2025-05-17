@@ -95,6 +95,34 @@ void CSVHandler::extractMeasurements(const string &folder) {
     }
 }
 
+void CSVHandler::extractUsers(const string &folder){
+   ifstream file(folder + "/users.csv");
+    string line;
+
+    if (file.is_open()) {
+        while (getline(file, line)) {
+            stringstream ss(line);
+            string user, sensor;
+
+            getline(ss, user, ';');
+            unsigned int userid = static_cast<unsigned int>(stoi(user.substr(4)));
+            getline(ss, sensor, ';');
+            unsigned int sensorid = static_cast<unsigned int>(stoi(sensor.substr(6)));
+
+            auto it = sensors.find(sensorid);
+            if (it != sensors.end()) {
+                Sensor &sensor = it->second;
+                sensor.SetUserID(userid);
+            } else {
+                cout << "Sensor with ID " << sensorid << " not found." << endl;
+            }
+        }
+        file.close();
+    } else {
+        cout << "Unable to open file" << endl;
+    }
+}
+
 // Getters
 Cleaner CSVHandler::getCleaner(unsigned int id) {
     auto it = cleaners.find(id);

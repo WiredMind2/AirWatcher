@@ -44,6 +44,8 @@ public:
     double GetLongitude() const;
     unsigned int GetUserID() const;
 
+    void SetUserID(unsigned int id);
+
 //------------------------------------------------------------------ PRIVE
 
 protected:

@@ -27,6 +27,7 @@ public:
     static void extractAll(const string &folder);
     static void extractSensors(const string &folder);
     static void extractMeasurements(const string &folder);
+    static void extractUsers(const string &folder);
 
     //getters
     static Cleaner getCleaner(unsigned int id);
