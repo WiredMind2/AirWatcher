@@ -95,8 +95,8 @@ void CSVHandler::extractMeasurements(const string &folder) {
     }
 }
 
-void CSVHandler::extractUsers(){
-   ifstream file(filePath);
+void CSVHandler::extractUsers(const string &folder){
+   ifstream file(folder + "/users.csv");
     string line;
 
     if (file.is_open()) {
