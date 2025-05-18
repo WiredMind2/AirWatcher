@@ -1,66 +1,8 @@
-/*************************************************************************
-                           PointsUtilisateurs  -  description
-                             -------------------
-    début                : $DATE$
-    copyright            : (C) $YEAR$ par $AUTHOR$
-    e-mail               : $EMAIL$
-*************************************************************************/
-
-//---------- Réalisation de la classe <PointsUtilisateurs> (fichier PointsUtilisateurs.cpp) ------------
-
-//---------------------------------------------------------------- INCLUDE
-
-//-------------------------------------------------------- Include système
-using namespace std;
 #include <iostream>
-
-//------------------------------------------------------ Include personnel
-#include "PointsUtilisateurs.h"
-
-//------------------------------------------------------------- Constantes
-
-//----------------------------------------------------------------- PUBLIC
-
-//----------------------------------------------------- Méthodes publiques
-// type PointsUtilisateurs::Méthode ( liste des paramètres )
-// Algorithme :
-//
-//{
-//} //----- Fin de Méthode
+using namespace std;
 
 
-//-------------------------------------------- Constructeurs - destructeur
-PointsUtilisateurs::PointsUtilisateurs ( const PointsUtilisateurs & unPointsUtilisateurs )
-// Algorithme :
-//
-{
-#ifdef MAP
-    cout << "Appel au constructeur de copie de <PointsUtilisateurs>" << endl;
-#endif
-} //----- Fin de PointsUtilisateurs (constructeur de copie)
-
-
-PointsUtilisateurs::PointsUtilisateurs ( )
-// Algorithme :
-//
-{
-#ifdef MAP
-    cout << "Appel au constructeur de <PointsUtilisateurs>" << endl;
-#endif
-} //----- Fin de PointsUtilisateurs
-
-
-PointsUtilisateurs::~PointsUtilisateurs ( )
-// Algorithme :
-//
-{
-#ifdef MAP
-    cout << "Appel au destructeur de <PointsUtilisateurs>" << endl;
-#endif
-} //----- Fin de ~PointsUtilisateurs
-
-
-//------------------------------------------------------------------ PRIVE
-
-//----------------------------------------------------- Méthodes protégées
-
+void consulter_points(){
+    // TO DO : gérer ça en partant du principe que l'utilisateur est déjà identifié (session) ou alors demander de retaper son id
+    std::cout << "Vous avez accumulé" << "user.getPoints()" << "points à ce jour !";
+}

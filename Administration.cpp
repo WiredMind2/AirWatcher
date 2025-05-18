@@ -1,65 +1,60 @@
-/*************************************************************************
-                           Administration  -  description
-                             -------------------
-    début                : $DATE$
-    copyright            : (C) $YEAR$ par $AUTHOR$
-    e-mail               : $EMAIL$
-*************************************************************************/
-
-//---------- Réalisation de la classe <Administration> (fichier Administration.cpp) ------------
-
-//---------------------------------------------------------------- INCLUDE
-
-//-------------------------------------------------------- Include système
-using namespace std;
 #include <iostream>
+#include "processing.h"
+#include <vector>
+#include "CSVHandler.h"
 
-//------------------------------------------------------ Include personnel
-#include "Administration.h"
+using namespace std;
 
-//------------------------------------------------------------- Constantes
-
-//----------------------------------------------------------------- PUBLIC
-
-//----------------------------------------------------- Méthodes publiques
-// type Administration::Méthode ( liste des paramètres )
-// Algorithme :
-//
-//{
-//} //----- Fin de Méthode
-
-//-------------------------------------------- Constructeurs - destructeur
-Administration::Administration ( const Administration & unAdministration )
-// Algorithme :
-//
+void consulter_capteurs_defaillants()
 {
-#ifdef MAP
-    cout << "Appel au constructeur de copie de <Administration>" << endl;
-#endif
-} //----- Fin de Administration (constructeur de copie)
+    double seuil_limite, step, radius;
+    time_t start, stop;
+    int k;
 
+    cout << "Entrez le rayon de la zone (en degrés): ";
+    cin >> radius;
+    cout << "Entrez le seuil choisi : ";
+    cin >> seuil_limite;
+    cout << "Entrez le nombre de voisins (k): ";
+    cin >> k;
+    
+    cout << "Entrez le pas de discrétisation (step): ";
+    cin >> step;
+    vector<const Sensor *> capteurs_defaillants = AirQualityProcessor::TrouverCapteursDetournes(radius, seuil_limite, k, step, start, stop); 
+    for (const auto &sensor : capteurs_defaillants)
+    {
+        cout << "Le capteur" << sensor->GetSensorID() << "est défaillant." << "\n";
+    }
+}
 
-Administration::Administration ( )
-// Algorithme :
-//
+void marquer_capteur_non_fiable()
 {
-#ifdef MAP
-    cout << "Appel au constructeur de <Administration>" << endl;
-#endif
-} //----- Fin de Administration
 
+    // Récupérer la liste des non fiables
+    consulter_capteurs_defaillants();
 
-Administration::~Administration ( )
-// Algorithme :
-//
+    // Choisir un capteur dans cette liste à marquer comme non fiable
+    int sensor_id;
+    cout << "Veuillez entrer l'identifiant du capteur à marquer comme non fiable"; // Ajouter gestion de si dans la liste ou non
+    cin >> sensor_id;
+
+    // Récupérer le capteur associé à l'id
+    Sensor capteur_non_fiable = CSVHandler::getSensor(sensor_id);
+
+    // TO DO : Marquer le capteur choisi comme non fiable (mettre ses mesures à -1 ? méthode dans GouvAgency?)
+    cout << "Le capteur n°" << capteur_non_fiable.GetSensorID() << "a été marqué comme non fiable" << "\n";
+}
+
+void marquer_user_malicieux()
 {
-#ifdef MAP
-    cout << "Appel au destructeur de <Administration>" << endl;
-#endif
-} //----- Fin de ~Administration
+    int user_id; // TO DO : changer le type de user_id pour qu'il soit compatible avec le type d'id dans CSVHandler
+    cout << "Veuillez entrer l'identifiant de l'utilisateur à signaler";
+    cin >> user_id;
 
+    // Récupérer l'user associé à l'id : chercher dans la liste des unreliable users donnée par findUnreliable
+    User user_malicieux = CSVHandler::getUser(user_id); // Problème : les id sont des string, handler à revoir
 
-//------------------------------------------------------------------ PRIVE
-
-//----------------------------------------------------- Méthodes protégées
-
+    // Le classer comme malicieux
+    GouvAgency("id_random", 0).classifyUnreliable(user_malicieux); // TO DO : revoir avec le bon id, méthodes GouvAgency en static ?
+    cout << "L'utilisateur" << user_id << "a été signalé. Il ne pourra plus accumuler de points" << "\n";
+}
