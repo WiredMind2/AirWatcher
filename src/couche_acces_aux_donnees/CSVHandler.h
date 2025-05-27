@@ -80,6 +80,14 @@ public:
     // Contrat :
     // Le fichier CSV des utilisateurs doit exister dans le dossier spécifié.
 
+    static void addUnreliable(const string &folder, const vector<unsigned int> &unreliableUserIds);
+    // Mode d'emploi :
+    // Cette méthode ajoute dans la map filtrée des utilisateurs les utilisateurs non fiables
+    //
+    // Contrat :
+    //
+
+
     //getters
     static Cleaner getCleaner(unsigned int id);
     // Mode d'emploi :
@@ -109,7 +117,7 @@ public:
     // Contrat :
     // L'identifiant doit correspondre à un Sensor existant.
 
-    static User getUser(unsigned int id);
+    static unsigned int getFilterdUser(unsigned int id);
     // Mode d'emploi :
     // Retourne un objet User correspondant à l'identifiant spécifié.
     //
@@ -163,7 +171,7 @@ protected:
     static multimap<time_t, Measurement*> measurements;
     static unordered_map<unsigned int, Provider*> providers;
     static unordered_map<unsigned int, Sensor*> sensors;
-    static unordered_map<unsigned int, User*> users;
+    static unordered_map<unsigned int, int> filterdUsers;
 
 private:
 //----------------------------------------------------- Méthodes privées
