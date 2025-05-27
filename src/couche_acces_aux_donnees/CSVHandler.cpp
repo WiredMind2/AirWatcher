@@ -47,9 +47,10 @@ time_t stringToTimeT(const string& dateTimeStr) {
 
 //----------------------------------------------------- Méthodes publiques
 void CSVHandler::extractAll(const string &folder) {
+    extractCleaners(folder);
     extractSensors(folder);
     extractMeasurements(folder);
-    extractCleaners(folder);
+    extractIndividuals(folder);
 }
 
 void CSVHandler::extractCleaners(const string &folder) {
@@ -164,19 +165,22 @@ void CSVHandler::extractMeasurements(const string &folder) {
     }
 }
 
-void CSVHandler::extractUsers(const string &folder){
+void CSVHandler::extractIndividuals(const string &folder){
    ifstream file(folder + "/users.csv");
     string line;
 
     if (file.is_open()) {
         while (getline(file, line)) {
             stringstream ss(line);
-            string user, sensor;
+            string userStr, sensorStr;
 
-            getline(ss, user, ';');
-            unsigned int userid = static_cast<unsigned int>(stoi(user.substr(4)));
-            getline(ss, sensor, ';');
-            unsigned int sensorid = static_cast<unsigned int>(stoi(sensor.substr(6)));
+            getline(ss, userStr, ';');
+            unsigned int userid = stoi(userStr.substr(4));
+            getline(ss, sensorStr, ';');
+            unsigned int sensorid = stoi(sensorStr.substr(6));
+
+            Individual individual(userid);
+            individuals.emplace(userid, individual);
 
             auto it = sensors.find(sensorid);
             if (it != sensors.end()) {

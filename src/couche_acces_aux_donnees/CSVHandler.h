@@ -73,7 +73,7 @@ public:
     // Contrat :
     // Le fichier CSV des mesures doit exister dans le dossier spécifié.
 
-    static void extractUsers(const string &folder);
+    static void extractIndividuals(const string &folder);
     // Mode d'emploi :
     // Cette méthode extrait les données des utilisateurs à partir d'un fichier CSV situé dans le dossier spécifié.
     //
