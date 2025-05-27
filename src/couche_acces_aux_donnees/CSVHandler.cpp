@@ -108,7 +108,7 @@ void CSVHandler::extractSensors(const string &folder) {
 
             Sensor sensor(id, latitude, longitude, -1);
             sensors.emplace(id, sensor);
-            cout << "Sensor ID: " << id << ", Latitude: " << latitude << ", Longitude: " << longitude << endl;
+            //cout << "Sensor ID: " << id << ", Latitude: " << latitude << ", Longitude: " << longitude << endl;
         }
         file.close();
     } else {
@@ -145,6 +145,14 @@ void CSVHandler::extractMeasurements(const string &folder) {
             double value = stod(valueStr);
             sensorIDStr = sensorIDStr.substr(6);
             unsigned int sensorID = stoi(sensorIDStr);
+            
+            // Vérifier que le sensor existe en mémoire
+            auto it = sensors.find(sensorID);
+            if (it == sensors.end()) {
+                //cout << "Sensor with ID " << sensorID << " not found. Skipping measurement." << endl;
+                continue;
+            }
+            
             string attributeID = attributeIDStr;
 
             Measurement* measurement = new Measurement(timestamp, value, sensorID, attributeID);
