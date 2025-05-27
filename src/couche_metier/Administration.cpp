@@ -2,13 +2,13 @@
 #include "processing.h"
 #include <vector>
 #include "../couche_acces_aux_donnees/CSVHandler.h"
+#include "../couche_presentation/analyse.h"
 
 using namespace std;
 
 void consulter_capteurs_defaillants()
 {
     double seuil_limite, radius;
-    time_t start, stop;
     int k;
 
     cout << "Entrez le rayon de la zone (en degrés): ";
@@ -17,8 +17,11 @@ void consulter_capteurs_defaillants()
     cin >> seuil_limite;
     cout << "Entrez le nombre de voisins (k): ";
     cin >> k;
-    
-    vector<const Sensor *> capteurs_defaillants = AirQualityProcessor::TrouverCapteursDetournes(radius, seuil_limite, k, start, stop); 
+
+    time_t start = demander_date("début");
+    time_t stop = demander_date("fin");
+
+    vector<const Sensor *> capteurs_defaillants = AirQualityProcessor::TrouverCapteursDetournes(radius, seuil_limite, k, start, stop);
     for (const auto &sensor : capteurs_defaillants)
     {
         cout << "Le capteur" << sensor->GetSensorID() << "est défaillant." << "\n";
@@ -53,6 +56,6 @@ void marquer_user_malicieux()
     User user_malicieux = CSVHandler::getUser(user_id); // Problème : les id sont des string, handler à revoir
 
     // Le classer comme malicieux
-    GouvAgency(0).classifyUnreliable(user_malicieux); // TO DO : revoir avec le bon id, méthodes GouvAgency en static ?
+    GouvAgency(5).classifyUnreliable(user_malicieux); // TO DO : revoir avec le bon id, méthodes GouvAgency en static ?
     cout << "L'utilisateur" << user_id << "a été signalé. Il ne pourra plus accumuler de points" << "\n";
 }
