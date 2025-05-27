@@ -13,28 +13,47 @@
 //-------------------------------------------------------- Include système
 using namespace std;
 #include <iostream>
+#include <iomanip>
 
 //------------------------------------------------------ Include personnel
 #include "presentation.h"
+#include "statistiques.h"
+#include "analyse.h"
 
 //------------------------------------------------------------- Constantes
 
 //----------------------------------------------------------------- PUBLIC
 
 //----------------------------------------------------- Méthodes publiques
-// type Presentation::Méthode ( liste des paramètres )
-// Algorithme :
-//
-//{
-//} //----- Fin de Méthode
 
-#include <iomanip> // For text formatting
-#include "statistiques.h"
-#include "analyse.h"
 
 void Presentation::Menu_principal ( )
-// Algorithme :
-//
+/**
+ * @brief Affiche le menu principal de l'application AirWatcher et gère les interactions utilisateur.
+ * 
+ * Cette méthode permet à l'utilisateur de sélectionner son type (Agence gouvernementale, Individu, ou Fournisseur),
+ * puis d'accéder au menu principal correspondant. Les options disponibles dans le menu principal varient en fonction
+ * du type d'utilisateur sélectionné. L'utilisateur peut naviguer entre différentes fonctionnalités ou quitter
+ * l'application.
+ * 
+ * @details
+ * - Le menu de sélection du type d'utilisateur propose trois choix :
+ *   1. Agence gouvernementale
+ *   2. Individu
+ *   3. Fournisseur
+ * - Une fois le type d'utilisateur sélectionné, le menu principal propose les options suivantes :
+ *   - Analyse de données
+ *   - Statistiques
+ *   - Points utilisateurs
+ *   - Administration (uniquement pour les agences gouvernementales)
+ *   - Quitter
+ * - Les entrées invalides sont gérées avec des messages d'erreur et une demande de réessai.
+ * 
+ * @note Les options spécifiques au menu principal sont conditionnées par le type d'utilisateur.
+ *       Par exemple, l'option "Administration" est uniquement accessible aux agences gouvernementales.
+ * 
+ * @warning L'utilisateur doit entrer un nombre entier valide pour naviguer dans les menus.
+ */
 {
 	//choix de l'utilisateur
 	string userType;
@@ -130,9 +149,23 @@ void Presentation::Menu_principal ( )
 	} while (choix != 0);
 }
 
+
 void Presentation::Menu_analyse ( )
-// Algorithme :
-//
+/**
+ * @brief Affiche le menu d'analyse de données et gère les interactions utilisateur.
+ * 
+ * Cette méthode affiche un menu interactif permettant à l'utilisateur de choisir parmi
+ * différentes options d'analyse de données. Les options incluent :
+ * - Analyse des données des capteurs.
+ * - Identification des capteurs non fiables.
+ * - Analyse de l'impact des purificateurs.
+ * 
+ * L'utilisateur peut également revenir au menu principal en sélectionnant l'option correspondante.
+ * La méthode gère les entrées invalides et invite l'utilisateur à réessayer en cas d'erreur.
+ * 
+ * @note Cette méthode utilise une boucle do-while pour maintenir le menu actif jusqu'à ce que
+ *       l'utilisateur choisisse de revenir au menu principal.
+ */
 {
 	int choix;
 	do
@@ -175,9 +208,33 @@ void Presentation::Menu_analyse ( )
 	} while (choix != 0);
 }
 
+
 void Presentation::Menu_statistiques ( )
-// Algorithme :
-//
+/**
+ * @brief Affiche le menu des statistiques et gère les interactions utilisateur.
+ * 
+ * Cette méthode affiche un menu permettant à l'utilisateur de choisir parmi plusieurs
+ * options liées aux statistiques de qualité de l'air. Les options incluent :
+ * - Calcul de la qualité moyenne de l'air par zone.
+ * - Calcul de la qualité moyenne de l'air par point.
+ * - Classement des capteurs similaires.
+ * 
+ * L'utilisateur peut également choisir de revenir au menu principal.
+ * 
+ * @details
+ * - Le menu est affiché dans une boucle do-while, permettant à l'utilisateur de faire
+ *   plusieurs choix jusqu'à ce qu'il décide de revenir au menu principal.
+ * - Les entrées utilisateur sont validées pour s'assurer qu'elles sont des entiers.
+ * - Les choix invalides sont gérés avec un message d'erreur.
+ * 
+ * @note Les fonctions suivantes sont appelées en fonction du choix de l'utilisateur :
+ * - `calculQualiteAirZone()`: Calcule la qualité moyenne de l'air par zone.
+ * - `calculQualiteAirPos()`: Calcule la qualité moyenne de l'air par point.
+ * - `classerCapteursSimilaires()`: Classe les capteurs similaires.
+ * 
+ * @warning Assurez-vous que les fonctions appelées dans les cases du switch sont correctement
+ * implémentées et gèrent leurs propres erreurs.
+ */
 {
 	int choix;
 	do
@@ -220,9 +277,26 @@ void Presentation::Menu_statistiques ( )
 	} while (choix != 0);
 }
 
+
 void Presentation::Menu_points_utilisateurs ( )
-// Algorithme :
-//
+/**
+ * @brief Displays the "Menu Points Utilisateurs" interface and handles user input.
+ * 
+ * This function presents a menu to the user with options to either consult the points
+ * of a specific user or return to the main menu. It validates user input to ensure
+ * it is an integer and provides feedback for invalid choices. The menu remains active
+ * until the user chooses to return to the main menu.
+ * 
+ * Menu options:
+ * - [1] Consult the points of a user.
+ * - [0] Return to the main menu.
+ * 
+ * Input validation:
+ * - Ensures the user enters a valid integer.
+ * - Prompts the user to re-enter a value if the input is invalid.
+ * 
+ * @note The actual functionality for consulting user points is not implemented in this function.
+ */
 {
 	int choix;
 	do
@@ -256,9 +330,21 @@ void Presentation::Menu_points_utilisateurs ( )
 	} while (choix != 0);
 }
 
+
 void Presentation::Menu_administration ( )
-// Algorithme :
-//
+/**
+ * @brief Displays the administration menu and handles user input for various administrative actions.
+ * 
+ * This function provides a menu interface for administrative tasks, such as:
+ * - Viewing faulty sensors.
+ * - Marking a sensor as unreliable.
+ * - Marking a user as malicious.
+ * 
+ * The menu is displayed in a loop until the user chooses to return to the main menu.
+ * Input validation is performed to ensure the user enters a valid integer choice.
+ * 
+ * @note The actual functionality for each menu option is not implemented in this function.
+ */
 {
 	int choix;
 	do
@@ -299,9 +385,8 @@ void Presentation::Menu_administration ( )
 }
 
 //-------------------------------------------- Constructeurs - destructeur
+
 Presentation::Presentation ( const Presentation & unPresentation )
-// Algorithme :
-//
 {
 #ifdef MAP
 	cout << "Appel au constructeur de copie de <Presentation>" << endl;
@@ -310,8 +395,6 @@ Presentation::Presentation ( const Presentation & unPresentation )
 
 
 Presentation::Presentation ( )
-// Algorithme :
-//
 {
 #ifdef MAP
 	cout << "Appel au constructeur de <Presentation>" << endl;
@@ -320,8 +403,6 @@ Presentation::Presentation ( )
 
 
 Presentation::~Presentation ( )
-// Algorithme :
-//
 {
 #ifdef MAP
 	cout << "Appel au destructeur de <Presentation>" << endl;
