@@ -1,46 +1,49 @@
 /*************************************************************************
-                           GouvAgency  -  description
+                           Administration  -  description
                              -------------------
-    début                : 16/05/2025
-    copyright            : (C) 2025 par aaron
-    e-mail               : 
+    début                : $DATE$
+    copyright            : (C) $YEAR$ par $AUTHOR$
+    e-mail               : $EMAIL$
 *************************************************************************/
 
-//---------- Interface de la classe <GouvAgency> (fichier GouvAgency.h) ----------------
-#if ! defined ( GOUVAGENCY_H )
-#define GOUVAGENCY_H
+//---------- Interface de la classe <Administration> (fichier Administration.h) ----------------
+#if ! defined ( Administration_H )
+#define Administration_H
 
 //--------------------------------------------------- Interfaces utilisées
-#include <list>
-#include "User.h"
-using std::list;
 
 //------------------------------------------------------------- Constantes
 
 //------------------------------------------------------------------ Types
 
 //------------------------------------------------------------------------
-// Rôle de la classe <GouvAgency>
+// Rôle de la classe <Administration>
 //
-// Représente une agence gouvernementale.
+//
 //------------------------------------------------------------------------
 
-class GouvAgency : public User
+class Administration 
 {
 //----------------------------------------------------------------- PUBLIC
 
 public:
 //----------------------------------------------------- Méthodes publiques
-    void classifyUnreliable(User &user);
-    void classifyReliable(User &user);
-    list<User> getUsers();
-    list<User> findUnreliable();
+    // type Méthode ( liste des paramètres );
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
 
-    // Constructor
-    GouvAgency(unsigned int id) : User(id) {};
+    void consulter_capteurs_defaillants();
+    void marquer_capteur_non_fiable();
+    void marquer_user_malicieux();
 
-    // Destructor
-    ~GouvAgency() override {};
+
+//------------------------------------------------- Surcharge d'opérateurs
+
+
+//-------------------------------------------- Constructeurs - destructeur
+
 
 //------------------------------------------------------------------ PRIVE
 
@@ -51,6 +54,8 @@ protected:
 
 };
 
-//-------------------------------- Autres définitions dépendantes de <GouvAgency>
+//-------------------------------- Autres définitions dépendantes de <Administration>
 
-#endif // GOUVAGENCY_H
+#endif // Administration_H
+
+

@@ -52,9 +52,9 @@ protected:
     unsigned int cleanerID;
     double latitude;
     double longitude;
+    unsigned int providerID;
     time_t timeStart;
     time_t timeStop;
-    unsigned int providerID;
 };
 
 //-------------------------------- Autres définitions dépendantes de <Cleaner>
