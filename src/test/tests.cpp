@@ -16,7 +16,7 @@ using namespace std;
 
 //------------------------------------------------------ Include personnel
 #include "tests.h"
-#include "../processing.h"
+#include "../couche_metier/processing.h"
 #include "../couche_metier/Sensor.h"
 
 

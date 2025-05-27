@@ -4,7 +4,7 @@
 #include <algorithm>
 #include <cmath>
 #include <limits>
-#include "couche_metier/Measurement.h"
+#include "Measurement.h"
 
 class AirQualityProcessor
 {

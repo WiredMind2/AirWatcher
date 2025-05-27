@@ -4,7 +4,7 @@
 #include <iomanip>
 #include "../couche_metier/Measurement.h"
 #include "../couche_metier/Cleaner.h"
-#include "../processing.h"
+#include "../couche_metier/processing.h"
 #include "analyse.h"
 
 using namespace std;
