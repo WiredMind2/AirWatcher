@@ -129,20 +129,41 @@ vector<const Sensor *> AirQualityProcessor::ListerCapteursSimilaires(unsigned in
 	vector<const Sensor *> capteurs_similaires;
 	if (id_ref >= measures.size())
 		return capteurs_similaires;
+
+	unordered_map<unsigned int, double> mesure_cache;
+	unordered_map<unsigned int, int> mesure_count;
+
 	for (Measurement *mesure : measures)
 	{
 		Sensor capteur = mesure->GetSensor();
-		if (capteur.GetSensorID() == id_ref)
-			continue; // Ignore le capteur de référence
-		double dist = sqrt(
-			(capteur.GetLatitude() - measures[id_ref]->GetSensor().GetLatitude()) *
-				(capteur.GetLatitude() - measures[id_ref]->GetSensor().GetLatitude()) +
-			(capteur.GetLongitude() - measures[id_ref]->GetSensor().GetLongitude()) *
-				(capteur.GetLongitude() - measures[id_ref]->GetSensor().GetLongitude()));
-		if (dist < 0.01) // Seuil de proximité
+		if (mesure_cache.find(capteur.GetSensorID()) == mesure_cache.end())
 		{
+			mesure_cache[capteur.GetSensorID()] = mesure->GetValue();
+			mesure_count[capteur.GetSensorID()] = 1;
+		}
+		else
+		{
+			mesure_cache[capteur.GetSensorID()] += mesure->GetValue();
+			mesure_count[capteur.GetSensorID()]++;
+		}
+	}
+
+	double ref_value = mesure_cache[id_ref] / mesure_count[id_ref];
+
+	for (const auto &pair : mesure_cache)
+	{
+		unsigned int sensor_id = pair.first;
+		double mesure_value = pair.second / mesure_count[sensor_id];
+
+		if (sensor_id == id_ref)
+			continue; // Ignore le capteur de référence
+		
+		if (fabs(mesure_value - ref_value) < 0.1 * ref_value) // Seuil de similarité de 10%
+		{
+			const Sensor &capteur = CSVHandler::getSensor(sensor_id);
 			capteurs_similaires.push_back(&capteur);
 		}
+
 	}
 	return capteurs_similaires;
 }
