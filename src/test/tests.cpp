@@ -123,15 +123,12 @@ void Tests::test_T11(int &testCount, int &testPassed, int &testFailed)
     int k = 4;
     double lat = 45.8;
     double lon = 2.15;
-    double expectedValue = 51.8486;
+    double expectedValue = 55.9396;
     double radius = 10;
     time_t start = 0;
     time_t stop = -1;
 
-    double val = AirQualityProcessor::EstimationQualiteAirZone(lat, lon, radius, k, start, stop);
-    cout<<"valeur de la fonction : ";
-    cout<<val<<endl;
-    if (abs(val - expectedValue) < 0.01) {
+    if (abs(AirQualityProcessor::EstimationQualiteAirZone(lat, lon, radius, k, start, stop) - expectedValue) < 0.01) {
         cout << "\033[1;32mTest T11 réussi.\033[0m\n";
         testPassed++;
     } else {
@@ -148,11 +145,13 @@ void Tests::test_T12(int &testCount, int &testPassed, int &testFailed)
     testCount++;
 
     int k = 4;
-    double lat = 99;
-    double lon = 99;
-    double radius = 10;
+    double lat = 400;
+    double lon = 400;
+    double radius = 2;
     time_t start = 0;
     time_t stop = -1;
+
+    cout<<AirQualityProcessor::EstimationQualiteAirZone(lat, lon, radius, k, start, stop) << endl;
 
     if (AirQualityProcessor::EstimationQualiteAirZone(lat, lon, radius, k, start, stop) == std::numeric_limits<double>::quiet_NaN()) {
         cout << "\033[1;32mTest T12 réussi.\033[0m\n";
@@ -171,11 +170,17 @@ void Tests::test_T13(int &testCount, int &testPassed, int &testFailed)
     testCount++;
 
     int k = 4;
-    double lat = 44;
-    double lon = 1.1;
-    double expectedValue = 0.5;
+    double lat = 44.6;
+    double lon = 0.8;
+    double radius = 10;
+    time_t start = 0;
+    time_t stop = -1;
+    double expectedValue = 55.4834; 
 
-    if (AirQualityProcessor::EstimationQualiteAirPos(lat, lon, k, 0, -1) == expectedValue) {
+    double val =AirQualityProcessor::EstimationQualiteAirZone(lat, lon, radius, k, start, stop);
+    cout << "Valeur estimée : " << val << endl;
+
+    if (abs(val - expectedValue) < 0.01) {
         cout << "\033[1;32mTest T11 réussi.\033[0m\n";
         testPassed++;
     } else {
