@@ -1,6 +1,7 @@
 # Ignore all object files
 *.o
 .vscode/
+.idea/
 obj/
 AppWatcher
 main
