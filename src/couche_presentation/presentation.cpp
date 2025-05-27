@@ -19,6 +19,8 @@ using namespace std;
 #include "presentation.h"
 #include "statistiques.h"
 #include "analyse.h"
+#include "PointsUtilisateurs.h"
+#include "../couche_metier/User.h"
 
 //------------------------------------------------------------- Constantes
 
@@ -56,7 +58,7 @@ void Presentation::Menu_principal ( )
  */
 {
 	//choix de l'utilisateur
-	string userType;
+	unsigned char userType = 0; 
 	do
 	{
 		cout << "\033[1;34m|============================================|\033[0m\n";
@@ -76,22 +78,16 @@ void Presentation::Menu_principal ( )
             cin.ignore(1000, '\n');     // Ignore les caractères restants dans le flux
         }
 
-		switch (choix)
+		if (choix < 1 || choix > 3)
 		{
-			case 1:
-				userType = "1";
-				break;
-			case 2:
-				userType = "2";
-				break;
-			case 3:
-				userType = "3";
-				break;
-			default:
-				cout << "\033[1;31mChoix invalide, veuillez réessayer.\033[0m" << endl;
-				break;
+			cout << "\033[1;31mChoix invalide, veuillez réessayer.\033[0m" << endl;
+			continue; // Redemande le choix
+		} else {
+			userType = choix;
+			User::SetGlobalUserType(userType);
 		}
-	} while (userType.empty());
+
+	} while (userType == 0);
 
 	cout << "\033[1;32mVous avez sélectionné : " << userType << "\033[0m" << endl;
 
@@ -105,7 +101,7 @@ void Presentation::Menu_principal ( )
 		cout << "\033[1;32m|[1] -------- Analyse de données ------------|\033[0m\n";
 		cout << "\033[1;32m|[2] -------- Statistiques ------------------|\033[0m\n";
 		cout << "\033[1;32m|[3] -------- Points utilisateurs -----------|\033[0m\n";
-		if (userType == "1")
+		if (userType == 1)
 		{
 			cout << "\033[1;32m|[4] -------- Administration ----------------|\033[0m\n";
 		}
@@ -132,7 +128,7 @@ void Presentation::Menu_principal ( )
 				Menu_points_utilisateurs();
 				break;
 			case 4:
-				if (userType == "1"){
+				if (userType == 1){
 					Menu_administration();
 				}
 				else{
@@ -319,6 +315,7 @@ void Presentation::Menu_points_utilisateurs ( )
 		switch(choix)
 		{
 			case 1:
+				consulter_points();
 				break;
 			case 0:
 				cout << "\033[1;31mRetour au menu principal.\033[0m" << endl;

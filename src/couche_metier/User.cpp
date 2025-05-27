@@ -83,6 +83,8 @@ User::~User()
 #endif
 } //----- Fin de ~User
 
+
 //------------------------------------------------------------------ PRIVE
 
+unsigned char User::userType = 0; // Initialisation du type d'utilisateur global
 //----------------------------------------------------- Méthodes protégées

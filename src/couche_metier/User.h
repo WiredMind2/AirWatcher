@@ -38,6 +38,11 @@ public:
     list<Sensor> compareSensor(Sensor sensor);
     double getGeoPoint(double latitude, double longitude);
     double getGeoZoneMean(double latitude, double longitude, double radius);
+    int getPoints() const { return points; }
+    void addPoints(int _points) { points += _points; }
+
+    static unsigned char GetGlobalUserType() {return userType;};
+    static void SetGlobalUserType(unsigned char _userType) { userType = _userType; };
 
     User(unsigned int id);
     virtual ~User();
@@ -49,7 +54,8 @@ protected:
 
 //----------------------------------------------------- Attributs protégés
     unsigned int userID;
-    int points;
+    int points = 0;
+    static unsigned char userType;
 };
 
 //-------------------------------- Autres définitions dépendantes de <User>
