@@ -69,7 +69,7 @@ void CSVHandler::extractCleaners(const string &folder) {
             getline(ss, timeStartStr, ';');
             getline(ss, timeStopStr, ';');
 
-            cout << "ID: " << idStr << ", Latitude: " << latitudeStr << ", Longitude: " << longitudeStr << ", Time Start: " << timeStartStr << ", Time Stop: " << timeStopStr << endl;
+            // cout << "ID: " << idStr << ", Latitude: " << latitudeStr << ", Longitude: " << longitudeStr << ", Time Start: " << timeStartStr << ", Time Stop: " << timeStopStr << endl;
             idStr = idStr.substr(7);
 
             unsigned int id = stoi(idStr);

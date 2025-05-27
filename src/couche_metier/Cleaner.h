@@ -34,7 +34,7 @@ public:
     void start();
     void stop();
 
-    Cleaner(const unsigned int &cleanerID, double latitude, double longitude, time_t timeStart, time_t timeStop, const unsigned int &providerID);
+    Cleaner(const unsigned int cleanerID, double latitude, double longitude, time_t timeStart, time_t timeStop, const unsigned int providerID);
     virtual ~Cleaner();
 
     unsigned int GetCleanerID() const { return cleanerID; }

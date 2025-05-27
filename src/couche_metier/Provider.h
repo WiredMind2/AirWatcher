@@ -37,7 +37,7 @@ public:
 //----------------------------------------------------- Méthodes publiques
     list<Cleaner> getCleaners();
     // Constructor
-    Provider(const string &id, int points);
+    Provider(unsigned int id, int points);
 
     // Destructor
     ~Provider() override;

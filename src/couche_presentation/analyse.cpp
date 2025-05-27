@@ -54,7 +54,7 @@ void analyser_impact_purificateurs()
 {
 	cout << "\033[1;33mAnalyse de l'impact des purificateurs.\033[0m" << endl;
 
-	Cleaner cleaner = Cleaner(1, 48.8566, 2.3522, 123); // TODO - Choisir un vrai purificateur
+	Cleaner cleaner = Cleaner(1, 48.8566, 2.3522, 0, 123, 1); // TODO - Choisir un vrai purificateur
 	cout << "ID du purificateur : " << cleaner.GetCleanerID() << endl;
 
 	time_t dateDebut = demander_date("début");
