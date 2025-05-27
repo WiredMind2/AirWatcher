@@ -63,8 +63,8 @@ double User::getGeoZoneMean(double latitude, double longitude, double radius)
 
 //-------------------------------------------- Constructeur - destructeur
 
-User::User(unsigned int &id, int points)
-    : userID(id), points(points)
+User::User(unsigned int &id)
+    : userID(id), points(0)
 // Algorithme :
 //
 
