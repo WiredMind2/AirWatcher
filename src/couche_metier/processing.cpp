@@ -126,8 +126,12 @@ vector<const Sensor *> AirQualityProcessor::TrouverCapteursDetournes(double radi
 
 		if (fabs(estimation_value - mesure_value) > seuil_limite)
 		{
-			const Sensor &capteur = CSVHandler::getSensor(sensor_id);
-			capteurs_detournes.push_back(&capteur);
+			try {
+				const Sensor &capteur = CSVHandler::getSensor(sensor_id);
+				capteurs_detournes.push_back(&capteur);
+			} catch (const std::runtime_error &e) {
+				continue;
+			}
 		}
 	}
 

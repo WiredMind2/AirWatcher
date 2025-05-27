@@ -126,7 +126,6 @@ void Tests::test_T11(int &testCount, int &testPassed, int &testFailed)
     double expectedValue = 41.747;
     double radius = 10;
 
-    cout << "Valeur estimée : " << AirQualityProcessor::EstimationQualiteAirPos(lat, lon, radius, k) << endl;
     if (abs(AirQualityProcessor::EstimationQualiteAirPos(lat, lon, radius, k) - expectedValue) < 0.01) {
         cout << "\033[1;32mTest T11 réussi.\033[0m\n";
         testPassed++;
@@ -148,9 +147,7 @@ void Tests::test_T12(int &testCount, int &testPassed, int &testFailed)
     double lon = 400;
     double radius = 2;
 
-    cout<<"valeur estimée"<<AirQualityProcessor::EstimationQualiteAirPos(lat, lon, radius, k) << endl;
-
-    if (AirQualityProcessor::EstimationQualiteAirPos(lat, lon, radius, k) == std::numeric_limits<double>::quiet_NaN()) {
+    if (isnan(AirQualityProcessor::EstimationQualiteAirPos(lat, lon, k, 0, -1))) {
         cout << "\033[1;32mTest T12 réussi.\033[0m\n";
         testPassed++;
     } else {
@@ -172,10 +169,7 @@ void Tests::test_T13(int &testCount, int &testPassed, int &testFailed)
     double radius = 1.7;
     double expectedValue = 58.7; 
 
-    double val =AirQualityProcessor::EstimationQualiteAirPos(lat, lon, radius, k);
-    cout << "Valeur estimée : " << val << endl;
-
-    if (abs(val - expectedValue) < 0.01) {
+    if (abs(AirQualityProcessor::EstimationQualiteAirPos(lat, lon, radius, k) - expectedValue) < 0.01) {
         cout << "\033[1;32mTest T13 réussi.\033[0m\n";
         testPassed++;
     } else {
@@ -198,11 +192,8 @@ void Tests::test_T21(int &testCount, int &testPassed, int &testFailed)
     double expectedValue = 53.8422;
     time_t start = 0; 
     time_t stop = -1; 
-    
-    double val = AirQualityProcessor::EstimationQualiteAirZone(lat, lon, radius, k, start, stop);
-    cout << "Valeur estimée : " << val << endl;
 
-    if (abs(val- expectedValue) < 0.01) {
+    if (abs(AirQualityProcessor::EstimationQualiteAirZone(lat, lon, radius, k, start, stop)- expectedValue) < 0.01) {
         cout << "\033[1;32mTest T21 réussi.\033[0m\n";
         testPassed++;
     } else {
@@ -226,9 +217,7 @@ void Tests::test_T22(int &testCount, int &testPassed, int &testFailed)
     time_t start = 0;
     time_t stop = -1;
 
-    cout << "Valeur estimée : " << AirQualityProcessor::EstimationQualiteAirZone(lat, lon, radius, k, start, stop) << endl;
-
-    if (AirQualityProcessor::EstimationQualiteAirZone(lat, lon, radius, k) == std::numeric_limits<double>::quiet_NaN()) {
+    if (isnan(AirQualityProcessor::EstimationQualiteAirZone(lat, lon, radius, k, start, stop))) {
         cout << "\033[1;32mTest T22 réussi.\033[0m\n";
         testPassed++;
     } else {
@@ -252,7 +241,6 @@ void Tests::test_T23(int &testCount, int &testPassed, int &testFailed)
     time_t start = 0;
     time_t stop = -1;
 
-    cout << "Valeur estimée : " << AirQualityProcessor::EstimationQualiteAirZone(lat, lon, radius, k, start, stop) << endl;
     if (abs(AirQualityProcessor::EstimationQualiteAirZone(lat, lon, radius, k, start, stop) - expectedValue) < 0.01) {
         cout << "\033[1;32mTest T23 réussi.\033[0m\n";
         testPassed++;
@@ -269,8 +257,8 @@ void Tests::test_T31(int &testCount, int &testPassed, int &testFailed)
     
     testCount++;
 
-    double lat = 44;
-    double lon = 1.1;
+    double lat = -300;
+    double lon = -300;
     int k = 4;
 
     std::vector<const Sensor *> detournes = AirQualityProcessor::TrouverCapteursDetournes(10.0, 0.5, k, 0, -1);
@@ -299,8 +287,8 @@ void Tests::test_T32(int &testCount, int &testPassed, int &testFailed)
     
     testCount++;
 
-    double lat = 44;
-    double lon = 1.1;
+    double lat = -300;
+    double lon = -300;
     int k = 4;
 
     std::vector<const Sensor *> detournes = AirQualityProcessor::TrouverCapteursDetournes(10.0, 0.5, k, 0, -1);
@@ -314,10 +302,10 @@ void Tests::test_T32(int &testCount, int &testPassed, int &testFailed)
     }
 
     if (capteurTrouve) {
-        cout << "\033[1;32mTest T31 réussi.\033[0m\n";
+        cout << "\033[1;32mTest T32 réussi.\033[0m\n";
         testPassed++;
     } else {
-        cout << "\033[1;31mTest T31 échoué.\033[0m\n";
+        cout << "\033[1;31mTest T32 échoué.\033[0m\n";
         testFailed++;
     }
 }
@@ -343,10 +331,10 @@ void Tests::test_T33(int &testCount, int &testPassed, int &testFailed)
     }
 
     if (capteurTrouve) {
-        cout << "\033[1;32mTest T31 réussi.\033[0m\n";
+        cout << "\033[1;32mTest T33 réussi.\033[0m\n";
         testPassed++;
     } else {
-        cout << "\033[1;31mTest T31 échoué.\033[0m\n";
+        cout << "\033[1;31mTest T33 échoué.\033[0m\n";
         testFailed++;
     }
 }
