@@ -25,7 +25,6 @@ void calculQualiteAirPos() {
 void calculQualiteAirZone() {
 	double lat, lon, radius;
 	int k;
-	double step;
 
 	std::cout << "Entrez la latitude du centre de la zone: ";
 	std::cin >> lat;
@@ -35,8 +34,6 @@ void calculQualiteAirZone() {
 	std::cin >> radius;
 	std::cout << "Entrez le nombre de voisins (k): ";
 	std::cin >> k;
-	std::cout << "Entrez le pas de discrétisation (step): ";
-	std::cin >> step;
 
 	// Appel à la fonction de traitement pour estimer la qualité de l'air sur la zone
 	double estimation = AirQualityProcessor::EstimationQualiteAirZone(lat, lon, radius, k);

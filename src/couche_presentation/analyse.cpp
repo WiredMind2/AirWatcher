@@ -62,11 +62,11 @@ void analyser_impact_purificateurs()
 
 	const int dayInSeconds = 86400; // Nombre de secondes dans un jour
 
-	// Appel à la fonction de traitement pour analyser l'impact
-	double qualiteAvant = AirQualityProcessor::EstimationQualiteAirPos(cleaner.GetLatitude(), cleaner.GetLongitude(), dateDebut, dateDebut + dayInSeconds);
+	// Appel à la fonction de traitement pour analyser l'impact sur une zone autour du purificateur
+	double qualiteAvant = AirQualityProcessor::EstimationQualiteAirZone(cleaner.GetLatitude(), cleaner.GetLongitude(), 10.0, dateDebut, dateDebut + dayInSeconds);
 	cout << "Qualité de l'air avant nettoyage : " << qualiteAvant << endl;
 
-	double qualiteApres = AirQualityProcessor::EstimationQualiteAirPos(cleaner.GetLatitude(), cleaner.GetLongitude(), dateFin, dateFin + dayInSeconds);
+	double qualiteApres = AirQualityProcessor::EstimationQualiteAirZone(cleaner.GetLatitude(), cleaner.GetLongitude(), 10.0, dateFin, dateFin + dayInSeconds);
 	cout << "Qualité de l'air après nettoyage : " << qualiteApres << endl;
 };
 
