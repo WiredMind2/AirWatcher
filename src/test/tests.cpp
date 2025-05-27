@@ -125,11 +125,10 @@ void Tests::test_T11(int &testCount, int &testPassed, int &testFailed)
     double lon = 2.15;
     double expectedValue = 51.8486;
     double radius = 10;
-    double step = 0.5;
     time_t start = 0;
     time_t stop = -1;
 
-    double val = AirQualityProcessor::EstimationQualiteAirZone(lat, lon, radius, k, step, start, stop);
+    double val = AirQualityProcessor::EstimationQualiteAirZone(lat, lon, radius, k, start, stop);
     cout<<"valeur de la fonction : ";
     cout<<val<<endl;
     if (abs(val - expectedValue) < 0.01) {
@@ -152,13 +151,10 @@ void Tests::test_T12(int &testCount, int &testPassed, int &testFailed)
     double lat = 99;
     double lon = 99;
     double radius = 10;
-    double step = 0.1;
     time_t start = 0;
     time_t stop = -1;
 
-    cout<<AirQualityProcessor::EstimationQualiteAirZone(lat, lon, radius, k, step, start, stop)<<endl;
-
-    if (AirQualityProcessor::EstimationQualiteAirZone(lat, lon, radius, k, step, start, stop) == std::numeric_limits<double>::quiet_NaN()) {
+    if (AirQualityProcessor::EstimationQualiteAirZone(lat, lon, radius, k, start, stop) == std::numeric_limits<double>::quiet_NaN()) {
         cout << "\033[1;32mTest T12 réussi.\033[0m\n";
         testPassed++;
     } else {
