@@ -7,17 +7,12 @@
 
 using namespace std;
 
-double AirQualityProcessor::EstimationQualiteAirPos(double lat, double lon, int k, time_t start, time_t stop)
+double AirQualityProcessor::EstimationQualiteAirPos(double lat, double lon, int k, time_t start, time_t stop, const vector<Measurement *> *measures)
 {
-
-	vector<Measurement *> measures = GetMeasures(start, stop);
-
-	if (measures.empty())
-		return numeric_limits<double>::quiet_NaN();
 
 	vector<pair<double, const Measurement *>> distances;
 
-	for (const Measurement *m : measures)
+	for (const Measurement *m : *measures)
 	{
 		double dist = sqrt((lat - m->GetSensor().GetLatitude()) * (lat - m->GetSensor().GetLatitude()) +
 						   (lon - m->GetSensor().GetLongitude()) * (lon - m->GetSensor().GetLongitude()));
@@ -44,12 +39,29 @@ double AirQualityProcessor::EstimationQualiteAirPos(double lat, double lon, int 
 	return (weight_total > 0.0) ? (weighted_sum / weight_total) : numeric_limits<double>::quiet_NaN();
 }
 
+
+double AirQualityProcessor::EstimationQualiteAirPos(double lat, double lon, int k, time_t start, time_t stop) {
+
+
+	vector<Measurement *> measures= GetMeasures(start, stop);
+	return EstimationQualiteAirPos(lat, lon, k, start, stop, &measures);
+}
+
 double AirQualityProcessor::EstimationQualiteAirZone(double lat, double lon, double radius, int k, time_t start, time_t stop)
 {
 
 	double step = 1; // Pas de discrétisation de la zone
 
 	vector<Measurement *> measures = GetMeasures(start, stop);
+	vector<Measurement *> valid_measures;
+
+	for (const Measurement *m : measures)
+	{
+		if (GetDistance(m, lat, lon) <= radius)
+		{
+			valid_measures.push_back(const_cast<Measurement *>(m));
+		}
+	}
 
 	vector<double> estimations;
 	for (double dlat = -radius; dlat <= radius; dlat += step)
@@ -58,7 +70,7 @@ double AirQualityProcessor::EstimationQualiteAirZone(double lat, double lon, dou
 		{
 			if (dlat * dlat + dlon * dlon <= radius * radius)
 			{
-				double est = EstimationQualiteAirPos(lat + dlat, lon + dlon, k, start, stop);
+				double est = EstimationQualiteAirPos(lat + dlat, lon + dlon, k, start, stop, &valid_measures);
 				if (!isnan(est))
 				{
 					estimations.push_back(est);
@@ -66,6 +78,7 @@ double AirQualityProcessor::EstimationQualiteAirZone(double lat, double lon, dou
 			}
 		}
 	}
+
 	if (estimations.empty())
 		return numeric_limits<double>::quiet_NaN();
 	double sum = 0.0;
@@ -157,13 +170,12 @@ vector<const Sensor *> AirQualityProcessor::ListerCapteursSimilaires(unsigned in
 
 		if (sensor_id == id_ref)
 			continue; // Ignore le capteur de référence
-		
+
 		if (fabs(mesure_value - ref_value) < 0.1 * ref_value) // Seuil de similarité de 10%
 		{
 			const Sensor &capteur = CSVHandler::getSensor(sensor_id);
 			capteurs_similaires.push_back(&capteur);
 		}
-
 	}
 	return capteurs_similaires;
 }
@@ -172,4 +184,27 @@ vector<Measurement *> AirQualityProcessor::GetMeasures(time_t start, time_t stop
 {
 	vector<Measurement *> measures = CSVHandler::getMeasurement(start, stop);
 	return measures;
+}
+
+double AirQualityProcessor::GetDistance(double lat1, double lon1, double lat2, double lon2)
+{
+	double dlat = lat2 - lat1;
+	double dlon = lon2 - lon1;
+	return sqrt(dlat * dlat + dlon * dlon);
+}
+
+double AirQualityProcessor::GetDistance(const Sensor &sensor1, const Sensor &sensor2)
+{
+	return GetDistance(sensor1.GetLatitude(), sensor1.GetLongitude(), sensor2.GetLatitude(), sensor2.GetLongitude());
+}
+
+double AirQualityProcessor::GetDistance(const Measurement &measurement1, const Measurement &measurement2)
+{
+	return GetDistance(measurement1.GetSensor().GetLatitude(), measurement1.GetSensor().GetLongitude(),
+					   measurement2.GetSensor().GetLatitude(), measurement2.GetSensor().GetLongitude());
+}
+
+double AirQualityProcessor::GetDistance(const Measurement *measurement, double lat, double lon)
+{
+	return GetDistance(measurement->GetSensor().GetLatitude(), measurement->GetSensor().GetLongitude(), lat, lon);
 }
