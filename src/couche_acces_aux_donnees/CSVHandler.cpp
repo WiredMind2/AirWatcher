@@ -1,18 +1,31 @@
-//
-// Created by aaron on 16/05/2025.
-//
+/*************************************************************************
+                           CSVHandler  -  description
+                             -------------------
+    début                : $DATE$
+    copyright            : (C) $YEAR$ par $AUTHOR$
+    e-mail               : $EMAIL$
+*************************************************************************/
 
-#include "CSVHandler.h"
+//---------- Réalisation de la classe <CSVHandler> (fichier CSVHandler.cpp) ------------
+
+//---------------------------------------------------------------- INCLUDE
+
+//-------------------------------------------------------- Include système
+using namespace std;
 #include <iostream>
 #include <fstream>
 #include <sstream>
 #include <vector>
 #include <string>
 #include <cstdlib>
-#include <iomanip> // For get_time
+#include <iomanip>
 
-using namespace std;
+//------------------------------------------------------ Include personnel
+#include "CSVHandler.h"
 
+//------------------------------------------------------------- Constantes
+
+//------------------------------------------------------------------ Variables 
 
 unordered_map<unsigned int, Cleaner> CSVHandler::cleaners;
 unordered_map<unsigned int, Individual> CSVHandler::individuals;
@@ -21,6 +34,9 @@ unordered_map<unsigned int, Provider> CSVHandler::providers;
 unordered_map<unsigned int, Sensor> CSVHandler::sensors;
 unordered_map<unsigned int, User> CSVHandler::users;
 
+//----------------------------------------------------------------- PUBLIC
+
+//----------------------------------------------------- Méthodes publiques
 void CSVHandler::extractAll(const string &folder) {
     extractSensors(folder);
     extractMeasurements(folder);
@@ -159,7 +175,6 @@ User CSVHandler::getUser(unsigned int id) {
     }
     throw runtime_error("User not found");
 }
-
 vector<Measurement*> CSVHandler::getMeasurement(time_t start, time_t stop) {
     if(stop == -1){
         stop = time(nullptr);
@@ -187,3 +202,39 @@ vector<Measurement*> CSVHandler::getMeasurement(time_t start, time_t stop) {
     }
     return results;
 }
+
+//-------------------------------------------- Constructeurs - destructeur
+CSVHandler::CSVHandler ( const CSVHandler & unCSVHandler )
+// Algorithme :
+//
+{
+#ifdef MAP
+    cout << "Appel au constructeur de copie de <CSVHandler>" << endl;
+#endif
+} //----- Fin de CSVHandler (constructeur de copie)
+
+
+CSVHandler::CSVHandler ( )
+// Algorithme :
+//
+{
+#ifdef MAP
+    cout << "Appel au constructeur de <CSVHandler>" << endl;
+#endif
+} //----- Fin de CSVHandler
+
+
+CSVHandler::~CSVHandler ( )
+// Algorithme :
+//
+{
+#ifdef MAP
+    cout << "Appel au destructeur de <CSVHandler>" << endl;
+#endif
+} //----- Fin de ~CSVHandler
+
+
+//------------------------------------------------------------------ PRIVE
+
+//----------------------------------------------------- Méthodes protégées
+
