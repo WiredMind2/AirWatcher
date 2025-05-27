@@ -45,14 +45,12 @@ void Cleaner::stop()
 
 //-------------------------------------------- Constructeur - destructeur
 
-Cleaner::Cleaner(const unsigned int &cleanerID, double latitude, double longitude, const unsigned int &providerID)
+Cleaner::Cleaner(const unsigned int &cleanerID, double latitude, double longitude, time_t timeStart, time_t timeStop, const unsigned int &providerID)
 // Algorithme :
 // Initialise les attributs du nettoyeur.
 //
-    : cleanerID(cleanerID), latitude(latitude), longitude(longitude), providerID(providerID)
+    : cleanerID(cleanerID), latitude(latitude), longitude(longitude), providerID(providerID), timeStart(timeStart), timeStop(timeStop)
 {
-    this->timeStart = 0;
-    this->timeStop = 0;
     cout << "Cleaner created with ID: " << cleanerID << endl;
 } //----- Fin de Cleaner
 
