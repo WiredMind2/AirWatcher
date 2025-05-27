@@ -1,12 +1,11 @@
 #include <iostream>
-#include "src/couche_presentation/presentation.h"
-#include "src/test/tests.h"
-#include "src/CSVHandler.h"
+#include "couche_presentation/presentation.h"
+#include "test/tests.h"
+#include "couche_acces_aux_donnees/CSVHandler.h"
 using namespace std;
 
 int main( int argc, char* argv[]){
-    CSVHandler::extractAll("CSV");
-
+    CSVHandler::extractAll("CSV_Tests");
     if (argc > 1 && string(argv[1]) == "test"){
         Tests test;
         test.runTests();

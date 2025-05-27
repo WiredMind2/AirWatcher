@@ -1,6 +1,6 @@
 #include "statistiques.h"
 #include <iostream>
-#include "../processing.h"
+#include "../couche_metier/processing.h"
 
 void calculQualiteAirPos() {
 	double lat, lon;
@@ -39,7 +39,7 @@ void calculQualiteAirZone() {
 	std::cin >> step;
 
 	// Appel à la fonction de traitement pour estimer la qualité de l'air sur la zone
-	double estimation = AirQualityProcessor::EstimationQualiteAirZone(lat, lon, radius, k, step);
+	double estimation = AirQualityProcessor::EstimationQualiteAirZone(lat, lon, radius, k);
 	if (std::isnan(estimation)) {
 		std::cout << "Aucune mesure disponible pour cette zone.\n";
 	} else {

@@ -1,6 +1,17 @@
-//
-// Created by aaron on 16/05/2025.
-//
+/*************************************************************************
+                           CSVHandler  -  description
+                             -------------------
+    début                : $DATE$
+    copyright            : (C) $YEAR$ par $AUTHOR$
+    e-mail               : $EMAIL$
+*************************************************************************/
+
+//---------- Réalisation de la classe <CSVHandler> (fichier CSVHandler.cpp) ------------
+
+//---------------------------------------------------------------- INCLUDE
+
+//-------------------------------------------------------- Include système
+using namespace std;
 
 #include "CSVHandler.h"
 #include <iostream>
@@ -11,8 +22,9 @@
 #include <cstdlib>
 #include <iomanip> // For get_time
 
-using namespace std;
+//------------------------------------------------------------- Constantes
 
+//------------------------------------------------------------------ Variables
 
 unordered_map<unsigned int, Cleaner> CSVHandler::cleaners;
 unordered_map<unsigned int, Individual> CSVHandler::individuals;
@@ -21,9 +33,58 @@ unordered_map<unsigned int, Provider> CSVHandler::providers;
 unordered_map<unsigned int, Sensor> CSVHandler::sensors;
 unordered_map<unsigned int, User> CSVHandler::users;
 
+time_t stringToTimeT(const string& dateTimeStr) {
+    tm tm = {};
+    istringstream ss(dateTimeStr);
+    ss >> get_time(&tm, "%Y-%m-%d %H:%M:%S");
+    if (ss.fail()) {
+        throw runtime_error("Failed to parse date/time string");
+    }
+    return mktime(&tm);
+}
+
+//----------------------------------------------------------------- PUBLIC
+
+//----------------------------------------------------- Méthodes publiques
 void CSVHandler::extractAll(const string &folder) {
     extractSensors(folder);
     extractMeasurements(folder);
+    extractCleaners(folder);
+}
+
+void CSVHandler::extractCleaners(const string &folder) {
+    ifstream file(folder + "/cleaners.csv");
+    string line;
+
+    //unordered_map<unsigned int, Cleaner> cleaners;
+
+    if (file.is_open()) {
+        while (getline(file, line)) {
+            stringstream ss(line);
+            string idStr, latitudeStr, longitudeStr, timeStartStr, timeStopStr;
+
+            getline(ss, idStr, ';');
+            getline(ss, latitudeStr, ';');
+            getline(ss, longitudeStr, ';');
+            getline(ss, timeStartStr, ';');
+            getline(ss, timeStopStr, ';');
+
+            // cout << "ID: " << idStr << ", Latitude: " << latitudeStr << ", Longitude: " << longitudeStr << ", Time Start: " << timeStartStr << ", Time Stop: " << timeStopStr << endl;
+            idStr = idStr.substr(7);
+
+            unsigned int id = stoi(idStr);
+            double latitude = stod(latitudeStr);
+            double longitude = stod(longitudeStr);
+            time_t timeStart = stringToTimeT(timeStartStr);
+            time_t timeStop = stringToTimeT(timeStopStr);
+
+            Cleaner cleaner(id, latitude, longitude, timeStart, timeStop, -1);
+            cleaners.emplace(id, cleaner);
+        }
+        file.close();
+    } else {
+        cout << "Unable to open file" << endl;
+    }
 }
 
 void CSVHandler::extractSensors(const string &folder) {
@@ -47,7 +108,7 @@ void CSVHandler::extractSensors(const string &folder) {
 
             Sensor sensor(id, latitude, longitude, -1);
             sensors.emplace(id, sensor);
-            cout << "Sensor ID: " << id << ", Latitude: " << latitude << ", Longitude: " << longitude << endl;
+            //cout << "Sensor ID: " << id << ", Latitude: " << latitude << ", Longitude: " << longitude << endl;
         }
         file.close();
     } else {
@@ -84,6 +145,14 @@ void CSVHandler::extractMeasurements(const string &folder) {
             double value = stod(valueStr);
             sensorIDStr = sensorIDStr.substr(6);
             unsigned int sensorID = stoi(sensorIDStr);
+            
+            // Vérifier que le sensor existe en mémoire
+            auto it = sensors.find(sensorID);
+            if (it == sensors.end()) {
+                //cout << "Sensor with ID " << sensorID << " not found. Skipping measurement." << endl;
+                continue;
+            }
+            
             string attributeID = attributeIDStr;
 
             Measurement* measurement = new Measurement(timestamp, value, sensorID, attributeID);
@@ -159,7 +228,6 @@ User CSVHandler::getUser(unsigned int id) {
     }
     throw runtime_error("User not found");
 }
-
 vector<Measurement*> CSVHandler::getMeasurement(time_t start, time_t stop) {
     if(stop == -1){
         stop = time(nullptr);
@@ -187,3 +255,39 @@ vector<Measurement*> CSVHandler::getMeasurement(time_t start, time_t stop) {
     }
     return results;
 }
+
+//-------------------------------------------- Constructeurs - destructeur
+CSVHandler::CSVHandler ( const CSVHandler & unCSVHandler )
+// Algorithme :
+//
+{
+#ifdef MAP
+    cout << "Appel au constructeur de copie de <CSVHandler>" << endl;
+#endif
+} //----- Fin de CSVHandler (constructeur de copie)
+
+
+CSVHandler::CSVHandler ( )
+// Algorithme :
+//
+{
+#ifdef MAP
+    cout << "Appel au constructeur de <CSVHandler>" << endl;
+#endif
+} //----- Fin de CSVHandler
+
+
+CSVHandler::~CSVHandler ( )
+// Algorithme :
+//
+{
+#ifdef MAP
+    cout << "Appel au destructeur de <CSVHandler>" << endl;
+#endif
+} //----- Fin de ~CSVHandler
+
+
+//------------------------------------------------------------------ PRIVE
+
+//----------------------------------------------------- Méthodes protégées
+

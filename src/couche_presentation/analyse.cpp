@@ -4,7 +4,7 @@
 #include <iomanip>
 #include "../couche_metier/Measurement.h"
 #include "../couche_metier/Cleaner.h"
-#include "../processing.h"
+#include "../couche_metier/processing.h"
 #include "analyse.h"
 
 using namespace std;
@@ -32,7 +32,8 @@ void identifier_capteurs_non_fiables()
 {
 	cout << "\033[1;31mAnalyse des capteurs non fiables.\033[0m" << endl;
 	// Appel à la fonction de traitement pour trouver les capteurs non fiables
-	vector<const Sensor *> capteurs_non_fiables = AirQualityProcessor::TrouverCapteursDetournes();
+	int k = 4; 
+	vector<const Sensor *> capteurs_non_fiables = AirQualityProcessor::TrouverCapteursDetournes(10.0, 0.5, k, 0, -1);
 
 	// Affichage des capteurs non fiables
 	if (capteurs_non_fiables.empty())
@@ -53,7 +54,7 @@ void analyser_impact_purificateurs()
 {
 	cout << "\033[1;33mAnalyse de l'impact des purificateurs.\033[0m" << endl;
 
-	Cleaner cleaner = Cleaner(1, 48.8566, 2.3522, 123); // TODO - Choisir un vrai purificateur
+	Cleaner cleaner = Cleaner(1, 48.8566, 2.3522,time(nullptr),time(nullptr), 123); // TODO - Choisir un vrai purificateur
 	cout << "ID du purificateur : " << cleaner.GetCleanerID() << endl;
 
 	time_t dateDebut = demander_date("début");

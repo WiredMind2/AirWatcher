@@ -37,7 +37,7 @@ public:
     list<User> findUnreliable();
 
     // Constructor
-    GouvAgency(const string &id, int points);
+    GouvAgency(unsigned int id, int points);
 
     // Destructor
     ~GouvAgency() override;
