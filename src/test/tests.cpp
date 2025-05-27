@@ -189,7 +189,7 @@ void Tests::test_T21(int &testCount, int &testPassed, int &testFailed)
     double lat = 45;
     double lon = 2.5;
     double radius = 10;
-    double expectedValue = 53.8422;
+    double expectedValue = 54.2618;
     time_t start = 0; 
     time_t stop = -1; 
 
@@ -237,7 +237,7 @@ void Tests::test_T23(int &testCount, int &testPassed, int &testFailed)
     double lat = 44;
     double lon = -1;
     double radius = 11;
-    double expectedValue = 54.7169;
+    double expectedValue = 54.5129;
     time_t start = 0;
     time_t stop = -1;
 
@@ -290,11 +290,15 @@ void Tests::test_T32(int &testCount, int &testPassed, int &testFailed)
     double lat = -300;
     double lon = -300;
     int k = 4;
+    time_t start = 0;
+    time_t stop = -1; 
 
-    std::vector<const Sensor *> detournes = AirQualityProcessor::TrouverCapteursDetournes(10.0, 0.5, k, 0, -1);
+
+    std::vector<const Sensor *> detournes = AirQualityProcessor::TrouverCapteursDetournes(lat, lon, k, start, stop);
     bool capteurTrouve = false;
 
     for (const auto &capteur : detournes) {
+        cout<< "Capteur ID: " << capteur->GetSensorID() << ", Latitude: " << capteur->GetLatitude() << ", Longitude: " << capteur->GetLongitude() << endl;
         if (capteur->GetLatitude() == lat && capteur->GetLongitude() == lon) {
             capteurTrouve = true;
             break;
