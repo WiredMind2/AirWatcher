@@ -158,12 +158,12 @@ protected:
 
 //----------------------------------------------------- Attributs protégés
 
-    static unordered_map<unsigned int, Cleaner> cleaners;
-    static unordered_map<unsigned int, Individual> individuals;
+    static unordered_map<unsigned int, Cleaner*> cleaners;
+    static unordered_map<unsigned int, Individual*> individuals;
     static multimap<time_t, Measurement*> measurements;
-    static unordered_map<unsigned int, Provider> providers;
-    static unordered_map<unsigned int, Sensor> sensors;
-    static unordered_map<unsigned int, User> users;
+    static unordered_map<unsigned int, Provider*> providers;
+    static unordered_map<unsigned int, Sensor*> sensors;
+    static unordered_map<unsigned int, User*> users;
 
 private:
 //----------------------------------------------------- Méthodes privées
