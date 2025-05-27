@@ -39,7 +39,7 @@ public:
     double getGeoPoint(double latitude, double longitude);
     double getGeoZoneMean(double latitude, double longitude, double radius);
 
-    User(unsigned int &id);
+    User(unsigned int id);
     virtual ~User();
 
 //------------------------------------------------------------------ PRIVE

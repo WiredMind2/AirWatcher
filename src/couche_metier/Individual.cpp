@@ -15,5 +15,5 @@
 //------------------------------------------------------ Include personnel
 #include "Individual.h"
 
-Individual::Individual(const string &id, int points) : User(id, points) {}
+Individual::Individual(unsigned int id) : User(id) {}
 Individual::~Individual() {}
