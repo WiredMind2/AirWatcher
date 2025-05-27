@@ -13,13 +13,14 @@
 //-------------------------------------------------------- Include système
 using namespace std;
 #include <iostream>
-#include "processing.h"
+#include "../couche_metier/processing.h"
 #include <vector>
-#include "CSVHandler.h"
+#include "../couche_acces_aux_donnees/CSVHandler.h"
 
 
 //------------------------------------------------------ Include personnel
 #include "Administration.h"
+#include "analyse.h"
 
 //------------------------------------------------------------- Constantes
 
@@ -35,9 +36,12 @@ using namespace std;
 
 void Administration::consulter_capteurs_defaillants()
 {
-    double seuil_limite, step, radius;
-    time_t start, stop;
+    double seuil_limite, radius;
     int k;
+
+	time_t start = demander_date("début");
+	time_t stop = demander_date("fin");
+
 
     cout << "Entrez le rayon de la zone (en degrés): ";
     cin >> radius;
@@ -46,9 +50,7 @@ void Administration::consulter_capteurs_defaillants()
     cout << "Entrez le nombre de voisins (k): ";
     cin >> k;
     
-    cout << "Entrez le pas de discrétisation (step): ";
-    cin >> step;
-    vector<const Sensor *> capteurs_defaillants = AirQualityProcessor::TrouverCapteursDetournes(radius, seuil_limite, k, step, start, stop); 
+    vector<const Sensor *> capteurs_defaillants = AirQualityProcessor::TrouverCapteursDetournes(radius, seuil_limite, k, start, stop); 
     for (const auto &sensor : capteurs_defaillants)
     {
         cout << "Le capteur" << sensor->GetSensorID() << "est défaillant." << "\n";
@@ -83,7 +85,7 @@ void Administration::marquer_user_malicieux()
     User user_malicieux = CSVHandler::getUser(user_id); // Problème : les id sont des string, handler à revoir
 
     // Le classer comme malicieux
-    GouvAgency("id_random", 0).classifyUnreliable(user_malicieux); // TO DO : revoir avec le bon id, méthodes GouvAgency en static ?
+    GouvAgency(4).classifyUnreliable(user_malicieux); // TO DO : revoir avec le bon id, méthodes GouvAgency en static ?
     cout << "L'utilisateur" << user_id << "a été signalé. Il ne pourra plus accumuler de points" << "\n";
 }
 

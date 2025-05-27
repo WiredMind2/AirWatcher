@@ -1,1 +1,0 @@
-void consulter_points();
