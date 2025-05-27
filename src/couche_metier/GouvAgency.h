@@ -37,10 +37,10 @@ public:
     list<User> findUnreliable();
 
     // Constructor
-    GouvAgency(unsigned int id);
+    GouvAgency(unsigned int id) : User(id) {};
 
     // Destructor
-    ~GouvAgency() override;
+    ~GouvAgency() override {};
 
 //------------------------------------------------------------------ PRIVE
 
