@@ -123,12 +123,11 @@ void Tests::test_T11(int &testCount, int &testPassed, int &testFailed)
     int k = 4;
     double lat = 45.8;
     double lon = 2.15;
-    double expectedValue = 55.9396;
+    double expectedValue = 42.989;
     double radius = 10;
-    time_t start = 0;
-    time_t stop = -1;
 
-    if (abs(AirQualityProcessor::EstimationQualiteAirZone(lat, lon, radius, k, start, stop) - expectedValue) < 0.01) {
+    cout << "Valeur estimée : " << AirQualityProcessor::EstimationQualiteAirPos(lat, lon, radius, k) << endl;
+    if (abs(AirQualityProcessor::EstimationQualiteAirPos(lat, lon, radius, k) - expectedValue) < 0.01) {
         cout << "\033[1;32mTest T11 réussi.\033[0m\n";
         testPassed++;
     } else {
@@ -148,12 +147,10 @@ void Tests::test_T12(int &testCount, int &testPassed, int &testFailed)
     double lat = 400;
     double lon = 400;
     double radius = 2;
-    time_t start = 0;
-    time_t stop = -1;
 
-    cout<<AirQualityProcessor::EstimationQualiteAirZone(lat, lon, radius, k, start, stop) << endl;
+    cout<<"valeur estimée"<<AirQualityProcessor::EstimationQualiteAirPos(lat, lon, radius, k) << endl;
 
-    if (AirQualityProcessor::EstimationQualiteAirZone(lat, lon, radius, k, start, stop) == std::numeric_limits<double>::quiet_NaN()) {
+    if (AirQualityProcessor::EstimationQualiteAirPos(lat, lon, radius, k) == std::numeric_limits<double>::quiet_NaN()) {
         cout << "\033[1;32mTest T12 réussi.\033[0m\n";
         testPassed++;
     } else {
@@ -173,18 +170,16 @@ void Tests::test_T13(int &testCount, int &testPassed, int &testFailed)
     double lat = 44.6;
     double lon = 0.8;
     double radius = 10;
-    time_t start = 0;
-    time_t stop = -1;
-    double expectedValue = 55.4834; 
+    double expectedValue = 54.076; 
 
-    double val =AirQualityProcessor::EstimationQualiteAirZone(lat, lon, radius, k, start, stop);
+    double val =AirQualityProcessor::EstimationQualiteAirPos(lat, lon, radius, k);
     cout << "Valeur estimée : " << val << endl;
 
     if (abs(val - expectedValue) < 0.01) {
-        cout << "\033[1;32mTest T11 réussi.\033[0m\n";
+        cout << "\033[1;32mTest T13 réussi.\033[0m\n";
         testPassed++;
     } else {
-        cout << "\033[1;31mTest T11 échoué.\033[0m\n";
+        cout << "\033[1;31mTest T13 échoué.\033[0m\n";
         testFailed++;
     }
 }
