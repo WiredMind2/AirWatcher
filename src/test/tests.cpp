@@ -287,19 +287,20 @@ void Tests::test_T32(int &testCount, int &testPassed, int &testFailed)
     
     testCount++;
 
-    double lat = -300;
-    double lon = -300;
+    double radius = 10;
+    double seuil_limite = 1;
+    unsigned int id_ref = 666;
     int k = 4;
     time_t start = 0;
     time_t stop = -1; 
 
 
-    std::vector<const Sensor *> detournes = AirQualityProcessor::TrouverCapteursDetournes(lat, lon, k, start, stop);
+    std::vector<const Sensor *> detournes = AirQualityProcessor::TrouverCapteursDetournes(radius, seuil_limite, k, start, stop);
     bool capteurTrouve = false;
 
     for (const auto &capteur : detournes) {
         cout<< "Capteur ID: " << capteur->GetSensorID() << ", Latitude: " << capteur->GetLatitude() << ", Longitude: " << capteur->GetLongitude() << endl;
-        if (capteur->GetLatitude() == lat && capteur->GetLongitude() == lon) {
+        if (capteur->GetSensorID() == id_ref) {
             capteurTrouve = true;
             break;
         }
