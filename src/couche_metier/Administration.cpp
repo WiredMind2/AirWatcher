@@ -53,6 +53,6 @@ void marquer_user_malicieux()
     User user_malicieux = CSVHandler::getUser(user_id); // Problème : les id sont des string, handler à revoir
 
     // Le classer comme malicieux
-    GouvAgency(5, 0).classifyUnreliable(user_malicieux); // TO DO : revoir avec le bon id, méthodes GouvAgency en static ?
+    GouvAgency(0).classifyUnreliable(user_malicieux); // TO DO : revoir avec le bon id, méthodes GouvAgency en static ?
     cout << "L'utilisateur" << user_id << "a été signalé. Il ne pourra plus accumuler de points" << "\n";
 }

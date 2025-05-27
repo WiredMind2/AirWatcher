@@ -30,7 +30,7 @@ class Individual : public User
 public:
 //----------------------------------------------------- Méthodes publiques
     // Constructor
-    Individual(unsigned int id, int points);
+    Individual(unsigned int id);
 
     // Destructor
     ~Individual() override;

@@ -15,5 +15,5 @@
 //------------------------------------------------------ Include personnel
 #include "Provider.h"
 
-Provider::Provider(unsigned int id, int points) : User(id, points) {}
+Provider::Provider(unsigned int id) : User(id) {}
 Provider::~Provider() {}
