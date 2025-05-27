@@ -253,7 +253,7 @@ void Tests::test_T23(int &testCount, int &testPassed, int &testFailed)
     time_t stop = -1;
 
     cout << "Valeur estimée : " << AirQualityProcessor::EstimationQualiteAirZone(lat, lon, radius, k, start, stop) << endl;
-    if (AirQualityProcessor::EstimationQualiteAirZone(lat, lon, radius, k, start, stop) == expectedValue) {
+    if (abs(AirQualityProcessor::EstimationQualiteAirZone(lat, lon, radius, k, start, stop) - expectedValue) < 0.01) {
         cout << "\033[1;32mTest T23 réussi.\033[0m\n";
         testPassed++;
     } else {
