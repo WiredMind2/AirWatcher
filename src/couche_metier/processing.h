@@ -14,6 +14,7 @@ public:
 	// measures : liste de toutes les mesures disponibles
 	// k : nombre de voisins à utiliser (par défaut 4)
 	// Retourne la valeur estimée de la qualité de l'air ou NaN si aucune mesure n'est disponible
+	static double EstimationQualiteAirPos(double lat, double lon, int k, time_t start, time_t stop, const std::vector<Measurement *> *measures);
 	static double EstimationQualiteAirPos(double lat, double lon, int k = 4, time_t start=0, time_t stop=-1);
 
 	// Estime la qualité de l'air sur une zone circulaire (centre lat, lon, rayon en degrés)
@@ -21,7 +22,7 @@ public:
 	// radius : rayon de la zone en degrés
 	// measures : liste de toutes les mesures disponibles
 	// k : nombre de voisins à utiliser (par défaut 4)
-	// step : pas de discrétisation de la zone (par défaut 0.01)
+	// step : pas de discrétisation de la zone (par défaut 1)
 	// Retourne la moyenne des estimations dans la zone
 	static double EstimationQualiteAirZone(double lat, double lon, double radius, int k = 4, time_t start=0, time_t stop=-1);
 
@@ -30,7 +31,7 @@ public:
 	// radius : rayon de la zone à considérer pour l'estimation (par défaut 0.02)
 	// seuil_limite : seuil de différence pour considérer un capteur comme détourné (par défaut 20.0)
 	// k : nombre de voisins à utiliser pour l'estimation (par défaut 4)
-	// step : pas de discrétisation de la zone (par défaut 0.01)
+	// step : pas de discrétisation de la zone (par défaut 1)
 	// Retourne une liste de pointeurs vers les capteurs détournés
 	static std::vector<const Sensor *> TrouverCapteursDetournes(double radius = 0.02, double seuil_limite = 20.0, int k = 4, time_t start=0, time_t stop=-1);
 
@@ -43,4 +44,10 @@ public:
 private:
 	// Fonction utilitaire pour recuperer la liste de toutes les mesures
 	static std::vector<Measurement*> GetMeasures(time_t start, time_t stop);
+
+	// Fonction utilitaire pour calculer la distance entre deux points géographiques
+	static double GetDistance(double lat1, double lon1, double lat2, double lon2);
+	static double GetDistance(const Sensor &s1, const Sensor &s2);
+	static double GetDistance(const Measurement &m1, const Measurement &m2);
+	static double GetDistance(const Measurement *m1, double lat, double lon);
 };

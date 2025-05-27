@@ -26,12 +26,12 @@ using namespace std;
 
 //------------------------------------------------------------------ Variables
 
-unordered_map<unsigned int, Cleaner> CSVHandler::cleaners;
-unordered_map<unsigned int, Individual> CSVHandler::individuals;
+unordered_map<unsigned int, Cleaner*> CSVHandler::cleaners;
+unordered_map<unsigned int, Individual*> CSVHandler::individuals;
 multimap<time_t, Measurement*> CSVHandler::measurements;
-unordered_map<unsigned int, Provider> CSVHandler::providers;
-unordered_map<unsigned int, Sensor> CSVHandler::sensors;
-unordered_map<unsigned int, User> CSVHandler::users;
+unordered_map<unsigned int, Provider*> CSVHandler::providers;
+unordered_map<unsigned int, Sensor*> CSVHandler::sensors;
+unordered_map<unsigned int, User*> CSVHandler::users;
 
 time_t stringToTimeT(const string& dateTimeStr) {
     tm tm = {};
@@ -79,7 +79,7 @@ void CSVHandler::extractCleaners(const string &folder) {
             time_t timeStart = stringToTimeT(timeStartStr);
             time_t timeStop = stringToTimeT(timeStopStr);
 
-            Cleaner cleaner(id, latitude, longitude, timeStart, timeStop, -1);
+            Cleaner* cleaner = new Cleaner(id, latitude, longitude, timeStart, timeStop, -1);
             cleaners.emplace(id, cleaner);
         }
         file.close();
@@ -107,7 +107,7 @@ void CSVHandler::extractSensors(const string &folder) {
             double latitude = stod(latitudeStr);
             double longitude = stod(longitudeStr);
 
-            Sensor sensor(id, latitude, longitude, -1);
+            Sensor* sensor = new Sensor(id, latitude, longitude, -1);
             sensors.emplace(id, sensor);
             //cout << "Sensor ID: " << id << ", Latitude: " << latitude << ", Longitude: " << longitude << endl;
         }
@@ -179,13 +179,13 @@ void CSVHandler::extractIndividuals(const string &folder){
             getline(ss, sensorStr, ';');
             unsigned int sensorid = stoi(sensorStr.substr(6));
 
-            Individual individual(userid);
+            Individual* individual = new Individual(userid);
             individuals.emplace(userid, individual);
 
             auto it = sensors.find(sensorid);
             if (it != sensors.end()) {
-                Sensor &sensor = it->second;
-                sensor.SetUserID(userid);
+                Sensor* sensor = it->second;
+                sensor->SetUserID(userid);
             } else {
                 cout << "Sensor with ID " << sensorid << " not found." << endl;
             }
@@ -200,35 +200,35 @@ void CSVHandler::extractIndividuals(const string &folder){
 Cleaner CSVHandler::getCleaner(unsigned int id) {
     auto it = cleaners.find(id);
     if (it != cleaners.end()) {
-        return it->second;
+        return *it->second;
     }
     throw runtime_error("Cleaner not found");
 }
 Individual CSVHandler::getIndividual(unsigned int id) {
     auto it = individuals.find(id);
     if (it != individuals.end()) {
-        return it->second;
+        return *it->second;
     }
     throw runtime_error("Individual not found");
 }
 Provider CSVHandler::getProvider(unsigned int id) {
     auto it = providers.find(id);
     if (it != providers.end()) {
-        return it->second;
+        return *it->second;
     }
     throw runtime_error("Provider not found");
 }
 Sensor CSVHandler::getSensor(unsigned int id) {
     auto it = sensors.find(id);
     if (it != sensors.end()) {
-        return it->second;
+        return *it->second;
     }
     throw runtime_error("Sensor not found");
 }
 User CSVHandler::getUser(unsigned int id) {
     auto it = users.find(id);
     if (it != users.end()) {
-        return it->second;
+        return *it->second;
     }
     throw runtime_error("User not found");
 }
