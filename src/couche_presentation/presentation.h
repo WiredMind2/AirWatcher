@@ -28,60 +28,55 @@ class Presentation
 
 public:
 //----------------------------------------------------- Méthodes publiques
-    // type Méthode ( liste des paramètres );
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
 
     void Menu_principal ( );
     // Mode d'emploi :
-    // Affiche le menu principal de l'application
+    // Affiche le menu principal.
     // Contrat :
-    //
+    // Aucun.
 
     void Menu_analyse ( );
     // Mode d'emploi :
-    // Affiche le menu d'analyse de l'application
+    // Affiche le menu d'analyse.
     // Contrat :
-    //
+    // Aucun.
 
     void Menu_statistiques ( );
     // Mode d'emploi :
-    // Affiche le menu de statistiques de l'application
+    // Affiche le menu de statistiques.
     // Contrat :
-    //
+    // Aucun.
 
     void Menu_points_utilisateurs ( );
     // Mode d'emploi :
-    // Affiche le menu de points utilisateurs de l'application
+    // Affiche le menu des points utilisateurs.
     // Contrat :
-    //
+    // Aucun.
 
     void Menu_administration ( );
     // Mode d'emploi :
-    // Affiche le menu d'administration de l'application
+    // Affiche le menu d'administration.
     // Contrat :
-    //
+    // Aucun.
 
 //-------------------------------------------- Constructeurs - destructeur
     Presentation ( const Presentation & unPresentation );
     // Mode d'emploi (constructeur de copie) :
-    //
+    // Copie un objet Presentation.
     // Contrat :
-    //
+    // Aucun.
 
     Presentation ( );
     // Mode d'emploi :
-    //
+    // Initialise un objet Presentation.
     // Contrat :
-    //
+    // Aucun.
 
     virtual ~Presentation ( );
     // Mode d'emploi :
-    //
+    // Détruit un objet Presentation.
     // Contrat :
-    //
+    // Aucun.
 
 //------------------------------------------------------------------ PRIVE
 
@@ -95,4 +90,3 @@ protected:
 //-------------------------------- Autres définitions dépendantes de <Presentation>
 
 #endif // Presentation_H
-
