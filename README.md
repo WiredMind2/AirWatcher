@@ -3,7 +3,7 @@
 ## Auteurs
 Ce projet a été réalisé par les binômes suivants :
 - **B3231** : Louis Labory et Daniel Massila
-- **BYYYY** : Aaron Berton et William Michaux
+- **B3226** : Aaron Berton et William Michaud
 
 ## Description
 AirWatcher est une application de surveillance de la qualité de l'air. Elle permet de collecter, analyser et afficher des données sur la pollution atmosphérique afin d'aider les utilisateurs à mieux comprendre et gérer leur environnement.
