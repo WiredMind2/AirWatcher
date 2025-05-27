@@ -1,11 +1,39 @@
+/*************************************************************************
+                           Administration  -  description
+                             -------------------
+    début                : $DATE$
+    copyright            : (C) $YEAR$ par $AUTHOR$
+    e-mail               : $EMAIL$
+*************************************************************************/
+
+//---------- Réalisation de la classe <Administration> (fichier Administration.cpp) ------------
+
+//---------------------------------------------------------------- INCLUDE
+
+//-------------------------------------------------------- Include système
+using namespace std;
 #include <iostream>
 #include "processing.h"
 #include <vector>
 #include "CSVHandler.h"
 
-using namespace std;
 
-void consulter_capteurs_defaillants()
+//------------------------------------------------------ Include personnel
+#include "Administration.h"
+
+//------------------------------------------------------------- Constantes
+
+//----------------------------------------------------------------- PUBLIC
+
+//----------------------------------------------------- Méthodes publiques
+// type Administration::Méthode ( liste des paramètres )
+// Algorithme :
+//
+//{
+//} //----- Fin de Méthode
+
+
+void Administration::consulter_capteurs_defaillants()
 {
     double seuil_limite, step, radius;
     time_t start, stop;
@@ -27,7 +55,7 @@ void consulter_capteurs_defaillants()
     }
 }
 
-void marquer_capteur_non_fiable()
+void Administration::marquer_capteur_non_fiable()
 {
 
     // Récupérer la liste des non fiables
@@ -45,7 +73,7 @@ void marquer_capteur_non_fiable()
     cout << "Le capteur n°" << capteur_non_fiable.GetSensorID() << "a été marqué comme non fiable" << "\n";
 }
 
-void marquer_user_malicieux()
+void Administration::marquer_user_malicieux()
 {
     int user_id; // TO DO : changer le type de user_id pour qu'il soit compatible avec le type d'id dans CSVHandler
     cout << "Veuillez entrer l'identifiant de l'utilisateur à signaler";
@@ -58,3 +86,19 @@ void marquer_user_malicieux()
     GouvAgency("id_random", 0).classifyUnreliable(user_malicieux); // TO DO : revoir avec le bon id, méthodes GouvAgency en static ?
     cout << "L'utilisateur" << user_id << "a été signalé. Il ne pourra plus accumuler de points" << "\n";
 }
+
+
+//------------------------------------------------- Surcharge d'opérateurs
+
+
+
+//-------------------------------------------- Constructeurs - destructeur
+
+
+//------------------------------------------------------------------ PRIVE
+
+//----------------------------------------------------- Méthodes protégées
+
+
+
+
