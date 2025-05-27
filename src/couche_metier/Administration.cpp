@@ -48,12 +48,12 @@ void marquer_capteur_non_fiable()
 
 void marquer_user_malicieux()
 {
-    int user_id; // TO DO : changer le type de user_id pour qu'il soit compatible avec le type d'id dans CSVHandler
+    int user_id;
     cout << "Veuillez entrer l'identifiant de l'utilisateur à signaler";
     cin >> user_id;
 
     // Récupérer l'user associé à l'id : chercher dans la liste des unreliable users donnée par findUnreliable
-    User user_malicieux = CSVHandler::getUser(user_id); // Problème : les id sont des string, handler à revoir
+    //User user_malicieux = CSVHandler::getUser(user_id);
 
     // Le classer comme malicieux
     GouvAgency(5).classifyUnreliable(user_malicieux); // TO DO : revoir avec le bon id, méthodes GouvAgency en static ?
