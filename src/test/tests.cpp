@@ -256,15 +256,17 @@ void Tests::test_T31(int &testCount, int &testPassed, int &testFailed)
     
     testCount++;
 
-    double lat = -300;
-    double lon = -300;
+    double radius = 10;
+    double seuil_limite = 10;
+    unsigned int id_ref = 88; // ID du capteur de référence
     int k = 4;
 
-    std::vector<const Sensor *>* detournes = AirQualityProcessor::TrouverCapteursDetournes(10.0, 0.5, k, 0, -1);
+    std::vector<const Sensor *>* detournes = AirQualityProcessor::TrouverCapteursDetournes(radius, seuil_limite, k, 0, -1);
     bool capteurTrouve = false;
 
     for (const Sensor* capteur : *detournes) {
-        if (capteur->GetLatitude() == lat && capteur->GetLongitude() == lon) {
+        //cout << "Capteur ID: " << capteur->GetSensorID() << ", Latitude: " << capteur->GetLatitude() << ", Longitude: " << capteur->GetLongitude() << endl;
+        if (capteur->GetSensorID() == id_ref) {
             capteurTrouve = true;
             break;
         }
@@ -287,7 +289,7 @@ void Tests::test_T32(int &testCount, int &testPassed, int &testFailed)
     testCount++;
 
     double radius = 10;
-    double seuil_limite = 1;
+    double seuil_limite = 10;
     unsigned int id_ref = 666;
     int k = 4;
     time_t start = 0;
@@ -320,15 +322,19 @@ void Tests::test_T33(int &testCount, int &testPassed, int &testFailed)
 {
     testCount++;
 
-    double lat = 44;
-    double lon = 1.1;
+    double radius = 10;
+    double seuil_limite = 10;
+    unsigned int id_ref = 222;
     int k = 4;
+    time_t start = 0;
+    time_t stop = -1; 
 
-    std::vector<const Sensor *>* detournes = AirQualityProcessor::TrouverCapteursDetournes(10.0, 0.5, k, 0, -1);
+    std::vector<const Sensor *>* detournes = AirQualityProcessor::TrouverCapteursDetournes(radius, seuil_limite, k, start, stop);
     bool capteurTrouve = false;
 
     for (const auto &capteur : *detournes) {
-        if (capteur->GetLatitude() == lat && capteur->GetLongitude() == lon) {
+        cout << "Capteur ID: " << capteur->GetSensorID() << ", Latitude: " << capteur->GetLatitude() << ", Longitude: " << capteur->GetLongitude() << endl;
+        if (capteur->GetSensorID() == id_ref) {
             capteurTrouve = true;
             break;
         }
