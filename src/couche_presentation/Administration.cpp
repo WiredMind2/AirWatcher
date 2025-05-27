@@ -82,10 +82,10 @@ void Administration::marquer_user_malicieux()
     cin >> user_id;
 
     // Récupérer l'user associé à l'id : chercher dans la liste des unreliable users donnée par findUnreliable
-    User user_malicieux = CSVHandler::getUser(user_id); // Problème : les id sont des string, handler à revoir
+    //User user_malicieux = CSVHandler::getUser(user_id); // Problème : les id sont des string, handler à revoir
 
     // Le classer comme malicieux
-    GouvAgency(4).classifyUnreliable(user_malicieux); // TO DO : revoir avec le bon id, méthodes GouvAgency en static ?
+    //GouvAgency(4).classifyUnreliable(user_malicieux); // TO DO : revoir avec le bon id, méthodes GouvAgency en static ?
     cout << "L'utilisateur" << user_id << "a été signalé. Il ne pourra plus accumuler de points" << "\n";
 }
 
