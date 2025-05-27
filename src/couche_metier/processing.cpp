@@ -148,10 +148,21 @@ vector<const Sensor *> AirQualityProcessor::ListerCapteursSimilaires(unsigned in
 		}
 	}
 
+	double ref_value = mesure_cache[id_ref] / mesure_count[id_ref];
+
 	for (const auto &pair : mesure_cache)
 	{
 		unsigned int sensor_id = pair.first;
 		double mesure_value = pair.second / mesure_count[sensor_id];
+
+		if (sensor_id == id_ref)
+			continue; // Ignore le capteur de référence
+		
+		if (fabs(mesure_value - ref_value) < 0.1 * ref_value) // Seuil de similarité de 10%
+		{
+			const Sensor &capteur = CSVHandler::getSensor(sensor_id);
+			capteurs_similaires.push_back(&capteur);
+		}
 
 	}
 	return capteurs_similaires;
