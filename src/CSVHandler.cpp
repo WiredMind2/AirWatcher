@@ -6,8 +6,20 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <iomanip>
+#include <ctime>
 
 using namespace std;
+
+time_t stringToTimeT(const string& dateTimeStr) {
+    tm tm = {};
+    istringstream ss(dateTimeStr);
+    ss >> get_time(&tm, "%Y-%m-%d %H:%M:%S");
+    if (ss.fail()) {
+        throw runtime_error("Failed to parse date/time string");
+    }
+    return mktime(&tm);
+}
 
 void CSVHandler::extractSensors() {
     ifstream file(filePath);
@@ -34,6 +46,41 @@ void CSVHandler::extractSensors() {
             sensors.emplace(id, sensor);
         }
         this->sensors = sensors;
+        file.close();
+    } else {
+        cout << "Unable to open file" << endl;
+    }
+}
+
+void CSVHandler::extractCleaners() {
+    ifstream file(filePath);
+    string line;
+
+    //unordered_map<unsigned int, Cleaner> cleaners;
+
+    if (file.is_open()) {
+        while (getline(file, line)) {
+            stringstream ss(line);
+            string idStr, latitudeStr, longitudeStr, timeStartStr, timeStopStr;
+
+            getline(ss, idStr, ';');
+            getline(ss, latitudeStr, ';');
+            getline(ss, longitudeStr, ';');
+            getline(ss, timeStartStr, ';');
+            getline(ss, timeStopStr, ';');
+
+            cout << "ID: " << idStr << ", Latitude: " << latitudeStr << ", Longitude: " << longitudeStr << ", Time Start: " << timeStartStr << ", Time Stop: " << timeStopStr << endl;
+            idStr = idStr.substr(7);
+
+            unsigned int id = stoi(idStr);
+            double latitude = stod(latitudeStr);
+            double longitude = stod(longitudeStr);
+            time_t timeStart = stringToTimeT(timeStartStr);
+            time_t timeStop = stringToTimeT(timeStopStr);
+
+            Cleaner cleaner(id, latitude, longitude, timeStart, timeStop, -1);
+            cleaners.emplace(id, cleaner);
+        }
         file.close();
     } else {
         cout << "Unable to open file" << endl;

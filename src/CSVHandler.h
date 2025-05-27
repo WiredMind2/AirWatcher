@@ -24,6 +24,7 @@ class CSVHandler {
 public:
 
     void extractSensors();
+    void extractCleaners();
 
     //getters
     Cleaner getCleaner(unsigned int id) const;
