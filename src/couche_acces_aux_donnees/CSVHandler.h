@@ -117,7 +117,7 @@ public:
     // Contrat :
     // L'identifiant doit correspondre à un User existant.
 
-    static Sensor getSensor(unsigned int id);
+    static Sensor* getSensor(unsigned int id);
     // Mode d'emploi :
     // Retourne un objet Sensor correspondant à l'identifiant spécifié.
     //

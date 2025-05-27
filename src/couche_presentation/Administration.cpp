@@ -50,8 +50,8 @@ void Administration::consulter_capteurs_defaillants()
     cout << "Entrez le nombre de voisins (k): ";
     cin >> k;
     
-    vector<const Sensor *> capteurs_defaillants = AirQualityProcessor::TrouverCapteursDetournes(radius, seuil_limite, k, start, stop); 
-    for (const auto &sensor : capteurs_defaillants)
+    vector<const Sensor *>* capteurs_defaillants = AirQualityProcessor::TrouverCapteursDetournes(radius, seuil_limite, k, start, stop); 
+    for (const auto &sensor : *capteurs_defaillants)
     {
         cout << "Le capteur" << sensor->GetSensorID() << "est défaillant." << "\n";
     }
@@ -69,10 +69,10 @@ void Administration::marquer_capteur_non_fiable()
     cin >> sensor_id;
 
     // Récupérer le capteur associé à l'id
-    Sensor capteur_non_fiable = CSVHandler::getSensor(sensor_id);
+    Sensor* capteur_non_fiable = CSVHandler::getSensor(sensor_id);
 
     // TO DO : Marquer le capteur choisi comme non fiable (mettre ses mesures à -1 ? méthode dans GouvAgency?)
-    cout << "Le capteur n°" << capteur_non_fiable.GetSensorID() << "a été marqué comme non fiable" << "\n";
+    cout << "Le capteur n°" << capteur_non_fiable->GetSensorID() << "a été marqué comme non fiable" << "\n";
 }
 
 void Administration::marquer_user_malicieux()

@@ -55,7 +55,7 @@ double Sensor::GetLatitude() const {
 }
 
 unsigned int Sensor::GetSensorID() const {
-    return 1; // Placeholder, should return the actual sensor ID
+    return sensorID;
 }
 
 unsigned int Sensor::GetUserID() const {

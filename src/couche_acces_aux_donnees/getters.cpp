@@ -71,10 +71,13 @@ Provider CSVHandler::getProvider(unsigned int id) {
     }
     throw runtime_error("Provider not found");
 }
-Sensor CSVHandler::getSensor(unsigned int id) {
+Sensor* CSVHandler::getSensor(unsigned int id) {
     auto it = sensors.find(id);
     if (it != sensors.end()) {
-        return *it->second;
+        if (it->second->GetSensorID() != id) {
+            cout << "Warning: Sensor ID mismatch. Expected: " << id << ", Found: " << it->second->GetSensorID() << endl;
+        }
+        return it->second;
     }
     throw runtime_error("Sensor not found");
 }
@@ -113,7 +116,7 @@ vector<Measurement*> CSVHandler::getMeasurement(time_t start, time_t stop) {
     vector<Measurement*> results;
     for (auto it = itLow; it != itHigh; ++it) {
         results.push_back(it->second);
-        // cout << "Measurement ID: " << it->second->GetSensor()->GetSensorID() << ", Value: " << it->second->GetValue();
+        // cout << "Measurement ID: " << it->second->GetSensor().GetSensorID() << ", Value: " << it->second->GetValue();
         // cout << ", Timestamp: " << it->second->GetTimestamp() << endl;
     }
     return results;

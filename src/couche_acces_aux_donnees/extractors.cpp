@@ -101,9 +101,21 @@ void CSVHandler::extractSensors(const string &folder) {
 
             Sensor* sensor = new Sensor(id, latitude, longitude, -1);
             sensors.emplace(id, sensor);
-            //cout << "Sensor ID: " << id << ", Latitude: " << latitude << ", Longitude: " << longitude << endl;
+            // cout << "Sensor ID: " << id << ", Latitude: " << latitude << ", Longitude: " << longitude << endl;
         }
         file.close();
+
+        cout << "Sensors loaded:" << endl;
+        for (const auto& pair : sensors) {
+            Sensor* sensor = pair.second;
+            // cout << "Key: " << pair.first
+            //      << ", ID: " << sensor->GetSensorID()
+            //      << ", Latitude: " << sensor->GetLatitude()
+            //      << ", Longitude: " << sensor->GetLongitude()
+            //      << ", UserID: " << sensor->GetUserID()
+            //      << endl;
+        }
+
     } else {
         cout << "Unable to open file" << endl;
     }
@@ -147,6 +159,11 @@ void CSVHandler::extractMeasurements(const string &folder) {
             }
             
             string attributeID = attributeIDStr;
+
+            // cout << "Measurement Timestamp: " << put_time(&tm, "%Y-%m-%d %H:%M:%S") 
+            //      << ", Value: " << value 
+            //      << ", Sensor ID: " << sensorID 
+            //      << ", Attribute ID: " << attributeID << endl;
 
             Measurement* measurement = new Measurement(timestamp, value, sensorID, attributeID);
             measurements.emplace(timestamp, measurement);

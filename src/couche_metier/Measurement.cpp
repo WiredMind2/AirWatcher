@@ -45,7 +45,7 @@ Measurement::~Measurement()
 #endif
 } //----- Fin de ~Measurement
 
-Sensor Measurement::GetSensor() const
+Sensor* Measurement::GetSensor() const
 {
     return CSVHandler::getSensor(sensorID);
 }

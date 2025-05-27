@@ -41,11 +41,10 @@ double AirQualityProcessor::EstimationQualiteAirPos(double lat, double lon, int 
 	return (weight_total > 0.0) ? (weighted_sum / weight_total) : numeric_limits<double>::quiet_NaN();
 }
 
+double AirQualityProcessor::EstimationQualiteAirPos(double lat, double lon, int k, time_t start, time_t stop)
+{
 
-double AirQualityProcessor::EstimationQualiteAirPos(double lat, double lon, int k, time_t start, time_t stop) {
-
-
-	vector<Measurement *> measures= GetMeasures(start, stop);
+	vector<Measurement *> measures = GetMeasures(start, stop);
 	return EstimationQualiteAirPos(lat, lon, k, start, stop, &measures);
 }
 
@@ -89,7 +88,7 @@ double AirQualityProcessor::EstimationQualiteAirZone(double lat, double lon, dou
 	return sum / estimations.size();
 }
 
-vector<const Sensor *> AirQualityProcessor::TrouverCapteursDetournes(double radius, double seuil_limite, int k, time_t start, time_t stop)
+vector<const Sensor *>* AirQualityProcessor::TrouverCapteursDetournes(double radius, double seuil_limite, int k, time_t start, time_t stop)
 {
 
 	vector<Measurement *> measures = GetMeasures(start, stop);
@@ -97,41 +96,48 @@ vector<const Sensor *> AirQualityProcessor::TrouverCapteursDetournes(double radi
 	unordered_map<unsigned int, double> mesure_cache;
 	unordered_map<unsigned int, int> mesure_count;
 
-	vector<const Sensor *> capteurs_detournes;
 	for (const Measurement *mesure : measures)
 	{
-		const Sensor &capteur = mesure->GetSensor();
+		const Sensor* capteur = mesure->GetSensor();
 
-		if (mesure_cache.find(capteur.GetSensorID()) == mesure_cache.end())
+		if (mesure_cache.find(capteur->GetSensorID()) == mesure_cache.end())
 		{
-			mesure_cache[capteur.GetSensorID()] = mesure->GetValue();
-			mesure_count[capteur.GetSensorID()] = 1;
+			mesure_cache[capteur->GetSensorID()] = mesure->GetValue();
+			mesure_count[capteur->GetSensorID()] = 1;
 		}
 		else
 		{
-			mesure_cache[capteur.GetSensorID()] += mesure->GetValue();
-			mesure_count[capteur.GetSensorID()]++;
+			mesure_cache[capteur->GetSensorID()] += mesure->GetValue();
+			mesure_count[capteur->GetSensorID()]++;
 		}
 
-		if (estimation_cache.find(capteur.GetSensorID()) == estimation_cache.end())
+		if (estimation_cache.find(capteur->GetSensorID()) == estimation_cache.end())
 		{
-			double estimation = EstimationQualiteAirZone(capteur.GetLatitude(), capteur.GetLongitude(), radius, k, start, stop);
-			estimation_cache[capteur.GetSensorID()] = estimation;
+			double estimation = EstimationQualiteAirZone(capteur->GetLatitude(), capteur->GetLongitude(), radius, k, start, stop);
+			estimation_cache[capteur->GetSensorID()] = estimation;
 		}
 	}
 
+	vector<const Sensor *>* capteurs_detournes = new vector<const Sensor *>;
 	for (const auto &pair : mesure_cache)
 	{
 		unsigned int sensor_id = pair.first;
 		double mesure_value = pair.second / mesure_count[sensor_id];
 		double estimation_value = estimation_cache[sensor_id];
 
+		// cout << "Capteur ID: " << sensor_id << ", Estimation: " << estimation_value
+		// 	 << ", Mesure: " << mesure_value << ", Différence: " << fabs(estimation_value - mesure_value) << endl;
 		if (fabs(estimation_value - mesure_value) > seuil_limite)
 		{
-			try {
-				const Sensor &capteur = CSVHandler::getSensor(sensor_id);
-				capteurs_detournes.push_back(&capteur);
-			} catch (const std::runtime_error &e) {
+			try
+			{
+				const Sensor* capteur = CSVHandler::getSensor(sensor_id);
+				// cout << "Capteur détourné trouvé: " << capteur->GetSensorID() << ", Latitude: " << capteur->GetLatitude()
+				// 	 << ", Longitude: " << capteur->GetLongitude() << endl;
+				capteurs_detournes->push_back(capteur);
+			}
+			catch (const std::runtime_error &e)
+			{
 				continue;
 			}
 		}
@@ -154,16 +160,16 @@ vector<const Sensor *> AirQualityProcessor::ListerCapteursSimilaires(unsigned in
 
 	for (Measurement *mesure : measures)
 	{
-		Sensor capteur = mesure->GetSensor();
-		if (mesure_cache.find(capteur.GetSensorID()) == mesure_cache.end())
+		Sensor* capteur = mesure->GetSensor();
+		if (mesure_cache.find(capteur->GetSensorID()) == mesure_cache.end())
 		{
-			mesure_cache[capteur.GetSensorID()] = mesure->GetValue();
-			mesure_count[capteur.GetSensorID()] = 1;
+			mesure_cache[capteur->GetSensorID()] = mesure->GetValue();
+			mesure_count[capteur->GetSensorID()] = 1;
 		}
 		else
 		{
-			mesure_cache[capteur.GetSensorID()] += mesure->GetValue();
-			mesure_count[capteur.GetSensorID()]++;
+			mesure_cache[capteur->GetSensorID()] += mesure->GetValue();
+			mesure_count[capteur->GetSensorID()]++;
 		}
 	}
 
@@ -179,8 +185,8 @@ vector<const Sensor *> AirQualityProcessor::ListerCapteursSimilaires(unsigned in
 
 		if (fabs(mesure_value - ref_value) < 0.1 * ref_value) // Seuil de similarité de 10%
 		{
-			const Sensor &capteur = CSVHandler::getSensor(sensor_id);
-			capteurs_similaires.push_back(&capteur);
+			const Sensor* capteur = CSVHandler::getSensor(sensor_id);
+			capteurs_similaires.push_back(capteur);
 		}
 	}
 	return capteurs_similaires;
@@ -206,11 +212,11 @@ double AirQualityProcessor::GetDistance(const Sensor &sensor1, const Sensor &sen
 
 double AirQualityProcessor::GetDistance(const Measurement &measurement1, const Measurement &measurement2)
 {
-	return GetDistance(measurement1.GetSensor().GetLatitude(), measurement1.GetSensor().GetLongitude(),
-					   measurement2.GetSensor().GetLatitude(), measurement2.GetSensor().GetLongitude());
+	return GetDistance(measurement1.GetSensor()->GetLatitude(), measurement1.GetSensor()->GetLongitude(),
+					   measurement2.GetSensor()->GetLatitude(), measurement2.GetSensor()->GetLongitude());
 }
 
 double AirQualityProcessor::GetDistance(const Measurement *measurement, double lat, double lon)
 {
-	return GetDistance(measurement->GetSensor().GetLatitude(), measurement->GetSensor().GetLongitude(), lat, lon);
+	return GetDistance(measurement->GetSensor()->GetLatitude(), measurement->GetSensor()->GetLongitude(), lat, lon);
 }

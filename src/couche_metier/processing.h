@@ -33,7 +33,7 @@ public:
 	// k : nombre de voisins à utiliser pour l'estimation (par défaut 4)
 	// step : pas de discrétisation de la zone (par défaut 1)
 	// Retourne une liste de pointeurs vers les capteurs détournés
-	static std::vector<const Sensor *> TrouverCapteursDetournes(double radius = 0.02, double seuil_limite = 20.0, int k = 4, time_t start=0, time_t stop=-1);
+	static std::vector<const Sensor *>* TrouverCapteursDetournes(double radius = 0.02, double seuil_limite = 20.0, int k = 4, time_t start=0, time_t stop=-1);
 
 	// Trouve les capteurs similaires à un capteur de référence
 	// id_ref : identifiant du capteur de référence
