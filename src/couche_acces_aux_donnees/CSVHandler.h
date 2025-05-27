@@ -10,13 +10,11 @@
 #if ! defined ( CSVHandler_H )
 #define CSVHandler_H
 
-//--------------------------------------------------- Interfaces utilisées
 #include <iostream>
 #include <string>
 #include <map>
 #include <unordered_map>
 #include <vector>
-using namespace std;
 
 #include "../couche_metier/Cleaner.h"
 #include "../couche_metier/GouvAgency.h"
@@ -25,6 +23,8 @@ using namespace std;
 #include "../couche_metier/Provider.h"
 #include "../couche_metier/Sensor.h"
 #include "../couche_metier/User.h"
+
+using namespace std;
 
 //------------------------------------------------------------- Constantes
 
@@ -51,6 +51,13 @@ public:
     //
     // Contrat :
     // Le dossier spécifié doit contenir les fichiers CSV nécessaires au bon fonctionnement.
+
+    static void extractCleaners(const string &folder);
+    // Mode d'emploi :
+    // Cette méthode extrait les données des nettoyeurs à partir d'un fichier CSV situé dans le dossier spécifié.
+    //
+    // Contrat :
+    // Le fichier CSV des nettoyeurs doit exister dans le dossier spécifié.
 
     static void extractSensors(const string &folder);
     // Mode d'emploi :
@@ -122,7 +129,6 @@ public:
     //
     // Contrat :
     //
-
 
 //-------------------------------------------- Constructeurs - destructeur
     CSVHandler ( const CSVHandler & unCSVHandler );
