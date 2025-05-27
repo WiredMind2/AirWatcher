@@ -31,7 +31,7 @@ unordered_map<unsigned int, Individual*> CSVHandler::individuals;
 multimap<time_t, Measurement*> CSVHandler::measurements;
 unordered_map<unsigned int, Provider*> CSVHandler::providers;
 unordered_map<unsigned int, Sensor*> CSVHandler::sensors;
-unordered_map<unsigned int, User*> CSVHandler::users;
+unordered_map<unsigned int, int> CSVHandler::filterdUsers;
 
 time_t stringToTimeT(const string& dateTimeStr) {
     tm tm = {};
@@ -196,6 +196,17 @@ void CSVHandler::extractIndividuals(const string &folder){
     }
 }
 
+void CSVHandler::addUnreliable(const string &folder, const vector<unsigned int> &unreliableUserIds) {
+    for (const auto& userId : unreliableUserIds) {
+        auto it = individuals.find(userId);
+        if (it != individuals.end()) {
+            filterdUsers.emplace(userId, -1);
+        } else {
+            cout << "User with ID " << userId << " not found." << endl;
+        }
+    }
+}
+
 // Getters
 Cleaner CSVHandler::getCleaner(unsigned int id) {
     auto it = cleaners.find(id);
@@ -225,10 +236,10 @@ Sensor CSVHandler::getSensor(unsigned int id) {
     }
     throw runtime_error("Sensor not found");
 }
-User CSVHandler::getUser(unsigned int id) {
-    auto it = users.find(id);
-    if (it != users.end()) {
-        return *it->second;
+unsigned int CSVHandler::getFilterdUser(unsigned int id) {
+    auto it = filterdUsers.find(id);
+    if (it != filterdUsers.end()) {
+        return it->first;
     }
     throw runtime_error("User not found");
 }

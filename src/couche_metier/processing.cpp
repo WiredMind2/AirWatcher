@@ -12,10 +12,12 @@ double AirQualityProcessor::EstimationQualiteAirPos(double lat, double lon, int 
 
 	vector<pair<double, const Measurement *>> distances;
 
+	double max_dist = 10.0;
 	for (const Measurement *m : *measures)
 	{
-		double dist = sqrt((lat - m->GetSensor().GetLatitude()) * (lat - m->GetSensor().GetLatitude()) +
-						   (lon - m->GetSensor().GetLongitude()) * (lon - m->GetSensor().GetLongitude()));
+		double dist = GetDistance(m, lat, lon);
+		if (dist > max_dist)
+			continue; // Ignore les mesures trop éloignées
 		distances.push_back({dist, m});
 	}
 
