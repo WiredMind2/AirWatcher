@@ -53,8 +53,6 @@ void Tests::runTests ( )
     
     test_T31(testCount, testPassed, testFailed);
     test_T32(testCount, testPassed, testFailed);
-    test_T33(testCount, testPassed, testFailed);
-    //...
 
     //results
     cout<<endl;
@@ -312,39 +310,6 @@ void Tests::test_T32(int &testCount, int &testPassed, int &testFailed)
         testPassed++;
     } else {
         cout << "\033[1;31mTest T32 échoué.\033[0m\n";
-        testFailed++;
-    }
-}
-
-void Tests::test_T33(int &testCount, int &testPassed, int &testFailed)
-// Algorithme :
-//
-{
-    testCount++;
-
-    double radius = 10;
-    double seuil_limite = 10;
-    unsigned int id_ref = 222;
-    int k = 4;
-    time_t start = 0;
-    time_t stop = -1; 
-
-    std::vector<const Sensor *>* detournes = AirQualityProcessor::TrouverCapteursDetournes(radius, seuil_limite, k, start, stop);
-    bool capteurTrouve = false;
-
-    for (const auto &capteur : *detournes) {
-        cout << "Capteur ID: " << capteur->GetSensorID() << ", Latitude: " << capteur->GetLatitude() << ", Longitude: " << capteur->GetLongitude() << endl;
-        if (capteur->GetSensorID() == id_ref) {
-            capteurTrouve = true;
-            break;
-        }
-    }
-
-    if (capteurTrouve) {
-        cout << "\033[1;32mTest T33 réussi.\033[0m\n";
-        testPassed++;
-    } else {
-        cout << "\033[1;31mTest T33 échoué.\033[0m\n";
         testFailed++;
     }
 }

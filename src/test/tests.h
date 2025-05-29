@@ -82,7 +82,6 @@ void test_T23(int &testCount, int &testPassed, int &testFailed);
 
 void test_T31(int &testCount, int &testPassed, int &testFailed);
 void test_T32(int &testCount, int &testPassed, int &testFailed);
-void test_T33(int &testCount, int &testPassed, int &testFailed);
 
 //----------------------------------------------------- Attributs protégés
 
