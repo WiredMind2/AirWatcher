@@ -256,7 +256,7 @@ void Tests::test_T31(int &testCount, int &testPassed, int &testFailed)
     double radius = 10;
     double seuil_limite = 10;
     unsigned int id_ref = 88; // ID du capteur de référence
-    int k = 4;
+    int k = 6;
 
     std::vector<const Sensor *>* detournes = AirQualityProcessor::TrouverCapteursDetournes(radius, seuil_limite, k, 0, -1);
     bool capteurTrouve = false;
@@ -288,7 +288,7 @@ void Tests::test_T32(int &testCount, int &testPassed, int &testFailed)
     double radius = 10;
     double seuil_limite = 10;
     unsigned int id_ref = 666;
-    int k = 4;
+    int k = 6;
     time_t start = 0;
     time_t stop = -1; 
 
