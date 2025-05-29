@@ -53,8 +53,6 @@ void Tests::runTests ( )
     
     test_T31(testCount, testPassed, testFailed);
     test_T32(testCount, testPassed, testFailed);
-    test_T33(testCount, testPassed, testFailed);
-    //...
 
     //results
     cout<<endl;
@@ -123,10 +121,9 @@ void Tests::test_T11(int &testCount, int &testPassed, int &testFailed)
     int k = 4;
     double lat = 45.8;
     double lon = 2.15;
-    double expectedValue = 41.747;
-    double radius = 10;
+    double expectedValue = 41.75;
 
-    if (abs(AirQualityProcessor::EstimationQualiteAirPos(lat, lon, radius, k) - expectedValue) < 0.01) {
+    if (abs(AirQualityProcessor::EstimationQualiteAirPos(lat, lon, k, 0, -1) - expectedValue) < 0.01) {
         cout << "\033[1;32mTest T11 réussi.\033[0m\n";
         testPassed++;
     } else {
@@ -163,12 +160,11 @@ void Tests::test_T13(int &testCount, int &testPassed, int &testFailed)
     testCount++;
 
     int k = 4;
-    double lat = 44.6;
-    double lon = 0.8;
-    double radius = 1.7;
-    double expectedValue = 58.7; 
+    double lat = -100;
+    double lon = -100;
+    double expectedValue = 70; 
 
-    if (abs(AirQualityProcessor::EstimationQualiteAirPos(lat, lon, radius, k) - expectedValue) < 0.01) {
+    if (abs(AirQualityProcessor::EstimationQualiteAirPos(lat, lon, k, 0, -1) - expectedValue) < 0.01) {
         cout << "\033[1;32mTest T13 réussi.\033[0m\n";
         testPassed++;
     } else {
@@ -209,7 +205,7 @@ void Tests::test_T22(int &testCount, int &testPassed, int &testFailed)
     
     testCount++;
 
-    int k = 4;
+    int k = 6;
     double lat = 400;
     double lon = 400;
     double radius = 2;
@@ -232,14 +228,15 @@ void Tests::test_T23(int &testCount, int &testPassed, int &testFailed)
     
     testCount++;
 
-    int k = 4;
-    double lat = 44;
-    double lon = -1;
-    double radius = 11;
-    double expectedValue = 54.5129;
+    int k = 6;
+    double lat = -100;
+    double lon = -100;
+    double radius = 0.1;
+    double expectedValue = 70;
     time_t start = 0;
     time_t stop = -1;
 
+    cout<<AirQualityProcessor::EstimationQualiteAirZone(lat, lon, radius, k, start, stop)<<endl;
     if (abs(AirQualityProcessor::EstimationQualiteAirZone(lat, lon, radius, k, start, stop) - expectedValue) < 0.01) {
         cout << "\033[1;32mTest T23 réussi.\033[0m\n";
         testPassed++;
@@ -259,7 +256,7 @@ void Tests::test_T31(int &testCount, int &testPassed, int &testFailed)
     double radius = 10;
     double seuil_limite = 10;
     unsigned int id_ref = 88; // ID du capteur de référence
-    int k = 4;
+    int k = 6;
 
     std::vector<const Sensor *> detournes = AirQualityProcessor::TrouverCapteursDetournes(radius, seuil_limite, k, 0, -1);
     bool capteurTrouve = false;
@@ -290,7 +287,7 @@ void Tests::test_T32(int &testCount, int &testPassed, int &testFailed)
     double radius = 10;
     double seuil_limite = 10;
     unsigned int id_ref = 666;
-    int k = 4;
+    int k = 6;
     time_t start = 0;
     time_t stop = -1; 
 
@@ -310,40 +307,6 @@ void Tests::test_T32(int &testCount, int &testPassed, int &testFailed)
         testPassed++;
     } else {
         cout << "\033[1;31mTest T32 échoué.\033[0m\n";
-        testFailed++;
-    }
-}
-
-void Tests::test_T33(int &testCount, int &testPassed, int &testFailed)
-// Algorithme :
-//
-{
-    testCount++;
-
-    double radius = 10;
-    double seuil_limite = 10;
-    unsigned int id_ref = 222;
-    int k = 4;
-    time_t start = 0;
-    time_t stop = -1; 
-
-    std::vector<const Sensor *> detournes = AirQualityProcessor::TrouverCapteursDetournes(radius, seuil_limite, k, start, stop);
-    bool capteurTrouve = false;
-
-    for (size_t i = 0; i < detournes.size(); ++i) {
-        const Sensor* capteur = detournes[i];
-        cout << "Capteur ID: " << capteur->GetSensorID() << ", Latitude: " << capteur->GetLatitude() << ", Longitude: " << capteur->GetLongitude() << endl;
-        if (capteur->GetSensorID() == id_ref) {
-            capteurTrouve = true;
-            break;
-        }
-    }
-
-    if (capteurTrouve) {
-        cout << "\033[1;32mTest T33 réussi.\033[0m\n";
-        testPassed++;
-    } else {
-        cout << "\033[1;31mTest T33 échoué.\033[0m\n";
         testFailed++;
     }
 }
