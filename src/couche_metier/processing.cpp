@@ -88,7 +88,7 @@ double AirQualityProcessor::EstimationQualiteAirZone(double lat, double lon, dou
 	return sum / estimations.size();
 }
 
-vector<const Sensor *>* AirQualityProcessor::TrouverCapteursDetournes(double radius, double seuil_limite, int k, time_t start, time_t stop)
+vector<const Sensor *> AirQualityProcessor::TrouverCapteursDetournes(double radius, double seuil_limite, int k, time_t start, time_t stop)
 {
 
 	vector<Measurement *> measures = GetMeasures(start, stop);
@@ -118,7 +118,7 @@ vector<const Sensor *>* AirQualityProcessor::TrouverCapteursDetournes(double rad
 		}
 	}
 
-	vector<const Sensor *>* capteurs_detournes = new vector<const Sensor *>;
+	vector<const Sensor *> capteurs_detournes;
 	for (const auto &pair : mesure_cache)
 	{
 		unsigned int sensor_id = pair.first;
@@ -134,7 +134,7 @@ vector<const Sensor *>* AirQualityProcessor::TrouverCapteursDetournes(double rad
 				const Sensor* capteur = CSVHandler::getSensor(sensor_id);
 				// cout << "Capteur détourné trouvé: " << capteur->GetSensorID() << ", Latitude: " << capteur->GetLatitude()
 				// 	 << ", Longitude: " << capteur->GetLongitude() << endl;
-				capteurs_detournes->push_back(capteur);
+				capteurs_detournes.push_back(capteur);
 			}
 			catch (const std::runtime_error &e)
 			{

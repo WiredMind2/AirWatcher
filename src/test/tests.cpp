@@ -261,10 +261,10 @@ void Tests::test_T31(int &testCount, int &testPassed, int &testFailed)
     unsigned int id_ref = 88; // ID du capteur de référence
     int k = 4;
 
-    std::vector<const Sensor *>* detournes = AirQualityProcessor::TrouverCapteursDetournes(radius, seuil_limite, k, 0, -1);
+    std::vector<const Sensor *> detournes = AirQualityProcessor::TrouverCapteursDetournes(radius, seuil_limite, k, 0, -1);
     bool capteurTrouve = false;
 
-    for (const Sensor* capteur : *detournes) {
+    for (const Sensor* capteur : detournes) {
         //cout << "Capteur ID: " << capteur->GetSensorID() << ", Latitude: " << capteur->GetLatitude() << ", Longitude: " << capteur->GetLongitude() << endl;
         if (capteur->GetSensorID() == id_ref) {
             capteurTrouve = true;
@@ -285,7 +285,6 @@ void Tests::test_T32(int &testCount, int &testPassed, int &testFailed)
 // Algorithme :
 //
 {
-    
     testCount++;
 
     double radius = 10;
@@ -295,11 +294,10 @@ void Tests::test_T32(int &testCount, int &testPassed, int &testFailed)
     time_t start = 0;
     time_t stop = -1; 
 
-
-    std::vector<const Sensor *>* detournes = AirQualityProcessor::TrouverCapteursDetournes(radius, seuil_limite, k, start, stop);
+    std::vector<const Sensor *> detournes = AirQualityProcessor::TrouverCapteursDetournes(radius, seuil_limite, k, start, stop);
     bool capteurTrouve = false;
 
-    for (const Sensor *capteur : *detournes) {
+    for (const Sensor* capteur : detournes) {
         // cout<< "Capteur ID: " << capteur->GetSensorID() << ", Latitude: " << capteur->GetLatitude() << ", Longitude: " << capteur->GetLongitude() << endl;
         if (capteur->GetSensorID() == id_ref) {
             capteurTrouve = true;
@@ -329,10 +327,11 @@ void Tests::test_T33(int &testCount, int &testPassed, int &testFailed)
     time_t start = 0;
     time_t stop = -1; 
 
-    std::vector<const Sensor *>* detournes = AirQualityProcessor::TrouverCapteursDetournes(radius, seuil_limite, k, start, stop);
+    std::vector<const Sensor *> detournes = AirQualityProcessor::TrouverCapteursDetournes(radius, seuil_limite, k, start, stop);
     bool capteurTrouve = false;
 
-    for (const auto &capteur : *detournes) {
+    for (size_t i = 0; i < detournes.size(); ++i) {
+        const Sensor* capteur = detournes[i];
         cout << "Capteur ID: " << capteur->GetSensorID() << ", Latitude: " << capteur->GetLatitude() << ", Longitude: " << capteur->GetLongitude() << endl;
         if (capteur->GetSensorID() == id_ref) {
             capteurTrouve = true;
