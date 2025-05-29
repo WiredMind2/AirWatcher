@@ -38,7 +38,11 @@ double AirQualityProcessor::EstimationQualiteAirPos(double lat, double lon, int 
 		weight_total += weight;
 	}
 
-	return (weight_total > 0.0) ? (weighted_sum / weight_total) : numeric_limits<double>::quiet_NaN();
+	if (weight_total == 0.0)
+	{
+		return numeric_limits<double>::quiet_NaN();
+	}
+	return weighted_sum / weight_total;
 }
 
 double AirQualityProcessor::EstimationQualiteAirPos(double lat, double lon, int k, time_t start, time_t stop)
@@ -81,7 +85,17 @@ double AirQualityProcessor::EstimationQualiteAirZone(double lat, double lon, dou
 	}
 
 	if (estimations.empty())
-		return numeric_limits<double>::quiet_NaN();
+	{
+		// Radius trop petit, faire une estimation à la position centrale
+		double est = EstimationQualiteAirPos(lat, lon, k, start, stop, &valid_measures);
+		if (!isnan(est))
+		{
+			estimations.push_back(est);
+		} else {
+			return numeric_limits<double>::quiet_NaN();
+		}
+	}
+
 	double sum = 0.0;
 	for (double v : estimations)
 		sum += v;
@@ -98,7 +112,7 @@ vector<const Sensor *> AirQualityProcessor::TrouverCapteursDetournes(double radi
 
 	for (const Measurement *mesure : measures)
 	{
-		const Sensor* capteur = mesure->GetSensor();
+		const Sensor *capteur = mesure->GetSensor();
 
 		if (mesure_cache.find(capteur->GetSensorID()) == mesure_cache.end())
 		{
@@ -131,7 +145,7 @@ vector<const Sensor *> AirQualityProcessor::TrouverCapteursDetournes(double radi
 		{
 			try
 			{
-				const Sensor* capteur = CSVHandler::getSensor(sensor_id);
+				const Sensor *capteur = CSVHandler::getSensor(sensor_id);
 				// cout << "Capteur détourné trouvé: " << capteur->GetSensorID() << ", Latitude: " << capteur->GetLatitude()
 				// 	 << ", Longitude: " << capteur->GetLongitude() << endl;
 				capteurs_detournes.push_back(capteur);
@@ -160,7 +174,7 @@ vector<const Sensor *> AirQualityProcessor::ListerCapteursSimilaires(unsigned in
 
 	for (Measurement *mesure : measures)
 	{
-		Sensor* capteur = mesure->GetSensor();
+		Sensor *capteur = mesure->GetSensor();
 		if (mesure_cache.find(capteur->GetSensorID()) == mesure_cache.end())
 		{
 			mesure_cache[capteur->GetSensorID()] = mesure->GetValue();
@@ -185,7 +199,7 @@ vector<const Sensor *> AirQualityProcessor::ListerCapteursSimilaires(unsigned in
 
 		if (fabs(mesure_value - ref_value) < 0.1 * ref_value) // Seuil de similarité de 10%
 		{
-			const Sensor* capteur = CSVHandler::getSensor(sensor_id);
+			const Sensor *capteur = CSVHandler::getSensor(sensor_id);
 			capteurs_similaires.push_back(capteur);
 		}
 	}
