@@ -1,5 +1,5 @@
 /*************************************************************************
- statistiques.h  -  Déclare les fonctions de calcul et d'affichage des statistiques sur la qualité de l'air et l'utilisation de l'application.
+ statistiques.h - Déclaration des fonctions statistiques.
  -------------------
  début                : Avril 2025
  auteurs              : Aaron Berton, William Michaud (B3226) - Louis Labory, Daniel Massila (B3231)

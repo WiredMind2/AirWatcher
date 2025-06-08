@@ -1,12 +1,13 @@
 /*************************************************************************
- presentation.h  -  Déclare les fonctions de gestion de l'affichage, de l'interface utilisateur et de l'interaction avec l'utilisateur dans AirWatcher.
- -------------------
- début                : Avril 2025
- auteurs              : Aaron Berton, William Michaud (B3226) - Louis Labory, Daniel Massila (B3231)
- e-mails              : aaron.berton@insa-lyon.fr, william.michaud@insa-lyon.fr, louis.labory@insa-lyon.fr, daniel.massila@insa-lyon.fr
+presentation.h  -  Déclaration de la classe Presentation pour la gestion des menus et de l'affichage utilisateur.
+-------------------
+début                : Avril 2025
+auteurs              : Aaron Berton, William Michaud (B3226) - Louis Labory, Daniel Massila (B3231)
+e-mails              : aaron.berton@insa-lyon.fr, william.michaud@insa-lyon.fr, louis.labory@insa-lyon.fr, daniel.massila@insa-lyon.fr
 *************************************************************************/
 
 //---------- Interface des fonctions d'affichage (fichier presentation.h) -----------
+#pragma once
 
 //--------------------------------------------------- Interfaces utilisées
 
@@ -81,5 +82,3 @@ protected:
 };
 
 //-------------------------------- Autres définitions dépendantes de <Presentation>
-
-#endif // Presentation_H

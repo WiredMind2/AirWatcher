@@ -1,5 +1,5 @@
 /*************************************************************************
- Individual.h  -  Déclare les structures et fonctions liées aux entités individuelles dans AirWatcher.
+ Individual.h - Déclaration de la classe Individual (entité individuelle).
  -------------------
  début                : Avril 2025
  auteurs              : Aaron Berton, William Michaud (B3226) - Louis Labory, Daniel Massila (B3231)
@@ -7,8 +7,7 @@
 *************************************************************************/
 
 //---------- Interface de la classe <Individual> (fichier Individual.h) ----------------
-#if ! defined ( INDIVIDUAL_H )
-#define INDIVIDUAL_H
+#pragma once
 
 //--------------------------------------------------- Interfaces utilisées
 #include "User.h"
@@ -32,5 +31,3 @@ public:
     ~Individual() override {};
 
 };
-
-#endif // INDIVIDUAL_H

@@ -1,9 +1,9 @@
 /*************************************************************************
- Administration.cpp  -  Implémente les fonctions liées à l'administration de l'application AirWatcher, telles que la gestion des utilisateurs, des capteurs, et des droits d'accès.
- -------------------
- début                : Avril 2025
- auteurs              : Aaron Berton, William Michaud (B3226) - Louis Labory, Daniel Massila (B3231)
- e-mails              : aaron.berton@insa-lyon.fr, william.michaud@insa-lyon.fr, louis.labory@insa-lyon.fr, daniel.massila@insa-lyon.fr
+Administration.cpp  -  Fonctions d'administration pour la gestion des utilisateurs, capteurs, et droits d'accès dans AirWatcher.
+-------------------
+début                : Avril 2025
+auteurs              : Aaron Berton, William Michaud (B3226) - Louis Labory, Daniel Massila (B3231)
+e-mails              : aaron.berton@insa-lyon.fr, william.michaud@insa-lyon.fr, louis.labory@insa-lyon.fr, daniel.massila@insa-lyon.fr
 *************************************************************************/
 
 //---------- Réalisation de la classe <Administration> (fichier Administration.cpp) ------------

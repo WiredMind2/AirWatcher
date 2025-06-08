@@ -1,9 +1,9 @@
 /*************************************************************************
- PointsUtilisateurs.cpp  -  Définit la fonction consulter_points qui permet d'afficher les points d'un utilisateur à partir de son ID, en utilisant la classe User.
- -------------------
- début                : Avril 2025
- auteurs              : Aaron Berton, William Michaud (B3226) - Louis Labory, Daniel Massila (B3231)
- e-mails              : aaron.berton@insa-lyon.fr, william.michaud@insa-lyon.fr, louis.labory@insa-lyon.fr, daniel.massila@insa-lyon.fr
+PointsUtilisateurs.cpp  -  Affiche les points d'un utilisateur à partir de son ID, en utilisant la classe User.
+-------------------
+début                : Avril 2025
+auteurs              : Aaron Berton, William Michaud (B3226) - Louis Labory, Daniel Massila (B3231)
+e-mails              : aaron.berton@insa-lyon.fr, william.michaud@insa-lyon.fr, louis.labory@insa-lyon.fr, daniel.massila@insa-lyon.fr
 *************************************************************************/
 
 //---------------------------------------------------------------- INCLUDE

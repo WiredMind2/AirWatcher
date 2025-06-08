@@ -1,9 +1,9 @@
 /*************************************************************************
- statistiques.cpp  -  Implémente les fonctions de calcul et d'affichage des statistiques sur la qualité de l'air et l'utilisation de l'application.
- -------------------
- début                : Avril 2025
- auteurs              : Aaron Berton, William Michaud (B3226) - Louis Labory, Daniel Massila (B3231)
- e-mails              : aaron.berton@insa-lyon.fr, william.michaud@insa-lyon.fr, louis.labory@insa-lyon.fr, daniel.massila@insa-lyon.fr
+statistiques.cpp  -  Fonctions de calcul et d'affichage des statistiques sur la qualité de l'air et l'utilisation de l'application.
+-------------------
+début                : Avril 2025
+auteurs              : Aaron Berton, William Michaud (B3226) - Louis Labory, Daniel Massila (B3231)
+e-mails              : aaron.berton@insa-lyon.fr, william.michaud@insa-lyon.fr, louis.labory@insa-lyon.fr, daniel.massila@insa-lyon.fr
 *************************************************************************/
 
 //---------------------------------------------------------------- INCLUDE

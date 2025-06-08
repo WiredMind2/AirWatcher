@@ -1,9 +1,9 @@
 /*************************************************************************
- presentation.cpp  -  Implémente les fonctions de gestion de l'affichage, de l'interface utilisateur et de l'interaction avec l'utilisateur dans AirWatcher.
- -------------------
- début                : Avril 2025
- auteurs              : Aaron Berton, William Michaud (B3226) - Louis Labory, Daniel Massila (B3231)
- e-mails              : aaron.berton@insa-lyon.fr, william.michaud@insa-lyon.fr, louis.labory@insa-lyon.fr, daniel.massila@insa-lyon.fr
+presentation.cpp  -  Fonctions de gestion de l'affichage, de l'interface utilisateur et de l'interaction avec l'utilisateur.
+-------------------
+début                : Avril 2025
+auteurs              : Aaron Berton, William Michaud (B3226) - Louis Labory, Daniel Massila (B3231)
+e-mails              : aaron.berton@insa-lyon.fr, william.michaud@insa-lyon.fr, louis.labory@insa-lyon.fr, daniel.massila@insa-lyon.fr
 *************************************************************************/
 
 // presentation.cpp - Fonctions de gestion de l'affichage et de l'interface utilisateur
@@ -268,7 +268,6 @@ void Presentation::Menu_statistiques ( )
 				break;
 			default:
 				cout << "\033[1;31mChoix invalide, veuillez réessayer.\033[0m"<< endl;
-				break;
 		}
 	} while (choix != 0);
 }

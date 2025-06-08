@@ -1,10 +1,13 @@
 /*************************************************************************
- tests.h  -  Déclare les fonctions de test pour valider les différentes fonctionnalités de l'application AirWatcher.
- -------------------
- début                : Avril 2025
- auteurs              : Aaron Berton, William Michaud (B3226) - Louis Labory, Daniel Massila (B3231)
- e-mails              : aaron.berton@insa-lyon.fr, william.michaud@insa-lyon.fr, louis.labory@insa-lyon.fr, daniel.massila@insa-lyon.fr
+tests.h  -  Déclaration des fonctions de test pour valider les fonctionnalités de l'application AirWatcher.
+-------------------
+début                : Avril 2025
+auteurs              : Aaron Berton, William Michaud (B3226) - Louis Labory, Daniel Massila (B3231)
+e-mails              : aaron.berton@insa-lyon.fr, william.michaud@insa-lyon.fr, louis.labory@insa-lyon.fr, daniel.massila@insa-lyon.fr
 *************************************************************************/
+
+#pragma once
+#include <iostream>
 
 //---------- Interface des fonctions de test (fichier tests.h) -----------
 
@@ -19,6 +22,7 @@
 // Permet de vérifier la robustesse et la fiabilité des modules de l'application.
 //------------------------------------------------------------------------
 
+void runTests();
 void test_T11(int &testCount, int &testPassed, int &testFailed);
 void test_T12(int &testCount, int &testPassed, int &testFailed);
 void test_T13(int &testCount, int &testPassed, int &testFailed);

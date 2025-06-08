@@ -1,9 +1,9 @@
 /*************************************************************************
- tests.cpp  -  Contient les fonctions de test pour valider les différentes fonctionnalités de l'application AirWatcher.
- -------------------
- début                : Avril 2025
- auteurs              : Aaron Berton, William Michaud (B3226) - Louis Labory, Daniel Massila (B3231)
- e-mails              : aaron.berton@insa-lyon.fr, william.michaud@insa-lyon.fr, louis.labory@insa-lyon.fr, daniel.massila@insa-lyon.fr
+tests.cpp  -  Fonctions de test pour valider les différentes fonctionnalités de l'application AirWatcher.
+-------------------
+début                : Avril 2025
+auteurs              : Aaron Berton, William Michaud (B3226) - Louis Labory, Daniel Massila (B3231)
+e-mails              : aaron.berton@insa-lyon.fr, william.michaud@insa-lyon.fr, louis.labory@insa-lyon.fr, daniel.massila@insa-lyon.fr
 *************************************************************************/
 
 //---------------------------------------------------------------- INCLUDE
@@ -21,15 +21,12 @@ using namespace std;
 //----------------------------------------------------------------- FONCTIONS DE TEST
 
 //----------------------------------------------------- Méthodes publiques
-// type Tests::Méthode ( liste des paramètres )
-// Algorithme :
-//
-//{
-//} //----- Fin de Méthode
 
-void Tests::runTests ( )
-// Algorithme :
-//
+//----------------------------- Algorithme principal de test
+// Chaque fonction de test vérifie une fonctionnalité précise de l'application.
+// Les résultats sont comparés aux valeurs attendues pour déterminer si les tests réussissent ou échouent.
+// Les tests incluent des vérifications pour des entrées valides et des cas limites, assurant ainsi la robustesse de l'application.
+void runTests ( )
 {
     // Initialisation des variables
     int testCount = 0;
@@ -64,51 +61,11 @@ void Tests::runTests ( )
 }
 
 
-//------------------------------------------------- Surcharge d'opérateurs
-Tests & Tests::operator = ( const Tests & unTests )
-// Algorithme :
-//
-{
-    return *this; //to avoid warning
-} //----- Fin de operator =
-
-
-//-------------------------------------------- Constructeurs - destructeur
-Tests::Tests ( const Tests & unTests )
-// Algorithme :
-//
-{
-#ifdef MAP
-    cout << "Appel au constructeur de copie de <Tests>" << endl;
-#endif
-} //----- Fin de Tests (constructeur de copie)
-
-
-Tests::Tests ( )
-// Algorithme :
-//
-{
-#ifdef MAP
-    cout << "Appel au constructeur de <Tests>" << endl;
-#endif
-} //----- Fin de Tests
-
-
-Tests::~Tests ( )
-// Algorithme :
-//
-{
-#ifdef MAP
-    cout << "Appel au destructeur de <Tests>" << endl;
-#endif
-} //----- Fin de ~Tests
-
-
 //------------------------------------------------------------------ PRIVE
 
 //----------------------------------------------------- Méthodes protégées
 
-void Tests::test_T11(int &testCount, int &testPassed, int &testFailed)
+void test_T11(int &testCount, int &testPassed, int &testFailed)
 // Algorithme :
 // 
 {
@@ -128,7 +85,7 @@ void Tests::test_T11(int &testCount, int &testPassed, int &testFailed)
     }
 }
 
-void Tests::test_T12(int &testCount, int &testPassed, int &testFailed)
+void test_T12(int &testCount, int &testPassed, int &testFailed)
 // Algorithme :
 // 
 {
@@ -148,7 +105,7 @@ void Tests::test_T12(int &testCount, int &testPassed, int &testFailed)
     }
 }
 
-void Tests::test_T13(int &testCount, int &testPassed, int &testFailed)
+void test_T13(int &testCount, int &testPassed, int &testFailed)
 // Algorithme :
 //
 {
@@ -169,7 +126,7 @@ void Tests::test_T13(int &testCount, int &testPassed, int &testFailed)
     }
 }
 
-void Tests::test_T21(int &testCount, int &testPassed, int &testFailed)
+void test_T21(int &testCount, int &testPassed, int &testFailed)
 // Algorithme :
 //  
 {
@@ -194,7 +151,7 @@ void Tests::test_T21(int &testCount, int &testPassed, int &testFailed)
 
 }
 
-void Tests::test_T22(int &testCount, int &testPassed, int &testFailed)
+void test_T22(int &testCount, int &testPassed, int &testFailed)
 // Algorithme :
 //
 {
@@ -217,7 +174,7 @@ void Tests::test_T22(int &testCount, int &testPassed, int &testFailed)
     }
 }
 
-void Tests::test_T23(int &testCount, int &testPassed, int &testFailed)
+void test_T23(int &testCount, int &testPassed, int &testFailed)
 // Algorithme :
 //
 {
@@ -241,7 +198,7 @@ void Tests::test_T23(int &testCount, int &testPassed, int &testFailed)
     }
 }
 
-void Tests::test_T31(int &testCount, int &testPassed, int &testFailed)
+void test_T31(int &testCount, int &testPassed, int &testFailed)
 // Algorithme :
 //
 {
@@ -273,7 +230,7 @@ void Tests::test_T31(int &testCount, int &testPassed, int &testFailed)
     }
 }
 
-void Tests::test_T32(int &testCount, int &testPassed, int &testFailed)
+void test_T32(int &testCount, int &testPassed, int &testFailed)
 // Algorithme :
 //
 {
@@ -305,8 +262,3 @@ void Tests::test_T32(int &testCount, int &testPassed, int &testFailed)
         testFailed++;
     }
 }
-
-//----------------------------- Algorithme principal de test
-// Chaque fonction de test vérifie une fonctionnalité précise de l'application.
-// Les résultats sont comparés aux valeurs attendues pour déterminer si les tests réussissent ou échouent.
-// Les tests incluent des vérifications pour des entrées valides et des cas limites, assurant ainsi la robustesse de l'application.

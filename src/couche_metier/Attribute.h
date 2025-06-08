@@ -1,14 +1,13 @@
 /*************************************************************************
-                           Attribute  -  description
-                             -------------------
-    début                : 16/05/2025
-    copyright            : (C) 2025 par aaron
-    e-mail               : 
+Attribute.h  -  Déclaration des structures et fonctions liées aux attributs de mesure dans AirWatcher.
+-------------------
+début                : Avril 2025
+auteurs              : Aaron Berton, William Michaud (B3226) - Louis Labory, Daniel Massila (B3231)
+e-mails              : aaron.berton@insa-lyon.fr, william.michaud@insa-lyon.fr, louis.labory@insa-lyon.fr, daniel.massila@insa-lyon.fr
 *************************************************************************/
 
 //---------- Interface de la classe <Attribute> (fichier Attribute.h) ----------------
-#if ! defined ( ATTRIBUTE_H )
-#define ATTRIBUTE_H
+#pragma once
 
 //--------------------------------------------------- Interfaces utilisées
 #include <string>
@@ -49,5 +48,3 @@ protected:
 };
 
 //-------------------------------- Autres définitions dépendantes de <Attribute>
-
-#endif // ATTRIBUTE_H
