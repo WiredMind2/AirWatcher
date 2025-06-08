@@ -89,4 +89,3 @@ AirWatcher est une application de surveillance de la qualité de l'air. Elle per
 - Les menus guident l'utilisateur pas à pas et affichent des messages d'erreur en cas de saisie incorrecte.
 - L'option Administration n'est accessible qu'aux agences gouvernementales.
 
-Pour toute question, consultez le code source ou contactez les auteurs du projet.
