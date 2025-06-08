@@ -22,6 +22,7 @@ using namespace std;
 #include "statistiques.h"
 #include "analyse.h"
 #include "PointsUtilisateurs.h"
+#include "Administration.h"
 #include "../couche_metier/User.h"
 
 //----------------------------------------------------------------- FONCTIONS D'AFFICHAGE
@@ -365,10 +366,13 @@ void Presentation::Menu_administration ( )
 		switch (choix)
 		{
 			case 1:
+				consulter_capteurs_defaillants();
 				break;
 			case 2:
+				marquer_capteur_non_fiable();
 				break;
 			case 3:
+				marquer_user_malicieux();
 				break;
 			case 0:
 				cout << "\033[1;31mRetour au menu principal.\033[0m" << endl;

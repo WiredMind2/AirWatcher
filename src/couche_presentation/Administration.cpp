@@ -32,21 +32,21 @@ using namespace std;
 //} //----- Fin de Méthode
 
 
-void Administration::consulter_capteurs_defaillants()
+void consulter_capteurs_defaillants()
 {
     double seuil_limite, radius;
-    int k;
+    int k = 4;
 
-	time_t start = demander_date("début");
-	time_t stop = demander_date("fin");
+    time_t start = demander_date("début");
+    time_t stop = demander_date("fin");
 
 
     cout << "Entrez le rayon de la zone (en degrés): ";
     cin >> radius;
     cout << "Entrez le seuil choisi : ";
     cin >> seuil_limite;
-    cout << "Entrez le nombre de voisins (k): ";
-    cin >> k;
+    // cout << "Entrez le nombre de voisins (k): ";
+    // cin >> k;
 
     vector<const Sensor *> capteurs_defaillants = AirQualityProcessor::TrouverCapteursDetournes(radius, seuil_limite, k, start, stop);
     for (const auto &sensor : capteurs_defaillants)
@@ -55,7 +55,7 @@ void Administration::consulter_capteurs_defaillants()
     }
 }
 
-void Administration::marquer_capteur_non_fiable()
+void marquer_capteur_non_fiable()
 {
 
     // Récupérer la liste des non fiables
@@ -73,7 +73,7 @@ void Administration::marquer_capteur_non_fiable()
     cout << "Le capteur n°" << capteur_non_fiable->GetSensorID() << "a été marqué comme non fiable" << "\n";
 }
 
-void Administration::marquer_user_malicieux()
+void marquer_user_malicieux()
 {
     int user_id; // TO DO : changer le type de user_id pour qu'il soit compatible avec le type d'id dans CSVHandler
     cout << "Veuillez entrer l'identifiant de l'utilisateur à signaler";

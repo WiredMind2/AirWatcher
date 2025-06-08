@@ -6,51 +6,16 @@ auteurs              : Aaron Berton, William Michaud (B3226) - Louis Labory, Dan
 e-mails              : aaron.berton@insa-lyon.fr, william.michaud@insa-lyon.fr, louis.labory@insa-lyon.fr, daniel.massila@insa-lyon.fr
 *************************************************************************/
 
-//---------- Interface de la classe <Administration> (fichier Administration.h) ----------------
+//---------- Interface des fonctions d'administration (fichier Administration.h) -----------
+
+//------------------------------------------------------------------------
+// Rôle des fonctions d'administration
+// Permet de gérer les capteurs défaillants, marquer les capteurs non fiables et signaler les utilisateurs malicieux.
+//------------------------------------------------------------------------
+
 #pragma once
 
-//--------------------------------------------------- Interfaces utilisées
-
-//------------------------------------------------------------------ Types
-
-//------------------------------------------------------------------------
-// Rôle de la classe <Administration>
-//
-//
-//------------------------------------------------------------------------
-
-class Administration 
-{
-//----------------------------------------------------------------- PUBLIC
-
-public:
-//----------------------------------------------------- Méthodes publiques
-    // type Méthode ( liste des paramètres );
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
-
-    void consulter_capteurs_defaillants();
-    void marquer_capteur_non_fiable();
-    void marquer_user_malicieux();
-
-
-//------------------------------------------------- Surcharge d'opérateurs
-
-
-//-------------------------------------------- Constructeurs - destructeur
-
-
-//------------------------------------------------------------------ PRIVE
-
-protected:
-//----------------------------------------------------- Méthodes protégées
-
-//----------------------------------------------------- Attributs protégés
-
-};
-
-//-------------------------------- Autres définitions dépendantes de <Administration>
-
+void consulter_capteurs_defaillants();
+void marquer_capteur_non_fiable();
+void marquer_user_malicieux();
 
