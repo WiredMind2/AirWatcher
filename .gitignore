@@ -3,5 +3,5 @@
 .vscode/
 .idea/
 obj/
-AppWatcher
 main
+AirWatcher
