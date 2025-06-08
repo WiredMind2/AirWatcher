@@ -17,13 +17,12 @@ AirWatcher est une application de surveillance de la qualité de l'air. Elle per
     ```bash
     cd AirWatcher
     ```
-3. Suivez les instructions spécifiques au projet pour configurer l'environnement.
 
 ## Compilation
-1. Assurez-vous d'avoir un compilateur C++ installé (par exemple, `g++`).
+1. Assurez-vous d'avoir un compilateur C++ installé (par exemple, `g++`) ainsi que l'outil `make`.
 2. Compilez le projet en exécutant la commande suivante dans le répertoire racine :
     ```bash
-    g++ -o AirWatcher src/*.cpp
+    make
     ```
 
 ## Utilisation
