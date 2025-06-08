@@ -1,76 +1,23 @@
 /*************************************************************************
-                           Tests  -  description
-                             -------------------
-    début                : $DATE$
-    copyright            : (C) $YEAR$ par $AUTHOR$
-    e-mail               : $EMAIL$
+ tests.h  -  Déclare les fonctions de test pour valider les différentes fonctionnalités de l'application AirWatcher.
+ -------------------
+ début                : Avril 2025
+ auteurs              : Aaron Berton, William Michaud (B3226) - Louis Labory, Daniel Massila (B3231)
+ e-mails              : aaron.berton@insa-lyon.fr, william.michaud@insa-lyon.fr, louis.labory@insa-lyon.fr, daniel.massila@insa-lyon.fr
 *************************************************************************/
 
-//---------- Interface de la classe <Tests> (fichier Tests.h) ----------------
+//---------- Interface des fonctions de test (fichier tests.h) -----------
+
+//--------------------------------------------------- Interfaces utilisées
 #if ! defined ( Tests_H )
 #define Tests_H
 
 //--------------------------------------------------- Interfaces utilisées
 
-//------------------------------------------------------------- Constantes
-
-//------------------------------------------------------------------ Types
-
 //------------------------------------------------------------------------
-// Rôle de la classe <Tests>
-//
-//
+// Rôle des fonctions de test
+// Permet de vérifier la robustesse et la fiabilité des modules de l'application.
 //------------------------------------------------------------------------
-
-class Tests
-{
-//----------------------------------------------------------------- PUBLIC
-
-public:
-//----------------------------------------------------- Méthodes publiques
-    // type Méthode ( liste des paramètres );
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
-
-    void runTests ( );
-    // Mode d'emploi :
-    // Lance tous les Tests unitaires de la classe
-    // Contrat :
-    // 
-
-//------------------------------------------------- Surcharge d'opérateurs
-    Tests & operator = ( const Tests & unTests );
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
-
-
-//-------------------------------------------- Constructeurs - destructeur
-    Tests ( const Tests & unTests );
-    // Mode d'emploi (constructeur de copie) :
-    //
-    // Contrat :
-    //
-
-    Tests ( );
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
-
-    virtual ~Tests ( );
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
-
-//------------------------------------------------------------------ PRIVE
-
-protected:
-//----------------------------------------------------- Méthodes protégées
 
 void test_T11(int &testCount, int &testPassed, int &testFailed);
 void test_T12(int &testCount, int &testPassed, int &testFailed);
@@ -82,10 +29,6 @@ void test_T23(int &testCount, int &testPassed, int &testFailed);
 
 void test_T31(int &testCount, int &testPassed, int &testFailed);
 void test_T32(int &testCount, int &testPassed, int &testFailed);
-
-//----------------------------------------------------- Attributs protégés
-
-};
 
 //-------------------------------- Autres définitions dépendantes de <Tests>
 

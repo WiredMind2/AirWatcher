@@ -1,9 +1,9 @@
 /*************************************************************************
-                           Administration  -  description
-                             -------------------
-    début                : $DATE$
-    copyright            : (C) $YEAR$ par $AUTHOR$
-    e-mail               : $EMAIL$
+ Administration.cpp  -  Implémente les fonctions liées à l'administration de l'application AirWatcher, telles que la gestion des utilisateurs, des capteurs, et des droits d'accès.
+ -------------------
+ début                : Avril 2025
+ auteurs              : Aaron Berton, William Michaud (B3226) - Louis Labory, Daniel Massila (B3231)
+ e-mails              : aaron.berton@insa-lyon.fr, william.michaud@insa-lyon.fr, louis.labory@insa-lyon.fr, daniel.massila@insa-lyon.fr
 *************************************************************************/
 
 //---------- Réalisation de la classe <Administration> (fichier Administration.cpp) ------------
@@ -21,8 +21,6 @@ using namespace std;
 //------------------------------------------------------ Include personnel
 #include "Administration.h"
 #include "analyse.h"
-
-//------------------------------------------------------------- Constantes
 
 //----------------------------------------------------------------- PUBLIC
 

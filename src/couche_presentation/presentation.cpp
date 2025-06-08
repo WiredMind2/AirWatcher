@@ -1,10 +1,12 @@
 /*************************************************************************
-						   Presentation  -  description
-							 -------------------
-	début                : $DATE$
-	copyright            : (C) $YEAR$ par $AUTHOR$
-	e-mail               : $EMAIL$
+ presentation.cpp  -  Implémente les fonctions de gestion de l'affichage, de l'interface utilisateur et de l'interaction avec l'utilisateur dans AirWatcher.
+ -------------------
+ début                : Avril 2025
+ auteurs              : Aaron Berton, William Michaud (B3226) - Louis Labory, Daniel Massila (B3231)
+ e-mails              : aaron.berton@insa-lyon.fr, william.michaud@insa-lyon.fr, louis.labory@insa-lyon.fr, daniel.massila@insa-lyon.fr
 *************************************************************************/
+
+// presentation.cpp - Fonctions de gestion de l'affichage et de l'interface utilisateur
 
 //---------- Réalisation de la classe <Presentation> (fichier Presentation.cpp) ------------
 
@@ -22,12 +24,10 @@ using namespace std;
 #include "PointsUtilisateurs.h"
 #include "../couche_metier/User.h"
 
-//------------------------------------------------------------- Constantes
+//----------------------------------------------------------------- FONCTIONS D'AFFICHAGE
+// Chaque fonction gère une partie de l'affichage ou de l'interface utilisateur.
 
-//----------------------------------------------------------------- PUBLIC
-
-//----------------------------------------------------- Méthodes publiques
-
+//--- Méthodes publiques
 
 void Presentation::Menu_principal ( )
 /**

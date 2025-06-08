@@ -1,12 +1,10 @@
 /*************************************************************************
-                           Tests  -  description
-                             -------------------
-    début                : $DATE$
-    copyright            : (C) $YEAR$ par $AUTHOR$
-    e-mail               : $EMAIL$
+ tests.cpp  -  Contient les fonctions de test pour valider les différentes fonctionnalités de l'application AirWatcher.
+ -------------------
+ début                : Avril 2025
+ auteurs              : Aaron Berton, William Michaud (B3226) - Louis Labory, Daniel Massila (B3231)
+ e-mails              : aaron.berton@insa-lyon.fr, william.michaud@insa-lyon.fr, louis.labory@insa-lyon.fr, daniel.massila@insa-lyon.fr
 *************************************************************************/
-
-//---------- Réalisation de la classe <Tests> (fichier Tests.cpp) ------------
 
 //---------------------------------------------------------------- INCLUDE
 
@@ -20,9 +18,7 @@ using namespace std;
 #include "../couche_metier/Sensor.h"
 
 
-//------------------------------------------------------------- Constantes
-
-//----------------------------------------------------------------- PUBLIC
+//----------------------------------------------------------------- FONCTIONS DE TEST
 
 //----------------------------------------------------- Méthodes publiques
 // type Tests::Méthode ( liste des paramètres )
@@ -309,3 +305,8 @@ void Tests::test_T32(int &testCount, int &testPassed, int &testFailed)
         testFailed++;
     }
 }
+
+//----------------------------- Algorithme principal de test
+// Chaque fonction de test vérifie une fonctionnalité précise de l'application.
+// Les résultats sont comparés aux valeurs attendues pour déterminer si les tests réussissent ou échouent.
+// Les tests incluent des vérifications pour des entrées valides et des cas limites, assurant ainsi la robustesse de l'application.

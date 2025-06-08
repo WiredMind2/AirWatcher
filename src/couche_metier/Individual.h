@@ -1,9 +1,9 @@
 /*************************************************************************
-                           Individual  -  description
-                             -------------------
-    début                : 16/05/2025
-    copyright            : (C) 2025 par aaron
-    e-mail               : 
+ Individual.h  -  Déclare les structures et fonctions liées aux entités individuelles dans AirWatcher.
+ -------------------
+ début                : Avril 2025
+ auteurs              : Aaron Berton, William Michaud (B3226) - Louis Labory, Daniel Massila (B3231)
+ e-mails              : aaron.berton@insa-lyon.fr, william.michaud@insa-lyon.fr, louis.labory@insa-lyon.fr, daniel.massila@insa-lyon.fr
 *************************************************************************/
 
 //---------- Interface de la classe <Individual> (fichier Individual.h) ----------------
@@ -12,10 +12,6 @@
 
 //--------------------------------------------------- Interfaces utilisées
 #include "User.h"
-
-//------------------------------------------------------------- Constantes
-
-//------------------------------------------------------------------ Types
 
 //------------------------------------------------------------------------
 // Rôle de la classe <Individual>

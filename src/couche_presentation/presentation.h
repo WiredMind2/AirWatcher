@@ -1,25 +1,18 @@
 /*************************************************************************
-                           Presentation  -  description
-                             -------------------
-    début                : $DATE$
-    copyright            : (C) $YEAR$ par $AUTHOR$
-    e-mail               : $EMAIL$
+ presentation.h  -  Déclare les fonctions de gestion de l'affichage, de l'interface utilisateur et de l'interaction avec l'utilisateur dans AirWatcher.
+ -------------------
+ début                : Avril 2025
+ auteurs              : Aaron Berton, William Michaud (B3226) - Louis Labory, Daniel Massila (B3231)
+ e-mails              : aaron.berton@insa-lyon.fr, william.michaud@insa-lyon.fr, louis.labory@insa-lyon.fr, daniel.massila@insa-lyon.fr
 *************************************************************************/
 
-//---------- Interface de la classe <Presentation> (fichier Presentation.h) ----------------
-#if ! defined ( Presentation_H )
-#define Presentation_H
+//---------- Interface des fonctions d'affichage (fichier presentation.h) -----------
 
 //--------------------------------------------------- Interfaces utilisées
 
-//------------------------------------------------------------- Constantes
-
-//------------------------------------------------------------------ Types
-
 //------------------------------------------------------------------------
-// Rôle de la classe <Presentation>
-//
-//
+// Rôle des fonctions d'affichage
+// Permet de gérer l'affichage et l'interface utilisateur de l'application.
 //------------------------------------------------------------------------
 
 class Presentation

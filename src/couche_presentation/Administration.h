@@ -1,9 +1,9 @@
 /*************************************************************************
-                           Administration  -  description
-                             -------------------
-    début                : $DATE$
-    copyright            : (C) $YEAR$ par $AUTHOR$
-    e-mail               : $EMAIL$
+ Administration.h  -  Déclare les fonctions d'administration pour la gestion des utilisateurs, des capteurs, et des droits d'accès dans AirWatcher.
+ -------------------
+ début                : Avril 2025
+ auteurs              : Aaron Berton, William Michaud (B3226) - Louis Labory, Daniel Massila (B3231)
+ e-mails              : aaron.berton@insa-lyon.fr, william.michaud@insa-lyon.fr, louis.labory@insa-lyon.fr, daniel.massila@insa-lyon.fr
 *************************************************************************/
 
 //---------- Interface de la classe <Administration> (fichier Administration.h) ----------------
@@ -11,8 +11,6 @@
 #define Administration_H
 
 //--------------------------------------------------- Interfaces utilisées
-
-//------------------------------------------------------------- Constantes
 
 //------------------------------------------------------------------ Types
 
