@@ -10,9 +10,6 @@ e-mails              : aaron.berton@insa-lyon.fr, william.michaud@insa-lyon.fr, 
 
 //---------- Interface de la fonction consulter_points (fichier PointsUtilisateurs.h) -----------
 
-//--------------------------------------------------- Interfaces utilisées
-// ...existing code...
-
 //------------------------------------------------------------------------
 // Rôle de la fonction consulter_points
 // Permet d'afficher les points d'un utilisateur à partir de son ID.

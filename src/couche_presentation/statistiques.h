@@ -10,9 +10,6 @@
 
 //---------- Interface des fonctions statistiques (fichier statistiques.h) -----------
 
-//--------------------------------------------------- Interfaces utilisées
-// (Aucune interface additionnelle requise pour ce fichier)
-
 //------------------------------------------------------------------------
 // Rôle des fonctions statistiques
 // Permet de calculer et d'afficher des statistiques sur la qualité de l'air et l'utilisation.

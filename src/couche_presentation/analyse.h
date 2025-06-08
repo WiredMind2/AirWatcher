@@ -8,18 +8,15 @@ e-mails              : aaron.berton@insa-lyon.fr, william.michaud@insa-lyon.fr, 
 
 //---------- Interface des fonctions d'analyse (fichier analyse.h) -----------
 
-//--------------------------------------------------- Interfaces utilisées
-// ...existing code...
-
 //------------------------------------------------------------------------
 // Rôle des fonctions d'analyse
 // Permet d'analyser les données de qualité de l'air pour extraire des informations utiles.
 //------------------------------------------------------------------------
+
+#pragma once
 
 void analyse_donnees_capteurs();
 void identifier_capteurs_non_fiables();
 void analyser_impact_purificateurs();
 time_t demander_date(const string &desc);
 double demander_coord(const string &desc);
-
-#pragma once
