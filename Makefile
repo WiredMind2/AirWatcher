@@ -1,5 +1,5 @@
 # Nom de l'exécutable
-EXEC = AppWatcher
+EXEC = AirWatcher
 
 # Compilateur et options
 CXX = g++
