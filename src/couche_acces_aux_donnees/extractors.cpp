@@ -105,16 +105,16 @@ void CSVHandler::extractSensors(const string &folder) {
         }
         file.close();
 
-        cout << "Sensors loaded:" << endl;
-        for (const auto& pair : sensors) {
-            Sensor* sensor = pair.second;
-            // cout << "Key: " << pair.first
-            //      << ", ID: " << sensor->GetSensorID()
-            //      << ", Latitude: " << sensor->GetLatitude()
-            //      << ", Longitude: " << sensor->GetLongitude()
-            //      << ", UserID: " << sensor->GetUserID()
-            //      << endl;
-        }
+        // cout << "Sensors loaded:" << endl;
+        // for (const auto& pair : sensors) {
+        //     Sensor* sensor = pair.second;
+        //     cout << "Key: " << pair.first
+        //          << ", ID: " << sensor->GetSensorID()
+        //          << ", Latitude: " << sensor->GetLatitude()
+        //          << ", Longitude: " << sensor->GetLongitude()
+        //          << ", UserID: " << sensor->GetUserID()
+        //          << endl;
+        // }
 
     } else {
         cout << "Unable to open file" << endl;

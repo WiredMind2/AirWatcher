@@ -49,9 +49,9 @@ void Administration::consulter_capteurs_defaillants()
     cin >> seuil_limite;
     cout << "Entrez le nombre de voisins (k): ";
     cin >> k;
-    
-    vector<const Sensor *>* capteurs_defaillants = AirQualityProcessor::TrouverCapteursDetournes(radius, seuil_limite, k, start, stop); 
-    for (const auto &sensor : *capteurs_defaillants)
+
+    vector<const Sensor *> capteurs_defaillants = AirQualityProcessor::TrouverCapteursDetournes(radius, seuil_limite, k, start, stop);
+    for (const auto &sensor : capteurs_defaillants)
     {
         cout << "Le capteur" << sensor->GetSensorID() << "est défaillant." << "\n";
     }

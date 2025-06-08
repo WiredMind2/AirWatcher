@@ -26,30 +26,7 @@ using namespace std;
 
 //----------------------------------------------------- Méthodes publiques
 
-Measurement::Measurement(time_t timestamp, double value, unsigned int sensorID, const string& attributeID)
-// Algorithme :
-//
-    : timestamp(timestamp), value(value), sensorID(sensorID), attributeID(attributeID)
-{
-#ifdef MAP
-    cout << "Appel au constructeur de <Measurement>" << endl;
-#endif
-} //----- Fin de Measurement
-
-Measurement::~Measurement()
-// Algorithme :
-//
-{
-#ifdef MAP
-    cout << "Appel au destructeur de <Measurement>" << endl;
-#endif
-} //----- Fin de ~Measurement
-
 Sensor* Measurement::GetSensor() const
 {
     return CSVHandler::getSensor(sensorID);
 }
-
-//------------------------------------------------------------------ PRIVE
-
-//----------------------------------------------------- Méthodes protégées

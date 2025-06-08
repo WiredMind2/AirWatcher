@@ -32,8 +32,9 @@ class Measurement
 
 public:
     //----------------------------------------------------- Méthodes publiques
-    Measurement(time_t timestamp, double value, unsigned int sensorID, const string &attributeID);
-    virtual ~Measurement();
+    Measurement(time_t timestamp, double value, unsigned int sensorID, const string &attributeID): 
+        timestamp(timestamp), value(value), sensorID(sensorID), attributeID(attributeID) {};
+    virtual ~Measurement() {};
 
     Sensor* GetSensor() const;
     double GetValue() const { return value; };
@@ -43,8 +44,6 @@ public:
 
     //------------------------------------------------------------------ PRIVE
 protected:
-    //----------------------------------------------------- Méthodes protégées
-
     //----------------------------------------------------- Attributs protégés
     time_t timestamp;
     double value;

@@ -30,19 +30,11 @@ class Individual : public User
 public:
 //----------------------------------------------------- Méthodes publiques
     // Constructor
-    Individual(unsigned int id);
+    Individual(unsigned int id): User(id) {};
 
     // Destructor
-    ~Individual() override;
-//------------------------------------------------------------------ PRIVE
-
-protected:
-//----------------------------------------------------- Méthodes protégées
-
-//----------------------------------------------------- Attributs protégés
+    ~Individual() override {};
 
 };
-
-//-------------------------------- Autres définitions dépendantes de <Individual>
 
 #endif // INDIVIDUAL_H

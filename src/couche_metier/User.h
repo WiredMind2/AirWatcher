@@ -44,8 +44,8 @@ public:
     static unsigned char GetGlobalUserType() {return userType;};
     static void SetGlobalUserType(unsigned char _userType) { userType = _userType; };
 
-    User(unsigned int id);
-    virtual ~User();
+    User(unsigned int id): userID(id) {};
+    virtual ~User() {};
 
 //------------------------------------------------------------------ PRIVE
 

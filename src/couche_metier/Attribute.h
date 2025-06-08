@@ -32,19 +32,11 @@ public:
 //----------------------------------------------------- Méthodes publiques
 
     // Constructeur
-    Attribute(int id, const string &unit, const string &description);
-    // Mode d'emploi :
-    //  Initialise un attribut avec un identifiant, une unité et une description.
-    //
-    // Contrat :
-    //
+    Attribute(int id, const string &unit, const string &description): 
+        attributeID(id), unit(unit), description(description) {};
 
     // Destructeur
-    virtual ~Attribute();
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
+    virtual ~Attribute() {};
 
 //------------------------------------------------------------------ PRIVE
 

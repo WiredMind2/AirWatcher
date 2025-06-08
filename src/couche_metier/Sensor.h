@@ -36,8 +36,9 @@ public:
 //----------------------------------------------------- Méthodes publiques
     list<Measurement> getData();
 
-    Sensor(unsigned int id, double lat, double lon, unsigned int userID);
-    virtual ~Sensor();
+    Sensor(unsigned int id, double lat, double lon, unsigned int userID): 
+        sensorID(id), latitude(lat), longitude(lon), userID(userID) {};
+    virtual ~Sensor() {};
 
     unsigned int GetSensorID() const;
     double GetLatitude() const;

@@ -33,17 +33,17 @@ void identifier_capteurs_non_fiables()
 	cout << "\033[1;31mAnalyse des capteurs non fiables.\033[0m" << endl;
 	// Appel à la fonction de traitement pour trouver les capteurs non fiables
 	int k = 4;
-	vector<const Sensor *>* capteurs_non_fiables = AirQualityProcessor::TrouverCapteursDetournes(10.0, 0.5, k, 0, -1);
+	vector<const Sensor *> capteurs_non_fiables = AirQualityProcessor::TrouverCapteursDetournes(10.0, 0.5, k, 0, -1);
 
 	// Affichage des capteurs non fiables
-	if (capteurs_non_fiables->empty())
+	if (capteurs_non_fiables.empty())
 	{
 		cout << "Aucun capteur non fiable trouvé." << endl;
 	}
 	else
 	{
 		cout << "Capteurs non fiables trouvés : " << endl;
-		for (const Sensor *capteur : *capteurs_non_fiables)
+		for (const Sensor *capteur : capteurs_non_fiables)
 		{
 			cout << "Capteur ID: " << capteur->GetSensorID() << ", Latitude: " << capteur->GetLatitude() << ", Longitude: " << capteur->GetLongitude() << endl;
 		}

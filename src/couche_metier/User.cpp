@@ -61,28 +61,6 @@ double User::getGeoZoneMean(double latitude, double longitude, double radius)
     return 0.0;
 } //----- Fin de getGeoZoneMean
 
-//-------------------------------------------- Constructeur - destructeur
-
-User::User(unsigned int id)
-    : userID(id), points(0)
-// Algorithme :
-//
-
-{
-#ifdef MAP
-    cout << "Appel au constructeur de <User>" << endl;
-#endif
-} //----- Fin de User
-
-User::~User()
-// Algorithme :
-//
-{
-#ifdef MAP
-    cout << "Appel au destructeur de <User>" << endl;
-#endif
-} //----- Fin de ~User
-
 
 //------------------------------------------------------------------ PRIVE
 

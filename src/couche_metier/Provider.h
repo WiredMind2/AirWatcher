@@ -37,10 +37,10 @@ public:
 //----------------------------------------------------- Méthodes publiques
     list<Cleaner> getCleaners();
     // Constructor
-    Provider(unsigned int id);
+    Provider(unsigned int id): User(id) {};
 
     // Destructor
-    ~Provider() override;
+    ~Provider() override {};
 
 //------------------------------------------------------------------ PRIVE
 

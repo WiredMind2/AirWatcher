@@ -52,7 +52,3 @@ list<User> GouvAgency::findUnreliable()
     list<User> unreliableUsers;
     return unreliableUsers;
 } //----- Fin de findUnreliable
-
-//------------------------------------------------------------------ PRIVE
-
-//----------------------------------------------------- Méthodes protégées

@@ -21,8 +21,8 @@ void consulter_capteurs_defaillants()
     time_t start = demander_date("début");
     time_t stop = demander_date("fin");
 
-    vector<const Sensor *>* capteurs_defaillants = AirQualityProcessor::TrouverCapteursDetournes(radius, seuil_limite, k, start, stop);
-    for (const auto &sensor : *capteurs_defaillants)
+    vector<const Sensor *> capteurs_defaillants = AirQualityProcessor::TrouverCapteursDetournes(radius, seuil_limite, k, start, stop);
+    for (const auto &sensor : capteurs_defaillants)
     {
         cout << "Le capteur" << sensor->GetSensorID() << "est défaillant." << "\n";
     }
