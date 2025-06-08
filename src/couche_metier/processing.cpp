@@ -91,7 +91,9 @@ double AirQualityProcessor::EstimationQualiteAirZone(double lat, double lon, dou
 		if (!isnan(est))
 		{
 			estimations.push_back(est);
-		} else {
+		}
+		else
+		{
 			return numeric_limits<double>::quiet_NaN();
 		}
 	}
@@ -166,26 +168,40 @@ vector<const Sensor *> AirQualityProcessor::ListerCapteursSimilaires(unsigned in
 	vector<Measurement *> measures = GetMeasures(start, stop);
 
 	vector<const Sensor *> capteurs_similaires;
-	if (id_ref >= measures.size())
-		return capteurs_similaires;
-
+	if (measures.empty())
+	{
+		return capteurs_similaires; // Retourne une liste vide si aucune mesure n'est trouvée
+	}
 	unordered_map<unsigned int, double> mesure_cache;
 	unordered_map<unsigned int, int> mesure_count;
 
 	for (Measurement *mesure : measures)
 	{
 		Sensor *capteur = mesure->GetSensor();
-		if (mesure_cache.find(capteur->GetSensorID()) == mesure_cache.end())
+		if (mesure_cache.find(capteur->GetSensorID()) == mesure_cache.end()) // Si le capteur n'est pas encore dans le cache
 		{
 			mesure_cache[capteur->GetSensorID()] = mesure->GetValue();
 			mesure_count[capteur->GetSensorID()] = 1;
 		}
-		else
+		else // Si le capteur est déjà dans le cache
 		{
 			mesure_cache[capteur->GetSensorID()] += mesure->GetValue();
 			mesure_count[capteur->GetSensorID()]++;
 		}
 	}
+
+	// cout << "Nombre de capteurs trouvés : " << mesure_cache.size() << endl;
+	// cout << "Capteurs trouvés :" << endl;
+	// for (const auto &pair : mesure_cache)
+	// {
+	// 	cout << "Capteur ID: " << pair.first << ", Valeur moyenne: " << pair.second / mesure_count[pair.first] << endl;
+	// }
+
+	// if (mesure_cache.find(id_ref) == mesure_cache.end())
+	// {
+	// 	cerr << "Capteur de référence non trouvé dans les mesures." << endl;
+	// 	return capteurs_similaires; // Retourne une liste vide si le capteur de référence n'est pas trouvé
+	// }
 
 	double ref_value = mesure_cache[id_ref] / mesure_count[id_ref];
 
@@ -203,6 +219,12 @@ vector<const Sensor *> AirQualityProcessor::ListerCapteursSimilaires(unsigned in
 			capteurs_similaires.push_back(capteur);
 		}
 	}
+
+	// Trie les capteurs similaires par ID
+	sort(capteurs_similaires.begin(), capteurs_similaires.end(),
+		 [](const Sensor *a, const Sensor *b)
+		 { return a->GetSensorID() < b->GetSensorID(); });
+
 	return capteurs_similaires;
 }
 

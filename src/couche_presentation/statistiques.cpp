@@ -50,6 +50,8 @@ void classerCapteursSimilaires() {
 
 	std::cin >> id_ref;
 
+	std::cout << "Recherche des capteurs similaires au capteur ID " << id_ref << "...\n";
+
 	// Appel à la fonction de traitement pour trouver les capteurs similaires
 	std::vector<const Sensor *> capteurs_similaires = AirQualityProcessor::ListerCapteursSimilaires(id_ref, 0, -1);
 	if (capteurs_similaires.empty()) {
