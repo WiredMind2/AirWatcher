@@ -37,18 +37,10 @@ void GouvAgency::classifyReliable(User &user)
 {
 } //----- Fin de classifyReliable
 
-list<User> GouvAgency::getUsers()
-// Algorithme :
-//
-{
-    list<User> users;
-    return users;
-} //----- Fin de getUsers
-
-list<User> GouvAgency::findUnreliable()
+list<User> GouvAgency::getUnreliableUsers()
 // Algorithme :
 //
 {
     list<User> unreliableUsers;
     return unreliableUsers;
-} //----- Fin de findUnreliable
+} //----- Fin de getUnreliableUsers

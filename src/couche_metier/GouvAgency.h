@@ -28,8 +28,7 @@ public:
 //----------------------------------------------------- Méthodes publiques
     void classifyUnreliable(User &user);
     void classifyReliable(User &user);
-    list<User> getUsers();
-    list<User> findUnreliable();
+    list<User> getUnreliableUsers();
 
     // Constructor
     GouvAgency(unsigned int id) : User(id) {};

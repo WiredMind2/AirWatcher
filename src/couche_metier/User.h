@@ -31,10 +31,6 @@ class User
 
 public:
 //----------------------------------------------------- Méthodes publiques
-    list<Sensor> getSensors();
-    list<Sensor> compareSensor(Sensor sensor);
-    double getGeoPoint(double latitude, double longitude);
-    double getGeoZoneMean(double latitude, double longitude, double radius);
     int getPoints() const { return points; }
     void addPoints(int _points) { points += _points; }
 
@@ -54,5 +50,6 @@ protected:
     int points = 0;
     static unsigned char userType;
 };
+
 
 //-------------------------------- Autres définitions dépendantes de <User>

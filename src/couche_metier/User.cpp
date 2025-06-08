@@ -26,41 +26,6 @@ using namespace std;
 
 //----------------------------------------------------- Méthodes publiques
 
-// list<Sensor> User::getSensors()
-// // Algorithme :
-// //
-// {
-//     return ;
-// } //----- Fin de getSensors
-
-// list<Sensor> User::compareSensor(Sensor sensor)
-// // Algorithme :
-// //
-// {
-
-//     list<Sensor> result;
-//     for (Sensor s : sensors) {
-//         if (s.getID() == sensor.getID()) {
-//             result.push_back(s);
-//         }
-//     }
-//     return result;
-// } //----- Fin de compareSensor
-
-double User::getGeoPoint(double latitude, double longitude)
-// Algorithme :
-//
-{
-    return 0.0;
-} //----- Fin de getGeoPoint
-
-double User::getGeoZoneMean(double latitude, double longitude, double radius)
-// Algorithme :
-//
-{
-    return 0.0;
-} //----- Fin de getGeoZoneMean
-
 
 //------------------------------------------------------------------ PRIVE
 

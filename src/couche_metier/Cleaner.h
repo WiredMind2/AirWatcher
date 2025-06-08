@@ -28,9 +28,6 @@ class Cleaner
 
 public:
 //----------------------------------------------------- Méthodes publiques
-    void start();
-    void stop();
-
     Cleaner(const unsigned int cleanerID, double latitude, double longitude, time_t timeStart, time_t timeStop, const unsigned int providerID)
         : cleanerID(cleanerID), latitude(latitude), longitude(longitude), providerID(providerID), timeStart(timeStart), timeStop(timeStop) {};
     virtual ~Cleaner() {};
