@@ -33,7 +33,6 @@ public:
         timestamp(timestamp), value(value), sensorID(sensorID), attributeID(attributeID) {};
     virtual ~Measurement() {};
 
-    Sensor* GetSensor() const;
     double GetValue() const { return value; };
     time_t GetTimestamp() const { return timestamp; };
     unsigned int GetSensorID() const { return sensorID; };
