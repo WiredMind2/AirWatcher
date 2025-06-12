@@ -228,6 +228,13 @@ vector<const Sensor *> AirQualityProcessor::ListerCapteursSimilaires(unsigned in
     sort(capteurs_similaires.begin(), capteurs_similaires.end(),
          [](const Sensor *a, const Sensor *b)
          { return a->GetSensorID() < b->GetSensorID(); });
+
+    // Renvoie seulement les premiers 10 capteurs similaires.
+    if (capteurs_similaires.size() > 10)
+    {
+        capteurs_similaires.resize(10);
+    }
+
     return capteurs_similaires;
 }
 

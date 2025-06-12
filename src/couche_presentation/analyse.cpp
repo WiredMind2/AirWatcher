@@ -15,6 +15,7 @@ e-mails              : aaron.berton@insa-lyon.fr, william.michaud@insa-lyon.fr, 
 #include "../couche_metier/Cleaner.h"
 #include "../couche_metier/processing.h"
 #include "analyse.h"
+#include "../couche_acces_aux_donnees/CSVHandler.h"
 
 using namespace std;
 
@@ -40,9 +41,13 @@ void analyse_donnees_capteurs()
 
 void identifier_capteurs_non_fiables()
 {
-	cout << "\033[1;31mAnalyse des capteurs non fiables.\033[0m" << endl;
 	// Appel à la fonction de traitement pour trouver les capteurs non fiables
-	vector<const Sensor *> capteurs_non_fiables = AirQualityProcessor::TrouverCapteursDetournes(10.0, 0.5, 0, -1);
+	time_t dateDebut = demander_date("début");
+	time_t dateFin = demander_date("fin");
+
+	cout << "\033[1;31mAnalyse des capteurs non fiables.\033[0m" << endl;
+
+	vector<const Sensor *> capteurs_non_fiables = AirQualityProcessor::TrouverCapteursDetournes(1.0, 10, dateDebut, dateFin);
 
 	// Affichage des capteurs non fiables
 	if (capteurs_non_fiables.empty())
@@ -63,19 +68,29 @@ void analyser_impact_purificateurs()
 {
 	cout << "\033[1;33mAnalyse de l'impact des purificateurs.\033[0m" << endl;
 
-	Cleaner cleaner = Cleaner(1, 48.8566, 2.3522, 0, 100, 123); // TODO - Choisir un vrai purificateur, ces valeurs marchent pas
-	cout << "ID du purificateur : " << cleaner.GetCleanerID() << endl;
+	int cleanerID;
+	cout << "Veuillez entrer l'ID du purificateur à analyser : ";
+	cin >> cleanerID;
 
-	time_t dateDebut = demander_date("début");
-	time_t dateFin = demander_date("fin");
+	Cleaner cleaner = CSVHandler::getCleaner(cleanerID);
+	if (cleaner.GetCleanerID() == 0)
+	{
+		cerr << "Purificateur non trouvé." << endl;
+		return;
+	}
 
-	const int dayInSeconds = 86400; // Nombre de secondes dans un jour
+	cout << "ID du purificateur : " << cleanerID << endl;
+
+	// time_t dateDebut = demander_date("début");
+	// time_t dateFin = demander_date("fin");
+
+	// const int dayInSeconds = 86400; // Nombre de secondes dans un jour
 
 	// Appel à la fonction de traitement pour analyser l'impact sur une zone autour du purificateur
-	double qualiteAvant = AirQualityProcessor::EstimationQualiteAirZone(cleaner.GetLatitude(), cleaner.GetLongitude(), 10.0, dateDebut, dateDebut + dayInSeconds);
+	double qualiteAvant = AirQualityProcessor::EstimationQualiteAirZone(cleaner.GetLatitude(), cleaner.GetLongitude(), 10.0, 0, cleaner.GetTimeStart());
 	cout << "Qualité de l'air avant nettoyage : " << qualiteAvant << endl;
 
-	double qualiteApres = AirQualityProcessor::EstimationQualiteAirZone(cleaner.GetLatitude(), cleaner.GetLongitude(), 10.0, dateFin, dateFin + dayInSeconds);
+	double qualiteApres = AirQualityProcessor::EstimationQualiteAirZone(cleaner.GetLatitude(), cleaner.GetLongitude(), 10.0, cleaner.GetTimeStop(), -1);
 	cout << "Qualité de l'air après nettoyage : " << qualiteApres << endl;
 };
 
