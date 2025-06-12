@@ -17,8 +17,9 @@ using namespace std;
 
 // Estime la qualité de l'air à une position (lat, lon) en utilisant les k mesures les plus proches dans l'intervalle [start, stop].
 // Si un pointeur vers un vecteur de mesures est fourni, il est utilisé, sinon on récupère les mesures depuis les CSV.
-double AirQualityProcessor::EstimationQualiteAirPos(double lat, double lon, int k, time_t start, time_t stop, const vector<Measurement *> *measures)
+double AirQualityProcessor::EstimationQualiteAirPos(double lat, double lon, time_t start, time_t stop, const vector<Measurement *> *measures)
 {
+    int k = 3; // Nombre de voisins à utiliser pour l'estimation locale.
     // Calcule la distance de chaque mesure à la position cible et ne garde que celles dans un rayon de 10 unités.
     vector<pair<double, const Measurement *>> distances;
     double max_dist = 10.0;
@@ -60,16 +61,21 @@ double AirQualityProcessor::EstimationQualiteAirPos(double lat, double lon, int 
 }
 
 // Surcharge : estime la qualité de l'air à une position (lat, lon) en récupérant les mesures depuis les CSV.
-double AirQualityProcessor::EstimationQualiteAirPos(double lat, double lon, int k, time_t start, time_t stop)
+double AirQualityProcessor::EstimationQualiteAirPos(double lat, double lon, time_t start, time_t stop)
 {
     vector<Measurement *> measures = GetMeasures(start, stop);
-    return EstimationQualiteAirPos(lat, lon, k, start, stop, &measures);
+    return EstimationQualiteAirPos(lat, lon, start, stop, &measures);
 }
 
 // Estime la qualité de l'air sur une zone circulaire centrée en (lat, lon) de rayon 'radius',
 // en discrétisant la zone et en moyennant les estimations locales.
-double AirQualityProcessor::EstimationQualiteAirZone(double lat, double lon, double radius, int k, time_t start, time_t stop)
+double AirQualityProcessor::EstimationQualiteAirZone(double lat, double lon, double radius, time_t start, time_t stop)
 {
+    if (radius <= 0.0)
+    {
+        // Si le rayon est négatif ou nul, retourne NaN.
+        return numeric_limits<double>::quiet_NaN();
+    }
     // Adapt the discretization step to the radius: e.g., 1/10th of the radius, with a minimum of 0.05 and a maximum of 1.0
     double step = std::max(0.05, std::min(radius / 10.0, 1.0));
     vector<Measurement *> measures = GetMeasures(start, stop);
@@ -90,7 +96,7 @@ double AirQualityProcessor::EstimationQualiteAirZone(double lat, double lon, dou
         {
             if (dlat * dlat + dlon * dlon <= radius * radius)
             {
-                double est = EstimationQualiteAirPos(lat + dlat, lon + dlon, k, start, stop, &valid_measures);
+                double est = EstimationQualiteAirPos(lat + dlat, lon + dlon, start, stop, &valid_measures);
                 if (!isnan(est))
                 {
                     estimations.push_back(est);
@@ -101,7 +107,7 @@ double AirQualityProcessor::EstimationQualiteAirZone(double lat, double lon, dou
     // Si aucune estimation n'est possible, tente une estimation centrale.
     if (estimations.empty())
     {
-        double est = EstimationQualiteAirPos(lat, lon, k, start, stop, &valid_measures);
+        double est = EstimationQualiteAirPos(lat, lon, start, stop, &valid_measures);
         if (!isnan(est))
         {
             estimations.push_back(est);
@@ -121,7 +127,7 @@ double AirQualityProcessor::EstimationQualiteAirZone(double lat, double lon, dou
 // Détecte les capteurs potentiellement détournés :
 // Pour chaque capteur, compare la valeur mesurée à une estimation locale sur la même période.
 // Si l'écart dépasse le seuil, le capteur est considéré comme détourné.
-vector<const Sensor *> AirQualityProcessor::TrouverCapteursDetournes(double radius, double seuil_limite, int k, time_t start, time_t stop)
+vector<const Sensor *> AirQualityProcessor::TrouverCapteursDetournes(double radius, double seuil_limite, time_t start, time_t stop)
 {
     vector<Measurement *> measures = GetMeasures(start, stop);
     unordered_map<unsigned int, double> estimation_cache;
@@ -143,7 +149,7 @@ vector<const Sensor *> AirQualityProcessor::TrouverCapteursDetournes(double radi
         }
         if (estimation_cache.find(capteur->GetSensorID()) == estimation_cache.end())
         {
-            double estimation = EstimationQualiteAirZone(capteur->GetLatitude(), capteur->GetLongitude(), radius, k, start, stop);
+            double estimation = EstimationQualiteAirZone(capteur->GetLatitude(), capteur->GetLongitude(), radius, start, stop);
             estimation_cache[capteur->GetSensorID()] = estimation;
         }
     }

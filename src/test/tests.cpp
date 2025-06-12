@@ -71,12 +71,11 @@ void test_T11(int &testCount, int &testPassed, int &testFailed)
 {
     testCount++;
 
-    int k = 4;
     double lat = 45.8;
     double lon = 2.15;
     double expectedValue = 41.75;
 
-    if (abs(AirQualityProcessor::EstimationQualiteAirPos(lat, lon, k, 0, -1) - expectedValue) < 0.01) {
+    if (abs(AirQualityProcessor::EstimationQualiteAirPos(lat, lon, 0, -1) - expectedValue) < 0.01) {
         cout << "\033[1;32mTest T11 réussi.\033[0m\n";
         testPassed++;
     } else {
@@ -92,11 +91,10 @@ void test_T12(int &testCount, int &testPassed, int &testFailed)
     
     testCount++;
 
-    int k = 4;
     double lat = 400;
     double lon = 400;
 
-    if (isnan(AirQualityProcessor::EstimationQualiteAirPos(lat, lon, k, 0, -1))) {
+    if (isnan(AirQualityProcessor::EstimationQualiteAirPos(lat, lon, 0, -1))) {
         cout << "\033[1;32mTest T12 réussi.\033[0m\n";
         testPassed++;
     } else {
@@ -112,12 +110,11 @@ void test_T13(int &testCount, int &testPassed, int &testFailed)
     
     testCount++;
 
-    int k = 4;
     double lat = -100;
     double lon = -100;
     double expectedValue = 70; 
 
-    if (abs(AirQualityProcessor::EstimationQualiteAirPos(lat, lon, k, 0, -1) - expectedValue) < 0.01) {
+    if (abs(AirQualityProcessor::EstimationQualiteAirPos(lat, lon, 0, -1) - expectedValue) < 0.01) {
         cout << "\033[1;32mTest T13 réussi.\033[0m\n";
         testPassed++;
     } else {
@@ -133,7 +130,6 @@ void test_T21(int &testCount, int &testPassed, int &testFailed)
     
     testCount++;
 
-    int k = 6;
     double lat = 45;
     double lon = 2.5;
     double radius = 10;
@@ -141,7 +137,7 @@ void test_T21(int &testCount, int &testPassed, int &testFailed)
     time_t start = 0; 
     time_t stop = -1; 
 
-    if (abs(AirQualityProcessor::EstimationQualiteAirZone(lat, lon, radius, k, start, stop)- expectedValue) < 0.01) {
+    if (abs(AirQualityProcessor::EstimationQualiteAirZone(lat, lon, radius, start, stop)- expectedValue) < 0.01) {
         cout << "\033[1;32mTest T21 réussi.\033[0m\n";
         testPassed++;
     } else {
@@ -158,14 +154,13 @@ void test_T22(int &testCount, int &testPassed, int &testFailed)
     
     testCount++;
 
-    int k = 6;
     double lat = 400;
     double lon = 400;
     double radius = 2;
     time_t start = 0;
     time_t stop = -1;
 
-    if (isnan(AirQualityProcessor::EstimationQualiteAirZone(lat, lon, radius, k, start, stop))) {
+    if (isnan(AirQualityProcessor::EstimationQualiteAirZone(lat, lon, radius, start, stop))) {
         cout << "\033[1;32mTest T22 réussi.\033[0m\n";
         testPassed++;
     } else {
@@ -181,7 +176,6 @@ void test_T23(int &testCount, int &testPassed, int &testFailed)
     
     testCount++;
 
-    int k = 6;
     double lat = -100;
     double lon = -100;
     double radius = 0.1;
@@ -189,7 +183,7 @@ void test_T23(int &testCount, int &testPassed, int &testFailed)
     time_t start = 0;
     time_t stop = -1;
 
-    if (abs(AirQualityProcessor::EstimationQualiteAirZone(lat, lon, radius, k, start, stop) - expectedValue) < 0.1) {
+    if (abs(AirQualityProcessor::EstimationQualiteAirZone(lat, lon, radius, start, stop) - expectedValue) < 0.1) {
         cout << "\033[1;32mTest T23 réussi.\033[0m\n";
         testPassed++;
     } else {
@@ -208,9 +202,8 @@ void test_T31(int &testCount, int &testPassed, int &testFailed)
     double radius = 10;
     double seuil_limite = 10;
     unsigned int id_ref = 88; // ID du capteur de référence
-    int k = 6;
 
-    std::vector<const Sensor *> detournes = AirQualityProcessor::TrouverCapteursDetournes(radius, seuil_limite, k, 0, -1);
+    std::vector<const Sensor *> detournes = AirQualityProcessor::TrouverCapteursDetournes(radius, seuil_limite, 0, -1);
     bool capteurTrouve = false;
 
     for (const Sensor* capteur : detournes) {
@@ -239,11 +232,10 @@ void test_T32(int &testCount, int &testPassed, int &testFailed)
     double radius = 10;
     double seuil_limite = 10;
     unsigned int id_ref = 666;
-    int k = 6;
     time_t start = 0;
     time_t stop = -1; 
 
-    std::vector<const Sensor *> detournes = AirQualityProcessor::TrouverCapteursDetournes(radius, seuil_limite, k, start, stop);
+    std::vector<const Sensor *> detournes = AirQualityProcessor::TrouverCapteursDetournes(radius, seuil_limite, start, stop);
     bool capteurTrouve = false;
 
     for (const Sensor* capteur : detournes) {

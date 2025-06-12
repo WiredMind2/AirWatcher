@@ -35,7 +35,6 @@ using namespace std;
 void consulter_capteurs_defaillants()
 {
     double seuil_limite, radius;
-    int k = 4;
 
     time_t start = demander_date("début");
     time_t stop = demander_date("fin");
@@ -48,7 +47,7 @@ void consulter_capteurs_defaillants()
     // cout << "Entrez le nombre de voisins (k): ";
     // cin >> k;
 
-    vector<const Sensor *> capteurs_defaillants = AirQualityProcessor::TrouverCapteursDetournes(radius, seuil_limite, k, start, stop);
+    vector<const Sensor *> capteurs_defaillants = AirQualityProcessor::TrouverCapteursDetournes(radius, seuil_limite, start, stop);
     for (const auto &sensor : capteurs_defaillants)
     {
         cout << "Le capteur" << sensor->GetSensorID() << "est défaillant." << "\n";

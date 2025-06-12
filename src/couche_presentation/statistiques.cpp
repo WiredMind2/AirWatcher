@@ -16,17 +16,14 @@ e-mails              : aaron.berton@insa-lyon.fr, william.michaud@insa-lyon.fr, 
 
 void calculQualiteAirPos() {
 	double lat, lon;
-	int k;
 
 	std::cout << "Entrez la latitude: ";
 	std::cin >> lat;
 	std::cout << "Entrez la longitude: ";
 	std::cin >> lon;
-	std::cout << "Entrez le nombre de voisins (k): ";
-	std::cin >> k;
 
 	// Appel à la fonction de traitement pour estimer la qualité de l'air
-	double estimation = AirQualityProcessor::EstimationQualiteAirPos(lat, lon, k);
+	double estimation = AirQualityProcessor::EstimationQualiteAirPos(lat, lon);
 	if (std::isnan(estimation)) {
 		std::cout << "Aucune mesure disponible pour cette position.\n";
 	} else {
@@ -36,7 +33,6 @@ void calculQualiteAirPos() {
 
 void calculQualiteAirZone() {
 	double lat, lon, radius;
-	int k;
 
 	std::cout << "Entrez la latitude du centre de la zone: ";
 	std::cin >> lat;
@@ -44,11 +40,9 @@ void calculQualiteAirZone() {
 	std::cin >> lon;
 	std::cout << "Entrez le rayon de la zone (en degrés): ";
 	std::cin >> radius;
-	std::cout << "Entrez le nombre de voisins (k): ";
-	std::cin >> k;
 
 	// Appel à la fonction de traitement pour estimer la qualité de l'air sur la zone
-	double estimation = AirQualityProcessor::EstimationQualiteAirZone(lat, lon, radius, k);
+	double estimation = AirQualityProcessor::EstimationQualiteAirZone(lat, lon, radius);
 	if (std::isnan(estimation)) {
 		std::cout << "Aucune mesure disponible pour cette zone.\n";
 	} else {

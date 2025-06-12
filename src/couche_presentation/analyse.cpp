@@ -31,12 +31,10 @@ void analyse_donnees_capteurs()
 	time_t dateDebut = demander_date("début");
 	time_t dateFin = demander_date("fin");
 
-	int k = 4;
-
 	cout << "Analyse de la qualité de l'air à la position (" << latitude << ", " << longitude << ") entre " << put_time(localtime(&dateDebut), "%Y-%m-%d") << " et " << put_time(localtime(&dateFin), "%Y-%m-%d") << endl;
 
 	// Appel à la fonction de traitement pour analyser les données
-	double qualiteAir = AirQualityProcessor::EstimationQualiteAirPos(latitude, longitude, k, dateDebut, dateFin);
+	double qualiteAir = AirQualityProcessor::EstimationQualiteAirPos(latitude, longitude, dateDebut, dateFin);
 	cout << "Qualité de l'air estimée à la position (" << latitude << ", " << longitude << ") : " << qualiteAir << endl;
 };
 
@@ -44,8 +42,7 @@ void identifier_capteurs_non_fiables()
 {
 	cout << "\033[1;31mAnalyse des capteurs non fiables.\033[0m" << endl;
 	// Appel à la fonction de traitement pour trouver les capteurs non fiables
-	int k = 4;
-	vector<const Sensor *> capteurs_non_fiables = AirQualityProcessor::TrouverCapteursDetournes(10.0, 0.5, k, 0, -1);
+	vector<const Sensor *> capteurs_non_fiables = AirQualityProcessor::TrouverCapteursDetournes(10.0, 0.5, 0, -1);
 
 	// Affichage des capteurs non fiables
 	if (capteurs_non_fiables.empty())

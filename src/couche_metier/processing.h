@@ -22,8 +22,8 @@ public:
 	// measures : liste de toutes les mesures disponibles
 	// k : nombre de voisins à utiliser (par défaut 4)
 	// Retourne la valeur estimée de la qualité de l'air ou NaN si aucune mesure n'est disponible
-	static double EstimationQualiteAirPos(double lat, double lon, int k, time_t start, time_t stop, const std::vector<Measurement *> *measures);
-	static double EstimationQualiteAirPos(double lat, double lon, int k = 4, time_t start=0, time_t stop=-1);
+	static double EstimationQualiteAirPos(double lat, double lon, time_t start, time_t stop, const std::vector<Measurement *> *measures);
+	static double EstimationQualiteAirPos(double lat, double lon, time_t start=0, time_t stop=-1);
 
 	// Estime la qualité de l'air sur une zone circulaire (centre lat, lon, rayon en degrés)
 	// lat, lon : coordonnées du centre de la zone
@@ -32,7 +32,7 @@ public:
 	// k : nombre de voisins à utiliser (par défaut 4)
 	// step : pas de discrétisation de la zone (par défaut 1)
 	// Retourne la moyenne des estimations dans la zone
-	static double EstimationQualiteAirZone(double lat, double lon, double radius, int k = 4, time_t start=0, time_t stop=-1);
+	static double EstimationQualiteAirZone(double lat, double lon, double radius, time_t start=0, time_t stop=-1);
 
 	// Trouve les capteurs détournés (valeur estimée différente de la valeur mesurée)
 	// measures : liste de toutes les mesures disponibles
@@ -41,7 +41,7 @@ public:
 	// k : nombre de voisins à utiliser pour l'estimation (par défaut 4)
 	// step : pas de discrétisation de la zone (par défaut 1)
 	// Retourne une liste de pointeurs vers les capteurs détournés
-	static std::vector<const Sensor *> TrouverCapteursDetournes(double radius = 0.02, double seuil_limite = 20.0, int k = 4, time_t start=0, time_t stop=-1);
+	static std::vector<const Sensor *> TrouverCapteursDetournes(double radius = 0.02, double seuil_limite = 20.0, time_t start=0, time_t stop=-1);
 
 	// Trouve les capteurs similaires à un capteur de référence
 	// id_ref : identifiant du capteur de référence
