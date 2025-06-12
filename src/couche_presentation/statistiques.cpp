@@ -10,6 +10,7 @@ e-mails              : aaron.berton@insa-lyon.fr, william.michaud@insa-lyon.fr, 
 #include "statistiques.h"
 #include <iostream>
 #include "../couche_metier/processing.h"
+#include "analyse.h"
 
 //----------------------------------------------------------------- FONCTIONS STATISTIQUES
 // Chaque fonction calcule ou affiche une statistique sur la qualité de l'air ou l'utilisation.
@@ -22,8 +23,11 @@ void calculQualiteAirPos() {
 	std::cout << "Entrez la longitude: ";
 	std::cin >> lon;
 
+	time_t dateDebut = demander_date("début");
+	time_t dateFin = demander_date("fin");
+
 	// Appel à la fonction de traitement pour estimer la qualité de l'air
-	double estimation = AirQualityProcessor::EstimationQualiteAirPos(lat, lon);
+	double estimation = AirQualityProcessor::EstimationQualiteAirPos(lat, lon, dateDebut, dateFin);
 	if (std::isnan(estimation)) {
 		std::cout << "Aucune mesure disponible pour cette position.\n";
 	} else {
@@ -41,8 +45,12 @@ void calculQualiteAirZone() {
 	std::cout << "Entrez le rayon de la zone (en degrés): ";
 	std::cin >> radius;
 
+	time_t dateDebut = demander_date("début");
+	time_t dateFin = demander_date("fin");
+
+
 	// Appel à la fonction de traitement pour estimer la qualité de l'air sur la zone
-	double estimation = AirQualityProcessor::EstimationQualiteAirZone(lat, lon, radius);
+	double estimation = AirQualityProcessor::EstimationQualiteAirZone(lat, lon, radius, dateDebut, dateFin, true);
 	if (std::isnan(estimation)) {
 		std::cout << "Aucune mesure disponible pour cette zone.\n";
 	} else {
@@ -56,10 +64,13 @@ void classerCapteursSimilaires() {
 
 	std::cin >> id_ref;
 
+	time_t dateDebut = demander_date("début");
+	time_t dateFin = demander_date("fin");
+
 	std::cout << "Recherche des capteurs similaires au capteur ID " << id_ref << "...\n";
 
 	// Appel à la fonction de traitement pour trouver les capteurs similaires
-	std::vector<const Sensor *> capteurs_similaires = AirQualityProcessor::ListerCapteursSimilaires(id_ref, 0, -1);
+	std::vector<const Sensor *> capteurs_similaires = AirQualityProcessor::ListerCapteursSimilaires(id_ref, dateDebut, dateFin);
 	if (capteurs_similaires.empty()) {
 		std::cout << "Aucun capteur similaire trouvé.\n";
 	} else {
