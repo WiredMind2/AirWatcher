@@ -147,12 +147,6 @@ protected:
     static unordered_map<unsigned int, Sensor*> sensors;
     static unordered_map<unsigned int, int> filterdUsers;
 
-private:
-//----------------------------------------------------- Méthodes privées
-    // Links objects together using ids
-    void linkAllObjects();
-    void linkUsers();
-
 };
 
 //-------------------------------- Autres définitions dépendantes de <CSVHandler>
