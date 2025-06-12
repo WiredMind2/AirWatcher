@@ -9,6 +9,7 @@ e-mails              : aaron.berton@insa-lyon.fr, william.michaud@insa-lyon.fr, 
 //---------------------------------------------------------------- INCLUDE
 #include "statistiques.h"
 #include <iostream>
+#include <iomanip>
 #include "../couche_metier/processing.h"
 #include "analyse.h"
 
@@ -27,11 +28,14 @@ void calculQualiteAirPos() {
 	time_t dateFin = demander_date("fin");
 
 	// Appel à la fonction de traitement pour estimer la qualité de l'air
-	double estimation = AirQualityProcessor::EstimationQualiteAirPos(lat, lon, dateDebut, dateFin);
-	if (std::isnan(estimation)) {
+	auto estimation = AirQualityProcessor::EstimationQualiteAirPos(lat, lon, dateDebut, dateFin);
+	if (estimation.empty()) {
 		std::cout << "Aucune mesure disponible pour cette position.\n";
 	} else {
-		std::cout << "Estimation de la qualité de l'air à (" << lat << ", " << lon << ") : " << estimation << "\n";
+		std::cout << "Estimation de la qualité de l'air à (" << lat << ", " << lon << ") : " << std::endl;
+		for (const auto &pair : estimation) {
+			std::cout << "Attribut ID: " << pair.first << ", Valeur estimée: " << fixed << setprecision(2) << pair.second << std::endl;
+		}
 	}
 }
 
@@ -50,11 +54,14 @@ void calculQualiteAirZone() {
 
 
 	// Appel à la fonction de traitement pour estimer la qualité de l'air sur la zone
-	double estimation = AirQualityProcessor::EstimationQualiteAirZone(lat, lon, radius, dateDebut, dateFin, true);
-	if (std::isnan(estimation)) {
+	auto estimation = AirQualityProcessor::EstimationQualiteAirZone(lat, lon, radius, dateDebut, dateFin, true);
+	if (estimation.empty()) {
 		std::cout << "Aucune mesure disponible pour cette zone.\n";
 	} else {
-		std::cout << "Estimation de la qualité de l'air sur la zone centrée à (" << lat << ", " << lon << ") : " << estimation << "\n";
+		std::cout << "Estimation de la qualité de l'air sur la zone centrée à (" << lat << ", " << lon << ") : " << std::endl;
+		for (const auto &pair : estimation) {
+			std::cout << "Attribut ID: " << pair.first << ", Valeur estimée: " << fixed << setprecision(2) << pair.second << std::endl;
+		}
 	}
 }
 

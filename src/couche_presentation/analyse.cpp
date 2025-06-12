@@ -35,8 +35,18 @@ void analyse_donnees_capteurs()
 	cout << "Analyse de la qualité de l'air à la position (" << latitude << ", " << longitude << ") entre " << put_time(localtime(&dateDebut), "%Y-%m-%d") << " et " << put_time(localtime(&dateFin), "%Y-%m-%d") << endl;
 
 	// Appel à la fonction de traitement pour analyser les données
-	double qualiteAir = AirQualityProcessor::EstimationQualiteAirPos(latitude, longitude, dateDebut, dateFin);
-	cout << "Qualité de l'air estimée à la position (" << latitude << ", " << longitude << ") : " << qualiteAir << endl;
+	auto qualiteAir = AirQualityProcessor::EstimationQualiteAirPos(latitude, longitude, dateDebut, dateFin);
+	if (qualiteAir.empty())
+	{
+		cout << "Aucune donnée de qualité de l'air disponible pour cette position et cette période." << endl;
+		return;
+	}
+
+	// cout << "Qualité de l'air estimée à la position (" << latitude << ", " << longitude << ") : " << endl;
+	for (const auto &pair : qualiteAir)
+	{
+		cout << "	" << CSVHandler::getAttribute(pair.first)->GetAttributeID() << ": Valeur estimée: " << fixed << setprecision(2) << pair.second << endl;
+	}
 };
 
 void identifier_capteurs_non_fiables()
@@ -72,8 +82,8 @@ void analyser_impact_purificateurs()
 	cout << "Veuillez entrer l'ID du purificateur à analyser : ";
 	cin >> cleanerID;
 
-	Cleaner cleaner = CSVHandler::getCleaner(cleanerID);
-	if (cleaner.GetCleanerID() == 0)
+	Cleaner* cleaner = CSVHandler::getCleaner(cleanerID);
+	if (cleaner->GetCleanerID() == 0)
 	{
 		cerr << "Purificateur non trouvé." << endl;
 		return;
@@ -87,11 +97,19 @@ void analyser_impact_purificateurs()
 	// const int dayInSeconds = 86400; // Nombre de secondes dans un jour
 
 	// Appel à la fonction de traitement pour analyser l'impact sur une zone autour du purificateur
-	double qualiteAvant = AirQualityProcessor::EstimationQualiteAirZone(cleaner.GetLatitude(), cleaner.GetLongitude(), 10.0, 0, cleaner.GetTimeStart());
-	cout << "Qualité de l'air avant nettoyage : " << qualiteAvant << endl;
+	auto qualiteAvant = AirQualityProcessor::EstimationQualiteAirZone(cleaner->GetLatitude(), cleaner->GetLongitude(), 10.0, 0, cleaner->GetTimeStart());
+	cout << "Qualité de l'air avant nettoyage : " << endl;
+	for (const auto &pair : qualiteAvant)
+	{
+		cout << "	" << CSVHandler::getAttribute(pair.first)->GetAttributeID() << ": Valeur estimée: " << fixed << setprecision(2) << pair.second << endl;
+	}
 
-	double qualiteApres = AirQualityProcessor::EstimationQualiteAirZone(cleaner.GetLatitude(), cleaner.GetLongitude(), 10.0, cleaner.GetTimeStop(), -1);
-	cout << "Qualité de l'air après nettoyage : " << qualiteApres << endl;
+	auto qualiteApres = AirQualityProcessor::EstimationQualiteAirZone(cleaner->GetLatitude(), cleaner->GetLongitude(), 10.0, cleaner->GetTimeStop(), -1);
+	cout << "Qualité de l'air après nettoyage : " << endl;
+	for (const auto &pair : qualiteApres)
+	{
+		cout << "	" << CSVHandler::getAttribute(pair.first)->GetAttributeID() << ": Valeur estimée: " << fixed << setprecision(2) << pair.second << endl;
+	}
 };
 
 time_t demander_date(const string &desc)
