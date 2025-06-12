@@ -17,7 +17,7 @@ using namespace std;
 
 // Estime la qualité de l'air à une position (lat, lon) en utilisant les k mesures les plus proches dans l'intervalle [start, stop].
 // Si un pointeur vers un vecteur de mesures est fourni, il est utilisé, sinon on récupère les mesures depuis les CSV.
-unordered_map<unsigned int, double> AirQualityProcessor::EstimationQualiteAirPos(double lat, double lon, time_t start, time_t stop, const unordered_map<unsigned int, vector<Measurement *>> *measures)
+unordered_map<unsigned int, double> Processing::EstimationQualiteAirPos(double lat, double lon, time_t start, time_t stop, const unordered_map<unsigned int, vector<Measurement *>> *measures)
 {
     int k = 3; // Nombre de voisins à utiliser pour l'estimation locale.
     double max_dist = 10.0;
@@ -71,13 +71,13 @@ unordered_map<unsigned int, double> AirQualityProcessor::EstimationQualiteAirPos
 }
 
 // Surcharge : estime la qualité de l'air à une position (lat, lon) en récupérant les mesures depuis les CSV.
-unordered_map<unsigned int, double> AirQualityProcessor::EstimationQualiteAirPos(double lat, double lon, time_t start, time_t stop)
+unordered_map<unsigned int, double> Processing::EstimationQualiteAirPos(double lat, double lon, time_t start, time_t stop)
 {
     auto measures = GetMeasures(start, stop);
     return EstimationQualiteAirPos(lat, lon, start, stop, &measures);
 }
 
-unordered_map<unsigned int, double> AirQualityProcessor::EstimationQualiteAirPos(double lat, double lon, time_t start, time_t stop, const vector<Measurement *> *measures)
+unordered_map<unsigned int, double> Processing::EstimationQualiteAirPos(double lat, double lon, time_t start, time_t stop, const vector<Measurement *> *measures)
 {
     unordered_map<unsigned int, vector<Measurement *>> measures_map;
     // Regroupe les mesures par attributeId.
@@ -90,7 +90,7 @@ unordered_map<unsigned int, double> AirQualityProcessor::EstimationQualiteAirPos
 
 // Estime la qualité de l'air sur une zone circulaire centrée en (lat, lon) de rayon 'radius',
 // en discrétisant la zone et en moyennant les estimations locales.
-unordered_map<unsigned int, double> AirQualityProcessor::EstimationQualiteAirZone(double lat, double lon, double radius, time_t start, time_t stop, bool log)
+unordered_map<unsigned int, double> Processing::EstimationQualiteAirZone(double lat, double lon, double radius, time_t start, time_t stop, bool log)
 {
 
     if (radius <= 0.0)
@@ -188,7 +188,7 @@ unordered_map<unsigned int, double> AirQualityProcessor::EstimationQualiteAirZon
 // Détecte les capteurs potentiellement détournés :
 // Pour chaque capteur, compare la valeur mesurée à une estimation locale sur la même période.
 // Si l'écart dépasse le seuil, le capteur est considéré comme détourné.
-vector<const Sensor *> AirQualityProcessor::TrouverCapteursDetournes(double radius, double seuil_limite, time_t start, time_t stop)
+vector<const Sensor *> Processing::TrouverCapteursDetournes(double radius, unordered_map<unsigned int, double> seuils_limite, time_t start, time_t stop)
 {
     auto measures = GetMeasures(start, stop);
     vector<const Sensor *> capteurs_detournes;
@@ -201,8 +201,17 @@ vector<const Sensor *> AirQualityProcessor::TrouverCapteursDetournes(double radi
     // Agrège les mesures et calcule les estimations pour chaque capteur.
     for (const auto &pair : measures)
     {
+        unsigned int attribute_id = pair.first;
+
+        if (seuils_limite.find(attribute_id) == seuils_limite.end())
+        {
+            // Si l'attribut n'a pas de seuil défini, on le saute.
+            continue;
+        }
+
         unordered_map<unsigned int, double> mesure_cache;
         unordered_map<unsigned int, int> mesure_count;
+
         for (const Measurement *mesure : pair.second)
         {
             const Sensor *capteur = mesure->GetSensor();
@@ -222,13 +231,18 @@ vector<const Sensor *> AirQualityProcessor::TrouverCapteursDetournes(double radi
         }
 
         // Compare la valeur mesurée et l'estimation pour chaque capteur.
-        for (const auto &pair : mesure_cache)
+        for (const auto &mpair : mesure_cache)
         {
-            unsigned int sensor_id = pair.first;
-            double mesure_value = pair.second / mesure_count[sensor_id];
-            double estimation_value = estimation_cache[sensor_id][pair.first];
-            if (fabs(estimation_value - mesure_value) > seuil_limite)
+            unsigned int sensor_id = mpair.first;
+            double mesure_value = mpair.second / mesure_count[sensor_id];
+            double estimation_value = estimation_cache[sensor_id][attribute_id];
+            if (fabs(estimation_value - mesure_value) > seuils_limite[attribute_id])
             {
+                // cout << "Capteur détourné détecté : ID " << sensor_id
+                //         << ", Attribut ID: " << attribute_id
+                //      << ", Mesure: " << mesure_value
+                //      << ", Estimation: " << estimation_value
+                //      << ", Écart: " << fabs(estimation_value - mesure_value) << "\n";
                 try
                 {
                     const Sensor *capteur = CSVHandler::getSensor(sensor_id);
@@ -247,7 +261,7 @@ vector<const Sensor *> AirQualityProcessor::TrouverCapteursDetournes(double radi
 
 // Liste les capteurs dont la valeur moyenne sur la période [start, stop] est similaire à celle d'un capteur de référence (id_ref).
 // Deux capteurs sont considérés similaires si leur valeur moyenne diffère de moins de 10%.
-vector<const Sensor *> AirQualityProcessor::ListerCapteursSimilaires(unsigned int id_ref, time_t start, time_t stop)
+vector<const Sensor *> Processing::ListerCapteursSimilaires(unsigned int id_ref, time_t start, time_t stop)
 {
 
     double precision = 0.1; // 10% de tolérance pour la similarité des valeurs.
@@ -279,7 +293,7 @@ vector<const Sensor *> AirQualityProcessor::ListerCapteursSimilaires(unsigned in
         }
 
         // Vérifie que le capteur de référence existe dans le cache et a au moins une mesure.
-        if (mesure_cache.find(id_ref) == mesure_cache.end() || mesure_count.find(id_ref) == mesure_count.end() || mesure_count[id_ref] == 0) 
+        if (mesure_cache.find(id_ref) == mesure_cache.end() || mesure_count.find(id_ref) == mesure_count.end() || mesure_count[id_ref] == 0)
             continue;
 
         // Calcule la valeur moyenne du capteur de référence.
@@ -324,7 +338,7 @@ vector<const Sensor *> AirQualityProcessor::ListerCapteursSimilaires(unsigned in
 }
 
 // Récupère toutes les mesures comprises entre deux timestamps, groupées par attributeId.
-unordered_map<unsigned int, vector<Measurement *>> AirQualityProcessor::GetMeasures(time_t start, time_t stop)
+unordered_map<unsigned int, vector<Measurement *>> Processing::GetMeasures(time_t start, time_t stop)
 {
     vector<Measurement *> allMeasures = CSVHandler::getMeasurement(start, stop);
     unordered_map<unsigned int, vector<Measurement *>> groupedMeasures;
@@ -337,7 +351,7 @@ unordered_map<unsigned int, vector<Measurement *>> AirQualityProcessor::GetMeasu
 }
 
 // Calcule la distance euclidienne entre deux points géographiques (lat1, lon1) et (lat2, lon2).
-double AirQualityProcessor::GetDistance(double lat1, double lon1, double lat2, double lon2)
+double Processing::GetDistance(double lat1, double lon1, double lat2, double lon2)
 {
     double dlat = lat2 - lat1;
     double dlon = lon2 - lon1;
@@ -345,20 +359,20 @@ double AirQualityProcessor::GetDistance(double lat1, double lon1, double lat2, d
 }
 
 // Calcule la distance entre deux capteurs.
-double AirQualityProcessor::GetDistance(const Sensor &sensor1, const Sensor &sensor2)
+double Processing::GetDistance(const Sensor &sensor1, const Sensor &sensor2)
 {
     return GetDistance(sensor1.GetLatitude(), sensor1.GetLongitude(), sensor2.GetLatitude(), sensor2.GetLongitude());
 }
 
 // Calcule la distance entre deux mesures (via leurs capteurs).
-double AirQualityProcessor::GetDistance(const Measurement &measurement1, const Measurement &measurement2)
+double Processing::GetDistance(const Measurement &measurement1, const Measurement &measurement2)
 {
     return GetDistance(measurement1.GetSensor()->GetLatitude(), measurement1.GetSensor()->GetLongitude(),
                        measurement2.GetSensor()->GetLatitude(), measurement2.GetSensor()->GetLongitude());
 }
 
 // Calcule la distance entre une mesure et une position géographique.
-double AirQualityProcessor::GetDistance(const Measurement *measurement, double lat, double lon)
+double Processing::GetDistance(const Measurement *measurement, double lat, double lon)
 {
     return GetDistance(measurement->GetSensor()->GetLatitude(), measurement->GetSensor()->GetLongitude(), lat, lon);
 }
