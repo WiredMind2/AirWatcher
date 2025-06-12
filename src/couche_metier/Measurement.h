@@ -13,6 +13,7 @@ e-mails              : aaron.berton@insa-lyon.fr, william.michaud@insa-lyon.fr, 
 #include <string>
 #include <ctime>
 #include "Sensor.h"
+#include "Attribute.h"
 using std::string;
 
 //------------------------------------------------------------------ Types
@@ -29,15 +30,15 @@ class Measurement
 
 public:
     //----------------------------------------------------- Méthodes publiques
-    Measurement(time_t timestamp, double value, unsigned int sensorID, const string &attributeID): 
-        timestamp(timestamp), value(value), sensorID(sensorID), attributeID(attributeID) {};
+    Measurement(time_t timestamp, double value, unsigned int sensorID, const string &attribute);
     virtual ~Measurement() {};
 
-    Sensor* GetSensor() const;
     double GetValue() const { return value; };
     time_t GetTimestamp() const { return timestamp; };
     unsigned int GetSensorID() const { return sensorID; };
-    string GetAttributeID() const { return attributeID; };
+    int GetAttributeID() const { return attributeId; };
+    Sensor* GetSensor() const;
+    Attribute* GetAttribute() const;
 
     //------------------------------------------------------------------ PRIVE
 protected:
@@ -45,7 +46,7 @@ protected:
     time_t timestamp;
     double value;
     unsigned int sensorID;
-    string attributeID;
+    int attributeId;
 };
 
 //-------------------------------- Autres définitions dépendantes de <Measurement>

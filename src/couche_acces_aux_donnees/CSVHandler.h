@@ -22,6 +22,7 @@ e-mails              : aaron.berton@insa-lyon.fr, william.michaud@insa-lyon.fr, 
 #include "../couche_metier/Provider.h"
 #include "../couche_metier/Sensor.h"
 #include "../couche_metier/User.h"
+#include "../couche_metier/Attribute.h"
 
 using namespace std;
 
@@ -75,6 +76,13 @@ public:
     // Contrat :
     // Le fichier CSV des utilisateurs doit exister dans le dossier spécifié.
 
+    static void extractAttributes(const string &folder);
+    // Mode d'emploi :
+    // Cette méthode extrait les données des attributs à partir d'un fichier CSV situé dans le dossier spécifié.
+    //
+    // Contrat :
+    // Le fichier CSV des attributs doit exister dans le dossier spécifié.
+
     static void addUnreliable(const string &folder, const vector<unsigned int> &unreliableUserIds);
     // Mode d'emploi :
     // Cette méthode ajoute dans la map filtrée des utilisateurs les utilisateurs non fiables
@@ -84,33 +92,26 @@ public:
 
 
     //getters
-    static Cleaner getCleaner(unsigned int id);
+    static Cleaner* getCleaner(unsigned int id);
     // Mode d'emploi :
     // Retourne un objet Cleaner correspondant à l'identifiant spécifié.
     //
     // Contrat :
     // L'identifiant doit correspondre à un Cleaner existant.
 
-    static Individual getIndividual(unsigned int id);
+    static Individual* getIndividual(unsigned int id);
     // Mode d'emploi :
     // Retourne un objet Individual correspondant à l'identifiant spécifié.
     //
     // Contrat :
     // L'identifiant doit correspondre à un Individual existant.
 
-    static Provider getProvider(unsigned int id);
+    static Provider* getProvider(unsigned int id);
     // Mode d'emploi :
     // Retourne un objet Provider correspondant à l'identifiant spécifié.
     //
     // Contrat :
     // L'identifiant doit correspondre à un Provider existant.
-
-    static User getUser(unsigned int id);
-    // Mode d'emploi :
-    // Retourne un objet User correspondant à l'identifiant spécifié.
-    //
-    // Contrat :
-    // L'identifiant doit correspondre à un User existant.
 
     static Sensor* getSensor(unsigned int id);
     // Mode d'emploi :
@@ -133,6 +134,21 @@ public:
     // Contrat :
     // Les dates de début et de fin doivent être valides et start doit être antérieur ou égal à stop.
 
+    static int getAttributeID(const string &attribute);
+    // Mode d'emploi :
+    // Retourne l'identifiant de l'attribut correspondant à la chaîne de caractères spécifiée.
+    //
+    // Contrat :
+    // La chaîne de caractères spécifiée doit correspondre à un attribut existant.
+
+
+    static Attribute* getAttribute(unsigned int id);
+    // Mode d'emploi :
+    // Retourne un objet Attribute correspondant à l'identifiant spécifié.
+    //
+    // Contrat :
+    // L'identifiant doit correspondre à un Attribute existant.
+
 //------------------------------------------------------------------ PRIVE
 
 protected:
@@ -146,6 +162,7 @@ protected:
     static unordered_map<unsigned int, Provider*> providers;
     static unordered_map<unsigned int, Sensor*> sensors;
     static unordered_map<unsigned int, int> filterdUsers;
+    static unordered_map<unsigned int, Attribute*> attributes;
 
 };
 

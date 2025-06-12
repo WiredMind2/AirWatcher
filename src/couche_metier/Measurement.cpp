@@ -26,7 +26,16 @@ using namespace std;
 
 //----------------------------------------------------- Méthodes publiques
 
-Sensor* Measurement::GetSensor() const
+
+Measurement::Measurement(time_t timestamp, double value, unsigned int sensorID, const string &attribute): 
+        timestamp(timestamp), value(value), sensorID(sensorID), attributeId(CSVHandler::getAttributeID(attribute)) {};
+
+Sensor *Measurement::GetSensor() const
 {
     return CSVHandler::getSensor(sensorID);
-}
+};
+
+Attribute *Measurement::GetAttribute() const
+{
+    return CSVHandler::getAttribute(attributeId);
+};

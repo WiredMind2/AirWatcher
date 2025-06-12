@@ -29,11 +29,17 @@ public:
 //----------------------------------------------------- Méthodes publiques
 
     // Constructeur
-    Attribute(int id, const string &unit, const string &description): 
-        attributeID(id), unit(unit), description(description) {};
+    Attribute(int id, const string &attrId, const string &unit, const string &description): 
+        id(id), attributeID(attrId), unit(unit), description(description) {};
 
     // Destructeur
     virtual ~Attribute() {};
+
+    // Getters
+    int GetID() const { return id; }
+    string GetAttributeID() const { return attributeID; }
+    string GetUnit() const { return unit; }
+    string GetDescription() const { return description; }
 
 //------------------------------------------------------------------ PRIVE
 
@@ -41,7 +47,8 @@ protected:
 //----------------------------------------------------- Méthodes protégées
 
 //----------------------------------------------------- Attributs protégés
-    int attributeID;
+    int id;
+    string attributeID;
     string unit;
     string description;
 

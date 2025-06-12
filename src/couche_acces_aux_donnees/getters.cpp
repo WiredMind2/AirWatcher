@@ -30,6 +30,7 @@ multimap<time_t, Measurement*> CSVHandler::measurements;
 unordered_map<unsigned int, Provider*> CSVHandler::providers;
 unordered_map<unsigned int, Sensor*> CSVHandler::sensors;
 unordered_map<unsigned int, int> CSVHandler::filterdUsers;
+unordered_map<unsigned int, Attribute*> CSVHandler::attributes;
 
 
 //----------------------------------------------------------------- PUBLIC
@@ -48,27 +49,30 @@ void CSVHandler::addUnreliable(const string &folder, const vector<unsigned int> 
 }
 
 // Getters
-Cleaner CSVHandler::getCleaner(unsigned int id) {
+Cleaner* CSVHandler::getCleaner(unsigned int id) {
     auto it = cleaners.find(id);
     if (it != cleaners.end()) {
-        return *it->second;
+        return it->second;
     }
     throw runtime_error("Cleaner not found");
 }
-Individual CSVHandler::getIndividual(unsigned int id) {
+
+Individual* CSVHandler::getIndividual(unsigned int id) {
     auto it = individuals.find(id);
     if (it != individuals.end()) {
-        return *it->second;
+        return it->second;
     }
     throw runtime_error("Individual not found");
 }
-Provider CSVHandler::getProvider(unsigned int id) {
+
+Provider* CSVHandler::getProvider(unsigned int id) {
     auto it = providers.find(id);
     if (it != providers.end()) {
-        return *it->second;
+        return it->second;
     }
     throw runtime_error("Provider not found");
 }
+
 Sensor* CSVHandler::getSensor(unsigned int id) {
     auto it = sensors.find(id);
     if (it != sensors.end()) {
@@ -79,17 +83,13 @@ Sensor* CSVHandler::getSensor(unsigned int id) {
     }
     throw runtime_error("Sensor not found");
 }
+
 unsigned int CSVHandler::getFilterdUser(unsigned int id) {
     auto it = filterdUsers.find(id);
     if (it != filterdUsers.end()) {
         return it->first;
     }
     throw runtime_error("User not found");
-}
-
-User CSVHandler::getUser(unsigned int id) { 
-    // TODO
-    throw runtime_error("Not implemented yet");
 }
 
 vector<Measurement*> CSVHandler::getMeasurement(time_t start, time_t stop) {
@@ -120,6 +120,23 @@ vector<Measurement*> CSVHandler::getMeasurement(time_t start, time_t stop) {
     return results;
 }
 
+int CSVHandler::getAttributeID(const string &attribute)
+{
+    for (const auto &pair : attributes) {
+        if (pair.second->GetAttributeID() == attribute) {
+            return pair.first;
+        }
+    }
+    throw runtime_error("Attribute not found: " + attribute);
+}
+
+Attribute* CSVHandler::getAttribute(unsigned int id) {
+    auto it = attributes.find(id);
+    if (it != attributes.end()) {
+        return it->second;
+    }
+    throw runtime_error("Attribute not found: " + to_string(id));
+}
 
 //------------------------------------------------------------------ PRIVE
 

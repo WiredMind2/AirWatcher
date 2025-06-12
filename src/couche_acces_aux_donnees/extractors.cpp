@@ -37,6 +37,7 @@ time_t stringToTimeT(const string& dateTimeStr) {
 
 //----------------------------------------------------- Méthodes publiques
 void CSVHandler::extractAll(const string &folder) {
+    extractAttributes(folder);
     extractCleaners(folder);
     extractSensors(folder);
     extractMeasurements(folder);
@@ -203,9 +204,25 @@ void CSVHandler::extractIndividuals(const string &folder){
     }
 }
 
-//-------------------------------------------- Constructeurs - destructeur
+void CSVHandler::extractAttributes(const string &folder) {
+    ifstream file(folder + "/attributes.csv");
+    string line;
 
-//------------------------------------------------------------------ PRIVE
+    if (file.is_open()) {
+        int attributeID = 0;
+        while (getline(file, line)) {
+            stringstream ss(line);
+            string idStr, nameStr, descStr;
 
-//----------------------------------------------------- Méthodes protégées
+            getline(ss, idStr, ';');
+            getline(ss, nameStr, ';');
+            getline(ss, descStr, ';');
 
+            attributes.emplace(attributeID, new Attribute(attributeID, idStr, nameStr, descStr));
+            attributeID++;
+        }
+        file.close();
+    } else {
+        cout << "Unable to open file " << folder + "/attributes.csv" << endl;
+    }
+}
