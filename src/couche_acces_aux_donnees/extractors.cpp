@@ -74,7 +74,7 @@ void CSVHandler::extractCleaners(const string &folder) {
         }
         file.close();
     } else {
-        cout << "Unable to open file" << endl;
+        cout << "Unable to open file " << folder + "/cleaners.csv" << endl;
     }
 }
 
@@ -115,7 +115,7 @@ void CSVHandler::extractSensors(const string &folder) {
         // }
 
     } else {
-        cout << "Unable to open file" << endl;
+        cout << "Unable to open file " << folder + "/sensors.csv" << endl;
     }
 }
 
@@ -168,7 +168,7 @@ void CSVHandler::extractMeasurements(const string &folder) {
         }
         file.close();
     } else {
-        cout << "Unable to open file" << endl;
+        cout << "Unable to open file " << folder + "/measurements.csv" << endl;
     }
 }
 
@@ -199,7 +199,7 @@ void CSVHandler::extractIndividuals(const string &folder){
         }
         file.close();
     } else {
-        cout << "Unable to open file" << endl;
+        cout << "Unable to open file " << folder + "/users.csv" << endl;
     }
 }
 
