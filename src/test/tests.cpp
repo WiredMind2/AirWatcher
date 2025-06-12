@@ -11,11 +11,14 @@ e-mails              : aaron.berton@insa-lyon.fr, william.michaud@insa-lyon.fr, 
 //-------------------------------------------------------- Include système
 using namespace std;
 #include <iostream>
+#include <map>
+#include <iomanip>
 
 //------------------------------------------------------ Include personnel
 #include "tests.h"
 #include "../couche_metier/processing.h"
 #include "../couche_metier/Sensor.h"
+#include "../couche_acces_aux_donnees/CSVHandler.h"
 
 
 //----------------------------------------------------------------- FONCTIONS DE TEST
@@ -65,6 +68,11 @@ void runTests ( )
 
 //----------------------------------------------------- Méthodes protégées
 
+// Helper function to map category name to its ID
+unsigned int getCategoryIdByName(const string& name) {
+    return CSVHandler::getAttributeID(name);
+}
+
 void test_T11(int &testCount, int &testPassed, int &testFailed)
 // Algorithme :
 // 
@@ -73,12 +81,27 @@ void test_T11(int &testCount, int &testPassed, int &testFailed)
 
     double lat = 45.8;
     double lon = 2.15;
-    double expectedValue = 41.73;
+    
+    map<string, double> expectedValues = {
+        {"O3", 41.75},
+        {"NO2", 38.36},
+        {"SO2", 43.10},
+        {"PM10", 46.18}
+    };
 
-    // cout << "Test T11 : Estimation de la qualité de l'air à la position (" << lat << ", " << lon << ")\n";
-    // cout << "Valeur attendue : " << expectedValue << "\n";
-    // cout << "Valeur estimée : " << AirQualityProcessor::EstimationQualiteAirPos(lat, lon, 0, -1) << "\n";
-    if (abs(AirQualityProcessor::EstimationQualiteAirPos(lat, lon, 0, -1) - expectedValue) < 0.01) {
+    auto result = AirQualityProcessor::EstimationQualiteAirPos(lat, lon, 0, -1);
+
+    bool allMatch = true;
+    for (const auto& exp : expectedValues) {
+        unsigned int catId = getCategoryIdByName(exp.first);
+        auto found = result.find(catId);
+        if (found == result.end() || abs(found->second - exp.second) >= 0.01) {
+            allMatch = false;
+            cout << "Échec pour l'attribut " << exp.first << ": attendu " << exp.second << ", obtenu " 
+                 << (found != result.end() ? to_string(found->second) : "non trouvé") << "\n";
+        }
+    }
+    if (allMatch) {
         cout << "\033[1;32mTest T11 réussi.\033[0m\n";
         testPassed++;
     } else {
@@ -97,7 +120,16 @@ void test_T12(int &testCount, int &testPassed, int &testFailed)
     double lat = 400;
     double lon = 400;
 
-    if (isnan(AirQualityProcessor::EstimationQualiteAirPos(lat, lon, 0, -1))) {
+    auto result = AirQualityProcessor::EstimationQualiteAirPos(lat, lon, 0, -1);
+
+    bool allMatch = true;
+    for (const auto& pair : result) {
+        if (!isnan(pair.second)) {
+            allMatch = false;
+            cout << "Échec pour l'attribut ID " << pair.first << ": valeur estimée non NaN.\n";
+        }
+    }
+    if (allMatch) {
         cout << "\033[1;32mTest T12 réussi.\033[0m\n";
         testPassed++;
     } else {
@@ -110,14 +142,31 @@ void test_T13(int &testCount, int &testPassed, int &testFailed)
 // Algorithme :
 //
 {
-    
     testCount++;
-
     double lat = -100;
     double lon = -100;
-    double expectedValue = 70; 
+    // Use category names as keys
+    map<string, double> expectedValues = {
+        {"O3", 70},
+        {"NO2", 0},
+        {"SO2", 0},
+        {"PM10", 0}
+    };
+    auto result = AirQualityProcessor::EstimationQualiteAirPos(lat, lon, 0, -1);
 
-    if (abs(AirQualityProcessor::EstimationQualiteAirPos(lat, lon, 0, -1) - expectedValue) < 0.01) {
+    bool allMatch = true;
+    for (const auto& exp : expectedValues) {
+        unsigned int cat = getCategoryIdByName(exp.first);
+        double expected = exp.second;
+
+        auto found = result.find(cat);
+        if (found == result.end() || abs(found->second - expected) >= 0.01) {
+            allMatch = false;
+            cout << "Échec pour l'attribut " << exp.first << ": attendu " << expected 
+                 << ", obtenu " << (found != result.end() ? to_string(found->second) : "non trouvé") << "\n";
+        }
+    }
+    if (allMatch) {
         cout << "\033[1;32mTest T13 réussi.\033[0m\n";
         testPassed++;
     } else {
@@ -130,20 +179,31 @@ void test_T21(int &testCount, int &testPassed, int &testFailed)
 // Algorithme :
 //  
 {
-    
     testCount++;
-
     double lat = 45;
     double lon = 2.5;
     double radius = 10;
-    double expectedValue = 52.2276;
+    map<string, double> expectedValues = {
+        {"O3", 57.92},
+        {"NO2", 56.64},
+        {"SO2", 52.96},
+        {"PM10", 52.57}
+    };
     time_t start = 0; 
     time_t stop = -1; 
-
-    // cout << "Test T21 : Estimation de la qualité de l'air sur la zone centrée à (" << lat << ", " << lon << ") avec un rayon de " << radius << "\n";
-    // cout << "Valeur attendue : " << expectedValue << "\n";
-    // cout << "Valeur estimée : " << AirQualityProcessor::EstimationQualiteAirZone(lat, lon, radius, start, stop) << "\n";
-    if (abs(AirQualityProcessor::EstimationQualiteAirZone(lat, lon, radius, start, stop)- expectedValue) < 0.01) {
+    auto result = AirQualityProcessor::EstimationQualiteAirZone(lat, lon, radius, start, stop);
+    bool allMatch = true;
+    for (const auto& exp : expectedValues) {
+        unsigned int cat = getCategoryIdByName(exp.first);
+        double expected = exp.second;
+        auto found = result.find(cat);
+        if (found == result.end() || abs(found->second - expected) >= 0.01) {
+            allMatch = false;
+            cout << "Échec pour l'attribut " << exp.first << ": attendu " << expected 
+                 << ", obtenu " << (found != result.end() ? to_string(found->second) : "non trouvé") << "\n";
+        }
+    }
+    if (allMatch) {
         cout << "\033[1;32mTest T21 réussi.\033[0m\n";
         testPassed++;
     } else {
@@ -166,7 +226,16 @@ void test_T22(int &testCount, int &testPassed, int &testFailed)
     time_t start = 0;
     time_t stop = -1;
 
-    if (isnan(AirQualityProcessor::EstimationQualiteAirZone(lat, lon, radius, start, stop))) {
+    auto result = AirQualityProcessor::EstimationQualiteAirZone(lat, lon, radius, start, stop);
+
+    bool allMatch = true;
+    for (const auto& exp : result) {
+        if (!isnan(exp.second)) {
+            allMatch = false;
+            cout << "Échec pour l'attribut ID " << exp.first << ": valeur estimée non NaN.\n";
+        }
+    }
+    if (allMatch) {
         cout << "\033[1;32mTest T22 réussi.\033[0m\n";
         testPassed++;
     } else {
@@ -179,17 +248,31 @@ void test_T23(int &testCount, int &testPassed, int &testFailed)
 // Algorithme :
 //
 {
-    
     testCount++;
-
     double lat = -100;
     double lon = -100;
     double radius = 0.1;
-    double expectedValue = 70;
+    map<string, double> expectedValues = {
+        {"O3", 70},
+        {"NO2", 0},
+        {"SO2", 0},
+        {"PM10", 0}
+    };
     time_t start = 0;
     time_t stop = -1;
-
-    if (abs(AirQualityProcessor::EstimationQualiteAirZone(lat, lon, radius, start, stop) - expectedValue) < 0.1) {
+    auto result = AirQualityProcessor::EstimationQualiteAirZone(lat, lon, radius, start, stop);
+    bool allMatch = true;
+    for (const auto& exp : expectedValues) {
+        unsigned int cat = getCategoryIdByName(exp.first);
+        double expected = exp.second;
+        auto found = result.find(cat);
+        if (found == result.end() || abs(found->second - expected) >= 0.1) {
+            allMatch = false;
+            cout << "Échec pour l'attribut " << exp.first << ": attendu " << expected 
+                 << ", obtenu " << (found != result.end() ? to_string(found->second) : "non trouvé") << "\n";
+        }
+    }
+    if (allMatch) {
         cout << "\033[1;32mTest T23 réussi.\033[0m\n";
         testPassed++;
     } else {
@@ -209,7 +292,7 @@ void test_T31(int &testCount, int &testPassed, int &testFailed)
     double seuil_limite = 10;
     unsigned int id_ref = 88; // ID du capteur de référence
 
-    std::vector<const Sensor *> detournes = AirQualityProcessor::TrouverCapteursDetournes(radius, seuil_limite, 0, -1);
+    vector<const Sensor *> detournes = AirQualityProcessor::TrouverCapteursDetournes(radius, seuil_limite, 0, -1);
     bool capteurTrouve = false;
 
     for (const Sensor* capteur : detournes) {
@@ -241,7 +324,7 @@ void test_T32(int &testCount, int &testPassed, int &testFailed)
     time_t start = 0;
     time_t stop = -1; 
 
-    std::vector<const Sensor *> detournes = AirQualityProcessor::TrouverCapteursDetournes(radius, seuil_limite, start, stop);
+    vector<const Sensor *> detournes = AirQualityProcessor::TrouverCapteursDetournes(radius, seuil_limite, start, stop);
     bool capteurTrouve = false;
 
     for (const Sensor* capteur : detournes) {
