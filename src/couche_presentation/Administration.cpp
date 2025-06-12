@@ -19,7 +19,7 @@ using namespace std;
 
 //------------------------------------------------------ Include personnel
 #include "Administration.h"
-#include "analyse.h"
+#include "../couche_metier/analyse.h"
 
 //----------------------------------------------------------------- PUBLIC
 

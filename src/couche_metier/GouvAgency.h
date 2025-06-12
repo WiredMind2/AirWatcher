@@ -26,10 +26,6 @@ class GouvAgency : public User
 
 public:
 //----------------------------------------------------- Méthodes publiques
-    void classifyUnreliable(User &user);
-    void classifyReliable(User &user);
-    list<User> getUnreliableUsers();
-
     // Constructor
     GouvAgency(unsigned int id) : User(id) {};
 

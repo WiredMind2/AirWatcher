@@ -19,8 +19,8 @@ using namespace std;
 
 //------------------------------------------------------ Include personnel
 #include "presentation.h"
-#include "statistiques.h"
-#include "analyse.h"
+#include "../couche_metier/statistiques.h"
+#include "../couche_metier/analyse.h"
 #include "PointsUtilisateurs.h"
 #include "Administration.h"
 #include "../couche_metier/User.h"
