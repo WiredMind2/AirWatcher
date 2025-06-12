@@ -69,17 +69,26 @@ double AirQualityProcessor::EstimationQualiteAirPos(double lat, double lon, time
 
 // Estime la qualité de l'air sur une zone circulaire centrée en (lat, lon) de rayon 'radius',
 // en discrétisant la zone et en moyennant les estimations locales.
-double AirQualityProcessor::EstimationQualiteAirZone(double lat, double lon, double radius, time_t start, time_t stop)
+double AirQualityProcessor::EstimationQualiteAirZone(double lat, double lon, double radius, time_t start, time_t stop, bool log)
 {
     if (radius <= 0.0)
     {
         // Si le rayon est négatif ou nul, retourne NaN.
         return numeric_limits<double>::quiet_NaN();
     }
-    // Adapt the discretization step to the radius: e.g., 1/10th of the radius, with a minimum of 0.05 and a maximum of 1.0
-    double step = std::max(0.05, std::min(radius / 10.0, 1.0));
+    // Définit le pas de discrétisation en fonction du rayon, avec une valeur minimale de 0.5 et maximale de 10.0.
+    double step = std::max(0.5, std::min(radius / 10.0, 10.0));
+
+    if (log)
+    {
+        cout << "Estimation de la qualité de l'air sur la zone centrée à (" << lat << ", " << lon << ") avec un rayon de " << radius << "\n";
+        cout << "Pas de discrétisation : " << step << "\n";
+    }
+
+    // Récupère les mesures dans l'intervalle [start, stop].
     vector<Measurement *> measures = GetMeasures(start, stop);
     vector<Measurement *> valid_measures;
+
     // Filtre les mesures dans le rayon spécifié.
     for (const Measurement *m : measures)
     {
@@ -96,6 +105,7 @@ double AirQualityProcessor::EstimationQualiteAirZone(double lat, double lon, dou
         {
             if (dlat * dlat + dlon * dlon <= radius * radius)
             {
+                if (log) cout << "\rEstimation à la position (" << lat + dlat << ", " << lon + dlon << ")   " << flush;
                 double est = EstimationQualiteAirPos(lat + dlat, lon + dlon, start, stop, &valid_measures);
                 if (!isnan(est))
                 {
@@ -104,6 +114,9 @@ double AirQualityProcessor::EstimationQualiteAirZone(double lat, double lon, dou
             }
         }
     }
+
+    if (log) cout << "\n";
+
     // Si aucune estimation n'est possible, tente une estimation centrale.
     if (estimations.empty())
     {

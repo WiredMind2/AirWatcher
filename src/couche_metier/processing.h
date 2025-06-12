@@ -32,7 +32,7 @@ public:
 	// k : nombre de voisins à utiliser (par défaut 4)
 	// step : pas de discrétisation de la zone (par défaut 1)
 	// Retourne la moyenne des estimations dans la zone
-	static double EstimationQualiteAirZone(double lat, double lon, double radius, time_t start=0, time_t stop=-1);
+	static double EstimationQualiteAirZone(double lat, double lon, double radius, time_t start=0, time_t stop=-1, bool log=false);
 
 	// Trouve les capteurs détournés (valeur estimée différente de la valeur mesurée)
 	// measures : liste de toutes les mesures disponibles
