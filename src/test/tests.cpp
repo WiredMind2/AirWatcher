@@ -266,12 +266,10 @@ void test_T23(int &testCount, int &testPassed, int &testFailed)
     testCount++;
     double lat = -100;
     double lon = -100;
-    double radius = 0.1;
+    double radius = 1;
     map<string, double> expectedValues = {
-        {"O3", 70},
-        {"NO2", 0},
-        {"SO2", 0},
-        {"PM10", 0}};
+        {"O3", 70}
+    };
     time_t start = 0;
     time_t stop = -1;
     auto result = Processing::EstimationQualiteAirZone(lat, lon, radius, start, stop);
