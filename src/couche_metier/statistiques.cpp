@@ -28,7 +28,7 @@ void calculQualiteAirPos() {
 	time_t dateFin = demander_date("fin");
 
 	// Appel à la fonction de traitement pour estimer la qualité de l'air
-	auto estimation = AirQualityProcessor::EstimationQualiteAirPos(lat, lon, dateDebut, dateFin);
+	auto estimation = Processing::EstimationQualiteAirPos(lat, lon, dateDebut, dateFin);
 	if (estimation.empty()) {
 		std::cout << "Aucune mesure disponible pour cette position.\n";
 	} else {
@@ -54,7 +54,7 @@ void calculQualiteAirZone() {
 
 
 	// Appel à la fonction de traitement pour estimer la qualité de l'air sur la zone
-	auto estimation = AirQualityProcessor::EstimationQualiteAirZone(lat, lon, radius, dateDebut, dateFin, true);
+	auto estimation = Processing::EstimationQualiteAirZone(lat, lon, radius, dateDebut, dateFin, true);
 	if (estimation.empty()) {
 		std::cout << "Aucune mesure disponible pour cette zone.\n";
 	} else {
@@ -77,7 +77,7 @@ void classerCapteursSimilaires() {
 	std::cout << "Recherche des capteurs similaires au capteur ID " << id_ref << "...\n";
 
 	// Appel à la fonction de traitement pour trouver les capteurs similaires
-	std::vector<const Sensor *> capteurs_similaires = AirQualityProcessor::ListerCapteursSimilaires(id_ref, dateDebut, dateFin);
+	std::vector<const Sensor *> capteurs_similaires = Processing::ListerCapteursSimilaires(id_ref, dateDebut, dateFin);
 	if (capteurs_similaires.empty()) {
 		std::cout << "Aucun capteur similaire trouvé.\n";
 	} else {

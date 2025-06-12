@@ -17,7 +17,7 @@
 
 using namespace std;
 
-class AirQualityProcessor
+class Processing
 {
 public:
 	// Estime la qualité de l'air à une position géographique donnée (lat, lon)
@@ -45,7 +45,7 @@ public:
 	// k : nombre de voisins à utiliser pour l'estimation (par défaut 4)
 	// step : pas de discrétisation de la zone (par défaut 1)
 	// Retourne une liste de pointeurs vers les capteurs détournés
-	static vector<const Sensor *> TrouverCapteursDetournes(double radius = 0.02, double seuil_limite = 20.0, time_t start=0, time_t stop=-1);
+	static vector<const Sensor *> TrouverCapteursDetournes(double radius = 0.02, unordered_map<unsigned int, double> seuils_limite = {{0, 20.0}}, time_t start=0, time_t stop=-1);
 
 	// Trouve les capteurs similaires à un capteur de référence
 	// id_ref : identifiant du capteur de référence

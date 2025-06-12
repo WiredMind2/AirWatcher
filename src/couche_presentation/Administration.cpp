@@ -33,16 +33,28 @@ using namespace std;
 void consulter_capteurs_defaillants()
 {
     double seuil_limite, radius;
+    string attribute;
 
     time_t start = demander_date("début");
     time_t stop = demander_date("fin");
 
     cout << "Entrez le rayon de la zone à analyser (en degrés): ";
     cin >> radius;
+    cout << "Entrez l'attribut à analyser (O3, NO2, SO2, PM10) : ";
+    cin >> attribute;
+
+    // Convertit l'attribut en ID
+    unsigned int attribute_id = CSVHandler::getAttributeID(attribute);
+    if (attribute_id == 0)
+    {
+        cerr << "Attribut invalide. Veuillez entrer O3, NO2, SO2 ou PM10.\n";
+        return;
+    }
+
     cout << "Entrez le seuil choisi : ";
     cin >> seuil_limite;
 
-    vector<const Sensor *> capteurs_defaillants = AirQualityProcessor::TrouverCapteursDetournes(radius, seuil_limite, start, stop);
+    vector<const Sensor *> capteurs_defaillants = Processing::TrouverCapteursDetournes(radius, {{attribute_id, seuil_limite}}, start, stop);
 
     if (capteurs_defaillants.empty())
     {
