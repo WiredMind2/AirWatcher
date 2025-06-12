@@ -17,7 +17,6 @@ using namespace std;
 #include <vector>
 #include "../couche_acces_aux_donnees/CSVHandler.h"
 
-
 //------------------------------------------------------ Include personnel
 #include "Administration.h"
 #include "analyse.h"
@@ -31,26 +30,33 @@ using namespace std;
 //{
 //} //----- Fin de Méthode
 
-
 void consulter_capteurs_defaillants()
 {
     double seuil_limite, radius;
+    int k = 4;
 
     time_t start = demander_date("début");
     time_t stop = demander_date("fin");
 
-
-    cout << "Entrez le rayon de la zone (en degrés): ";
+    cout << "Entrez le rayon de la zone à analyser (en degrés): ";
     cin >> radius;
     cout << "Entrez le seuil choisi : ";
     cin >> seuil_limite;
-    // cout << "Entrez le nombre de voisins (k): ";
-    // cin >> k;
 
-    vector<const Sensor *> capteurs_defaillants = AirQualityProcessor::TrouverCapteursDetournes(radius, seuil_limite, start, stop);
-    for (const auto &sensor : capteurs_defaillants)
+    vector<const Sensor *> capteurs_defaillants = AirQualityProcessor::TrouverCapteursDetournes(radius, seuil_limite, k, start, stop);
+
+    if (capteurs_defaillants.empty())
     {
-        cout << "Le capteur" << sensor->GetSensorID() << "est défaillant." << "\n";
+        cout << "Aucun capteur défaillant trouvé.\n";
+    }
+
+    else
+    {
+        cout << "Capteurs défaillants détectés :\n";
+        for (const auto &sensor : capteurs_defaillants)
+        {
+            cout << "Capteur d'identifiant" << sensor->GetSensorID() << " " << "\n";
+        }
     }
 }
 
@@ -58,46 +64,46 @@ void marquer_capteur_non_fiable()
 {
 
     // Récupérer la liste des non fiables
-    consulter_capteurs_defaillants();
+    
 
     // Choisir un capteur dans cette liste à marquer comme non fiable
     int sensor_id;
-    cout << "Veuillez entrer l'identifiant du capteur à marquer comme non fiable"; // Ajouter gestion de si dans la liste ou non
+    cout << "Veuillez entrer l'identifiant du capteur à marquer comme non fiable" << "\n"; 
     cin >> sensor_id;
 
     // Récupérer le capteur associé à l'id
-    Sensor* capteur_non_fiable = CSVHandler::getSensor(sensor_id);
+    Sensor *capteur_non_fiable = CSVHandler::getSensor(sensor_id);
 
-    // TO DO : Marquer le capteur choisi comme non fiable (mettre ses mesures à -1 ? méthode dans GouvAgency?)
+    // Marquer le capteur choisi comme non fiable : fonctionnalité non implémentée dans cette version
+
     cout << "Le capteur n°" << capteur_non_fiable->GetSensorID() << "a été marqué comme non fiable" << "\n";
 }
 
 void marquer_user_malicieux()
 {
-    int user_id; // TO DO : changer le type de user_id pour qu'il soit compatible avec le type d'id dans CSVHandler
+    unsigned int user_malicieux;
     cout << "Veuillez entrer l'identifiant de l'utilisateur à signaler";
-    cin >> user_id;
+    cin >> user_malicieux;
 
-    // Récupérer l'user associé à l'id : chercher dans la liste des unreliable users donnée par findUnreliable
-    //User user_malicieux = CSVHandler::getUser(user_id); // Problème : les id sont des string, handler à revoir
+    // Vérifie si l'utilisateur existe parmi les individus (utilisateurs privés uniquement)
 
-    // Le classer comme malicieux
-    //GouvAgency(4).classifyUnreliable(user_malicieux); // TO DO : revoir avec le bon id, méthodes GouvAgency en static ?
-    cout << "L'utilisateur" << user_id << "a été signalé. Il ne pourra plus accumuler de points" << "\n";
+    try
+    {
+        CSVHandler::getIndividual(user_malicieux); // Lève une exception si non trouvé
+        CSVHandler::addUnreliable("", {user_malicieux});
+        cout << "L'utilisateur " << user_malicieux << " a été signalé. Il ne pourra plus accumuler de points.\n";
+    }
+    catch (const exception &e)
+    {
+        cerr << "Erreur : utilisateur introuvable ou non individuel.\n";
+    }
 }
 
 
 //------------------------------------------------- Surcharge d'opérateurs
 
-
-
 //-------------------------------------------- Constructeurs - destructeur
-
 
 //------------------------------------------------------------------ PRIVE
 
 //----------------------------------------------------- Méthodes protégées
-
-
-
-
