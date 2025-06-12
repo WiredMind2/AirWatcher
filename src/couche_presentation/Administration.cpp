@@ -33,7 +33,6 @@ using namespace std;
 void consulter_capteurs_defaillants()
 {
     double seuil_limite, radius;
-    int k = 4;
 
     time_t start = demander_date("début");
     time_t stop = demander_date("fin");
@@ -43,7 +42,7 @@ void consulter_capteurs_defaillants()
     cout << "Entrez le seuil choisi : ";
     cin >> seuil_limite;
 
-    vector<const Sensor *> capteurs_defaillants = AirQualityProcessor::TrouverCapteursDetournes(radius, seuil_limite, k, start, stop);
+    vector<const Sensor *> capteurs_defaillants = AirQualityProcessor::TrouverCapteursDetournes(radius, seuil_limite, start, stop);
 
     if (capteurs_defaillants.empty())
     {
