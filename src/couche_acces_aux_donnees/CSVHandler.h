@@ -133,37 +133,9 @@ public:
     // Contrat :
     // Les dates de début et de fin doivent être valides et start doit être antérieur ou égal à stop.
 
-//------------------------------------------------- Surcharge d'opérateurs
-    CSVHandler & operator = ( const CSVHandler & unCSVHandler );
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
-
-//-------------------------------------------- Constructeurs - destructeur
-    CSVHandler ( const CSVHandler & unCSVHandler );
-    // Mode d'emploi (constructeur de copie) :
-    //
-    // Contrat :
-    //
-
-    CSVHandler ( );
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
-
-    virtual ~CSVHandler ( );
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
-
 //------------------------------------------------------------------ PRIVE
 
 protected:
-//----------------------------------------------------- Méthodes protégées
-
 
 
 //----------------------------------------------------- Attributs protégés
