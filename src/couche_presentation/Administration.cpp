@@ -40,15 +40,28 @@ void consulter_capteurs_defaillants()
 
     cout << "Entrez le rayon de la zone à analyser (en degrés): ";
     cin >> radius;
-    cout << "Entrez l'attribut à analyser (O3, NO2, SO2, PM10) : ";
-    cin >> attribute;
 
-    // Convertit l'attribut en ID
-    unsigned int attribute_id = CSVHandler::getAttributeID(attribute);
-    if (attribute_id == 0)
+    while (radius <= 0)
     {
-        cerr << "Attribut invalide. Veuillez entrer O3, NO2, SO2 ou PM10.\n";
-        return;
+        cout << "Le rayon doit être supérieur à 0. Veuillez réessayer : ";
+        cin >> radius;
+    }
+
+    cout << "Entrez l'attribut à analyser (O3, NO2, SO2, PM10) : ";
+    unsigned int attribute_id = 0;
+    // Convertit l'attribut en ID
+    while (attribute_id == 0)
+    {
+        cin >> attribute;
+
+        try
+        {
+            attribute_id = CSVHandler::getAttributeID(attribute);
+        }
+        catch (const exception &e)
+        {
+            cerr << "Attribut invalide. Veuillez entrer O3, NO2, SO2 ou PM10 : ";
+        }
     }
 
     cout << "Entrez le seuil choisi : ";
@@ -75,11 +88,10 @@ void marquer_capteur_non_fiable()
 {
 
     // Récupérer la liste des non fiables
-    
 
     // Choisir un capteur dans cette liste à marquer comme non fiable
     int sensor_id;
-    cout << "Veuillez entrer l'identifiant du capteur à marquer comme non fiable" << "\n"; 
+    cout << "Veuillez entrer l'identifiant du capteur à marquer comme non fiable: " << "\n";
     cin >> sensor_id;
 
     // Récupérer le capteur associé à l'id
@@ -87,13 +99,13 @@ void marquer_capteur_non_fiable()
 
     // Marquer le capteur choisi comme non fiable : fonctionnalité non implémentée dans cette version
 
-    cout << "Le capteur n°" << capteur_non_fiable->GetSensorID() << "a été marqué comme non fiable" << "\n";
+    cout << "Le capteur n°" << capteur_non_fiable->GetSensorID() << "a été marqué comme non fiable." << "\n";
 }
 
 void marquer_user_malicieux()
 {
     unsigned int user_malicieux;
-    cout << "Veuillez entrer l'identifiant de l'utilisateur à signaler";
+    cout << "Veuillez entrer l'identifiant de l'utilisateur à signaler: " << "\n";
     cin >> user_malicieux;
 
     // Vérifie si l'utilisateur existe parmi les individus (utilisateurs privés uniquement)
@@ -109,7 +121,6 @@ void marquer_user_malicieux()
         cerr << "Erreur : utilisateur introuvable ou non individuel.\n";
     }
 }
-
 
 //------------------------------------------------- Surcharge d'opérateurs
 
