@@ -109,15 +109,17 @@ void analyser_impact_purificateurs()
 
 	// const int dayInSeconds = 86400; // Nombre de secondes dans un jour
 
+	const int time_offset = 60 * 60 * 24; // Décalage de 24 heures pour l'estimation
+
 	// Appel à la fonction de traitement pour analyser l'impact sur une zone autour du purificateur
-	auto qualiteAvant = Processing::EstimationQualiteAirZone(cleaner->GetLatitude(), cleaner->GetLongitude(), 10.0, 0, cleaner->GetTimeStart());
+	auto qualiteAvant = Processing::EstimationQualiteAirZone(cleaner->GetLatitude(), cleaner->GetLongitude(), 10.0, cleaner->GetTimeStart()-time_offset, cleaner->GetTimeStart());
 	cout << "Qualité de l'air avant nettoyage : " << endl;
 	for (const auto &pair : qualiteAvant)
 	{
 		cout << "	" << CSVHandler::getAttribute(pair.first)->GetAttributeID() << ": Valeur estimée: " << fixed << setprecision(2) << pair.second << endl;
 	}
 
-	auto qualiteApres = Processing::EstimationQualiteAirZone(cleaner->GetLatitude(), cleaner->GetLongitude(), 10.0, cleaner->GetTimeStop(), -1);
+	auto qualiteApres = Processing::EstimationQualiteAirZone(cleaner->GetLatitude(), cleaner->GetLongitude(), 10.0, cleaner->GetTimeStop(), cleaner->GetTimeStop()+time_offset);
 	cout << "Qualité de l'air après nettoyage : " << endl;
 	for (const auto &pair : qualiteApres)
 	{
