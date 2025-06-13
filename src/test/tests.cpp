@@ -13,6 +13,7 @@ using namespace std;
 #include <iostream>
 #include <map>
 #include <iomanip>
+#include <chrono>
 
 //------------------------------------------------------ Include personnel
 #include "tests.h"
@@ -100,6 +101,8 @@ void test_T11(int &testCount, int &testPassed, int &testFailed)
 {
     testCount++;
 
+    auto start_time = chrono::high_resolution_clock::now();
+
     double lat = 45.8;
     double lon = 2.15;
 
@@ -123,14 +126,17 @@ void test_T11(int &testCount, int &testPassed, int &testFailed)
                  << (found != result.end() ? to_string(found->second) : "non trouvé") << "\n";
         }
     }
+
+    auto end_time = chrono::high_resolution_clock::now();
+    double elapsed_time = chrono::duration<double>(end_time - start_time).count();
     if (allMatch)
     {
-        cout << "\033[1;32mTest T11 réussi.\033[0m\n";
+        cout << "\033[1;32mTest T11 réussi.\033[0m (" << elapsed_time << " sec)\n";
         testPassed++;
     }
     else
     {
-        cout << "\033[1;31mTest T11 échoué.\033[0m\n";
+        cout << "\033[1;31mTest T11 échoué.\033[0m Durée : " << elapsed_time << " secondes.\n";
         testFailed++;
     }
 }
@@ -139,8 +145,9 @@ void test_T12(int &testCount, int &testPassed, int &testFailed)
 // Algorithme :
 //
 {
-
     testCount++;
+
+    auto start_time = chrono::high_resolution_clock::now();
 
     double lat = 400;
     double lon = 400;
@@ -156,14 +163,17 @@ void test_T12(int &testCount, int &testPassed, int &testFailed)
             cout << "Échec pour l'attribut ID " << pair.first << ": valeur estimée non NaN.\n";
         }
     }
+
+    auto end_time = chrono::high_resolution_clock::now();
+    double elapsed_time = chrono::duration<double>(end_time - start_time).count();
     if (allMatch)
     {
-        cout << "\033[1;32mTest T12 réussi.\033[0m\n";
+        cout << "\033[1;32mTest T12 réussi.\033[0m (" << elapsed_time << " sec)\n";
         testPassed++;
     }
     else
     {
-        cout << "\033[1;31mTest T12 échoué.\033[0m\n";
+        cout << "\033[1;31mTest T12 échoué.\033[0m (" << elapsed_time << " sec)\n";
         testFailed++;
     }
 }
@@ -173,6 +183,9 @@ void test_T13(int &testCount, int &testPassed, int &testFailed)
 //
 {
     testCount++;
+
+    auto start_time = chrono::high_resolution_clock::now();
+
     double lat = -100;
     double lon = -100;
     map<string, double> expectedValues = {
@@ -182,14 +195,17 @@ void test_T13(int &testCount, int &testPassed, int &testFailed)
         {"PM10", 0}};
     auto result = Processing::EstimationQualiteAirPos(lat, lon, 0, -1);
     bool allMatch = compareCategoryResults(expectedValues, result);
+
+    auto end_time = chrono::high_resolution_clock::now();
+    double elapsed_time = chrono::duration<double>(end_time - start_time).count();
     if (allMatch)
     {
-        cout << "\033[1;32mTest T13 réussi.\033[0m\n";
+        cout << "\033[1;32mTest T13 réussi.\033[0m (" << elapsed_time << " sec)\n";
         testPassed++;
     }
     else
     {
-        cout << "\033[1;31mTest T13 échoué.\033[0m\n";
+        cout << "\033[1;31mTest T13 échoué.\033[0m (" << elapsed_time << " sec)\n";
         testFailed++;
     }
 }
@@ -199,9 +215,12 @@ void test_T21(int &testCount, int &testPassed, int &testFailed)
 //
 {
     testCount++;
+
+    auto start_time = chrono::high_resolution_clock::now();
+
     double lat = 45;
     double lon = 2.5;
-    double radius = 10;
+    double radius = 10.0;
     map<string, double> expectedValues = {
         {"O3", 57.92},
         {"NO2", 56.64},
@@ -211,14 +230,16 @@ void test_T21(int &testCount, int &testPassed, int &testFailed)
     time_t stop = -1;
     auto result = Processing::EstimationQualiteAirZone(lat, lon, radius, start, stop);
     bool allMatch = compareCategoryResults(expectedValues, result);
+    auto end_time = chrono::high_resolution_clock::now();
+    double elapsed_time = chrono::duration<double>(end_time - start_time).count();
     if (allMatch)
     {
-        cout << "\033[1;32mTest T21 réussi.\033[0m\n";
+        cout << "\033[1;32mTest T21 réussi.\033[0m (" << elapsed_time << " sec)\n";
         testPassed++;
     }
     else
     {
-        cout << "\033[1;31mTest T21 échoué.\033[0m\n";
+        cout << "\033[1;31mTest T21 échoué.\033[0m (" << elapsed_time << " sec)\n";
         testFailed++;
     }
 }
@@ -227,8 +248,9 @@ void test_T22(int &testCount, int &testPassed, int &testFailed)
 // Algorithme :
 //
 {
-
     testCount++;
+
+    auto start_time = chrono::high_resolution_clock::now();
 
     double lat = 400;
     double lon = 400;
@@ -247,14 +269,16 @@ void test_T22(int &testCount, int &testPassed, int &testFailed)
             cout << "Échec pour l'attribut ID " << exp.first << ": valeur estimée non NaN.\n";
         }
     }
+    auto end_time = chrono::high_resolution_clock::now();
+    double elapsed_time = chrono::duration<double>(end_time - start_time).count();
     if (allMatch)
     {
-        cout << "\033[1;32mTest T22 réussi.\033[0m\n";
+        cout << "\033[1;32mTest T22 réussi.\033[0m (" << elapsed_time << " sec)\n";
         testPassed++;
     }
     else
     {
-        cout << "\033[1;31mTest T22 échoué.\033[0m\n";
+        cout << "\033[1;31mTest T22 échoué.\033[0m (" << elapsed_time << " sec)\n";
         testFailed++;
     }
 }
@@ -264,6 +288,8 @@ void test_T23(int &testCount, int &testPassed, int &testFailed)
 //
 {
     testCount++;
+    auto start_time = chrono::high_resolution_clock::now();
+
     double lat = -100;
     double lon = -100;
     double radius = 1;
@@ -274,14 +300,16 @@ void test_T23(int &testCount, int &testPassed, int &testFailed)
     time_t stop = -1;
     auto result = Processing::EstimationQualiteAirZone(lat, lon, radius, start, stop);
     bool allMatch = compareCategoryResults(expectedValues, result, 0.1);
+    auto end_time = chrono::high_resolution_clock::now();
+    double elapsed_time = chrono::duration<double>(end_time - start_time).count();
     if (allMatch)
     {
-        cout << "\033[1;32mTest T23 réussi.\033[0m\n";
+        cout << "\033[1;32mTest T23 réussi.\033[0m (" << elapsed_time << " sec)\n";
         testPassed++;
     }
     else
     {
-        cout << "\033[1;31mTest T23 échoué.\033[0m\n";
+        cout << "\033[1;31mTest T23 échoué.\033[0m (" << elapsed_time << " sec)\n";
         testFailed++;
     }
 }
@@ -292,6 +320,8 @@ void test_T31(int &testCount, int &testPassed, int &testFailed)
 {
 
     testCount++;
+
+    auto start_time = chrono::high_resolution_clock::now();
 
     double radius = 10;
     unordered_map<string, double> seuils_limite = {
@@ -319,14 +349,17 @@ void test_T31(int &testCount, int &testPassed, int &testFailed)
         }
     }
 
+    int iterationCount = 11; // Nombre d'itérations effectuees pour ce test
+    auto end_time = chrono::high_resolution_clock::now();
+    double elapsed_time = chrono::duration<double>(end_time - start_time).count() / iterationCount;
     if (!capteurTrouve)
     {
-        cout << "\033[1;32mTest T31 réussi.\033[0m\n";
+        cout << "\033[1;32mTest T31 réussi.\033[0m (" << elapsed_time << " sec)\n";
         testPassed++;
     }
     else
     {
-        cout << "\033[1;31mTest T31 échoué.\033[0m\n";
+        cout << "\033[1;31mTest T31 échoué.\033[0m (" << elapsed_time << " sec)\n";
         testFailed++;
     }
 }
@@ -336,6 +369,7 @@ void test_T32(int &testCount, int &testPassed, int &testFailed)
 //
 {
     testCount++;
+    auto start_time = chrono::high_resolution_clock::now();
 
     double radius = 10;
     unordered_map<string, double> seuils_limite = {
@@ -367,14 +401,17 @@ void test_T32(int &testCount, int &testPassed, int &testFailed)
         }
     }
 
+    int iterationCount = 11; // Nombre d'itérations effectuees pour ce test
+    auto end_time = chrono::high_resolution_clock::now();
+    double elapsed_time = chrono::duration<double>(end_time - start_time).count() / iterationCount;
     if (capteurTrouve)
     {
-        cout << "\033[1;32mTest T32 réussi.\033[0m\n";
+        cout << "\033[1;32mTest T32 réussi.\033[0m (" << elapsed_time << " sec)\n";
         testPassed++;
     }
     else
     {
-        cout << "\033[1;31mTest T32 échoué.\033[0m\n";
+        cout << "\033[1;31mTest T32 échoué.\033[0m (" << elapsed_time << " sec)\n";
         testFailed++;
     }
 }
