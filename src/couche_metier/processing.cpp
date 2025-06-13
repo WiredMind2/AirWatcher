@@ -100,7 +100,7 @@ unordered_map<unsigned int, double> Processing::EstimationQualiteAirZone(double 
     }
 
     // Définit le pas de discrétisation en fonction du rayon, avec une valeur minimale de 0.5 et maximale de 10.0.
-    double step = std::max(0.5, std::min(radius / 10.0, 10.0));
+    double step = std::max(0.5, radius / 10.0);
 
     if (log)
     {
@@ -127,6 +127,8 @@ unordered_map<unsigned int, double> Processing::EstimationQualiteAirZone(double 
     // Si aucune mesure n'est disponible, retourne un map vide.
     if (measures_map.empty())
     {
+        if (log)
+            cout << "Aucune mesure disponible dans la zone spécifiée.\n";
         return unordered_map<unsigned int, double>{};
     }
 
@@ -179,6 +181,8 @@ unordered_map<unsigned int, double> Processing::EstimationQualiteAirZone(double 
     // Si aucune estimation n'est possible, retourne un map vide.
     if (estimations.empty())
     {
+        if (log)
+            cout << "Aucune estimation possible dans la zone spécifiée.\n";
         return unordered_map<unsigned int, double>{};
     }
 
@@ -197,6 +201,8 @@ vector<const Sensor *> Processing::TrouverCapteursDetournes(double radius, unord
         // Si aucune mesure n'est disponible, retourne une liste vide.
         return capteurs_detournes;
     }
+
+    int calls = 0;
     unordered_map<unsigned int, unordered_map<unsigned int, double>> estimation_cache;
     // Agrège les mesures et calcule les estimations pour chaque capteur.
     for (const auto &pair : measures)
@@ -225,6 +231,7 @@ vector<const Sensor *> Processing::TrouverCapteursDetournes(double radius, unord
 
             if (estimation_cache.find(capteur->GetSensorID()) == estimation_cache.end())
             {
+                calls++;
                 auto estimation = EstimationQualiteAirZone(capteur->GetLatitude(), capteur->GetLongitude(), radius, start, stop);
                 estimation_cache[capteur->GetSensorID()] = estimation;
             }
